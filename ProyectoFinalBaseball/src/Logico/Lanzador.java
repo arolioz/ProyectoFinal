@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Lanzador extends Jugador {
-	private ArrayList<Lanzamiento> misLanzamientos;
+	private ArrayList<String> misLanzamientos;
 	private String rolLanzador;
 	private EstadisticaLanzador estadisticas;
 	private float efectividad;
@@ -23,11 +23,11 @@ public class Lanzador extends Jugador {
 		this.efectividad = efectividad;
 	}
 
-	public ArrayList<Lanzamiento> getMisLanzamientos() {
+	public ArrayList<String> getMisLanzamientos() {
 		return misLanzamientos;
 	}
 
-	public void setMisLanzamientos(ArrayList<Lanzamiento> misLanzamientos) {
+	public void setMisLanzamientos(ArrayList<String> misLanzamientos) {
 		this.misLanzamientos = misLanzamientos;
 	}
 
