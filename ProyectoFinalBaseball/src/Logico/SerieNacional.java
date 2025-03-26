@@ -77,5 +77,45 @@ public class SerieNacional {
 		return generadorLesiones;
 	}
 	
+	public void ingresarJugador(Jugador jugador) {
+		misJugadores.add(jugador);
+		generadorJugadores++;
+	}
+
+	
+	public void ingresarEquipo(Equipo equipo) {
+		misEquipos.add(equipo);
+		generadorEquipos++;
+	}
+	
+	public void ingresarLesion(Lesion lesion) {
+		misLesiones.add(lesion);
+		generadorLesiones++;
+	}
+	
+	public void ingresarJuego(Juego juego) {
+		misJuegos.add(juego);
+		generadorJuegos++;
+	}
+	
+	public void eliminarEquipo(Equipo equipo) {
+		misEquipos.remove(equipo);
+	}
+	
+	public void eliminarJugador(Jugador jugador) {
+		misJugadores.remove(jugador);
+	}
+	
+	public Jugador buscarjugadorDadoId(String id){
+		Jugador jugador = null;
+		for (Jugador aux : misJugadores) {
+			if(aux.getIdJugador().equalsIgnoreCase(id)){
+				jugador = aux;
+			}
+		}
+		return jugador;
+	}
+	
+	
 	
 } 
