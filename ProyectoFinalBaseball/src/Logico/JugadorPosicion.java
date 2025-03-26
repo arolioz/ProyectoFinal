@@ -52,7 +52,9 @@ public class JugadorPosicion extends Jugador {
 	}
 	
 	
-	
+	public float calcularPromedio() {
+		return (float) (estadisticas.getHits() / estadisticas.getTurnosAlBate());
+	}
 	
 
 }
