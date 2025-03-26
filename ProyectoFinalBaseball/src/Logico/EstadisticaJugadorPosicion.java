@@ -10,17 +10,16 @@ public class EstadisticaJugadorPosicion {
 	private int ponches;
 	private int error;
 	
-	public EstadisticaJugadorPosicion(int hits, int basePorBolas, int cantHomeruns, int carrerasRemolcadas,
-			int carrerasAnotadas, int turnosAlBate, int ponches, int error) {
+	public EstadisticaJugadorPosicion() {
 		super();
-		this.hits = hits;
-		this.basePorBolas = basePorBolas;
-		this.cantHomeruns = cantHomeruns;
-		this.carrerasRemolcadas = carrerasRemolcadas;
-		this.carrerasAnotadas = carrerasAnotadas;
-		this.turnosAlBate = turnosAlBate;
-		this.ponches = ponches;
-		this.error = error;
+		this.hits = 0;
+		this.basePorBolas = 0;
+		this.cantHomeruns = 0;
+		this.carrerasRemolcadas = 0;
+		this.carrerasAnotadas = 0;
+		this.turnosAlBate = 0;
+		this.ponches = 0;
+		this.error = 0;
 	}
 
 	public int getHits() {

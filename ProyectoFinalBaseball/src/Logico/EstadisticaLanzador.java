@@ -11,18 +11,17 @@ public class EstadisticaLanzador {
 	private int inningsJugados;
 	private int error;
 	
-	public EstadisticaLanzador(int ponches, int strikes, int bolas, int bateadoresGolpeados, int basePorBolas,
-			int carrerasPermitidas, int hitsPermitidos, int inningsJugados, int error) {
+	public EstadisticaLanzador() {
 		super();
-		this.ponches = ponches;
-		this.strikes = strikes;
-		this.bolas = bolas;
-		this.bateadoresGolpeados = bateadoresGolpeados;
-		this.basePorBolas = basePorBolas;
-		this.carrerasPermitidas = carrerasPermitidas;
-		this.hitsPermitidos = hitsPermitidos;
-		this.inningsJugados = inningsJugados;
-		this.error = error;
+		this.ponches = 0;
+		this.strikes = 0;
+		this.bolas = 0;
+		this.bateadoresGolpeados = 0;
+		this.basePorBolas = 0;
+		this.carrerasPermitidas = 0;
+		this.hitsPermitidos = 0;
+		this.inningsJugados = 0;
+		this.error = 0;
 	}
 
 	public int getPonches() {

@@ -17,6 +17,7 @@ public class Lanzador extends Jugador {
 		super(idJugador, nombre, apellido, fechaNacimiento, telefono, direccion, nacionalidad, correoElectronico,
 				numCamiseta, equipo, peso, altura, ladoDominante, estaLesionado);
 		
+		this.estadisticas = new EstadisticaLanzador();
 		this.misLanzamientos = misLanzamientos;
 		this.rolLanzador = rolLanzador;
 	}
