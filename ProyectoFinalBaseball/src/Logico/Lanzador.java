@@ -7,7 +7,6 @@ public class Lanzador extends Jugador {
 	private ArrayList<String> misLanzamientos;
 	private String rolLanzador;
 	private EstadisticaLanzador estadisticas;
-	private float efectividad;
 	
 	public Lanzador(String idJugador, String nombre, String apellido, Date fechaNacimiento, String telefono,
 			String direccion, String nacionalidad, String correoElectronico, int numCamiseta, Equipo equipo, float peso,
@@ -45,13 +44,8 @@ public class Lanzador extends Jugador {
 	public void setEstadisticas(EstadisticaLanzador estadisticas) {
 		this.estadisticas = estadisticas;
 	}
-
-	public float getEfectividad() {
-		return efectividad;
+	
+	public float calcularEfectividad() {
+		return (float) ((estadisticas.getCarrerasPermitidas() * 9)/ estadisticas.getInningsJugados());
 	}
-
-	public void setEfectividad(float efectividad) {
-		this.efectividad = efectividad;
-	}
-
 }
