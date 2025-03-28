@@ -116,6 +116,24 @@ public class SerieNacional {
 		return jugador;
 	}
 	
+	public Equipo buscarEquipoDadoId(String id){
+		Equipo equipo = null;
+		for( Equipo aux : misEquipos) {
+			if(aux.getId().equalsIgnoreCase(id)) {
+				equipo = aux;
+			}
+		}
+		return equipo;
+	}
 	
+	public Juego buscarJuegoDadoId(String id){
+		Juego juego = null;
+		for( Juego aux : misJuegos) {
+			if(aux.getId().equalsIgnoreCase(id)) {
+				juego = aux;
+			}
+		}
+		return juego;
+	}
 	
 } 
