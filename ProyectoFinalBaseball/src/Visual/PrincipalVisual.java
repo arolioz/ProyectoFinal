@@ -61,6 +61,16 @@ public class PrincipalVisual extends JFrame {
 		});
 		mnNewMenu.add(mntmNewMenuItem);
 		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Listado de jugadores");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListadoJugadores aux = new ListadoJugadores();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_2);
+		
 		JMenu mnNewMenu_1 = new JMenu("Equipo");
 		menuBar.add(mnNewMenu_1);
 		
@@ -73,6 +83,16 @@ public class PrincipalVisual extends JFrame {
 			}
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Listado de equipos");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListadoEquipo aux = new ListadoEquipo();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_3);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
