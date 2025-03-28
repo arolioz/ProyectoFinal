@@ -90,6 +90,7 @@ public class SerieNacional {
 	
 	public void ingresarLesion(Lesion lesion) {
 		misLesiones.add(lesion);
+		lesion.getJugador().setEstaLesionado(true);
 		generadorLesiones++;
 	}
 	
