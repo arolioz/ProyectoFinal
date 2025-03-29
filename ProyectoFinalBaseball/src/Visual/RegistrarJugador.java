@@ -361,8 +361,7 @@ public class RegistrarJugador extends JDialog {
 		CBLado.setSelectedIndex(0);
 		CBRol.setSelectedIndex(0);
 		
-		
-		
+			
 	}
 
 	private void cargarEquipo() {
