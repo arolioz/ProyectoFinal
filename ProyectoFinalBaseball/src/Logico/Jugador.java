@@ -24,7 +24,7 @@ public class Jugador {
 	
 	public Jugador(String idJugador, String nombre, String apellido, Date fechaNacimiento, String telefono,
 			String direccion, String nacionalidad, String correoElectronico, int numCamiseta, Equipo equipo, float peso,
-			float altura, String ladoDominante, boolean estaLesionado) {
+			float altura, String ladoDominante) {
 		super();
 		this.idJugador = idJugador;
 		this.nombre = nombre;
@@ -39,7 +39,7 @@ public class Jugador {
 		this.peso = peso;
 		this.altura = altura;
 		this.ladoDominante = ladoDominante;
-		this.estaLesionado = estaLesionado;
+		this.estaLesionado = false;
 		//this.misLesiones = new ArrayList<Lesion>;
 	}
 

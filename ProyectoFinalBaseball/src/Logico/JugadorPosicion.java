@@ -10,15 +10,15 @@ public class JugadorPosicion extends Jugador {
 	
 	public JugadorPosicion(String idJugador, String nombre, String apellido, Date fechaNacimiento, String telefono,
 			String direccion, String nacionalidad, String correoElectronico, int numCamiseta, Equipo equipo, float peso,
-			float altura, String ladoDominante, boolean estaLesionado, String posicion,
-			EstadisticaJugadorPosicion estadisticas, float promedio) {
+			float altura, String ladoDominante, String posicion
+			) {
 		
 		super(idJugador, nombre, apellido, fechaNacimiento, telefono, direccion, nacionalidad, correoElectronico,
-				numCamiseta, equipo, peso, altura, ladoDominante, estaLesionado);
+				numCamiseta, equipo, peso, altura, ladoDominante);
 		
 		this.posicion = posicion;
 		this.estadisticas = new EstadisticaJugadorPosicion();
-		this.promedio = promedio;
+		this.promedio = 0;
 	}
 
 

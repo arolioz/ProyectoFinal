@@ -10,14 +10,14 @@ public class Lanzador extends Jugador {
 	
 	public Lanzador(String idJugador, String nombre, String apellido, Date fechaNacimiento, String telefono,
 			String direccion, String nacionalidad, String correoElectronico, int numCamiseta, Equipo equipo, float peso,
-			float altura, String ladoDominante, boolean estaLesionado,
-			String rolLanzador, ArrayList<String> misLanzamientos) {
+			float altura, String ladoDominante,
+			String rolLanzador) {
 		
 		super(idJugador, nombre, apellido, fechaNacimiento, telefono, direccion, nacionalidad, correoElectronico,
-				numCamiseta, equipo, peso, altura, ladoDominante, estaLesionado);
+				numCamiseta, equipo, peso, altura, ladoDominante);
 		
 		this.estadisticas = new EstadisticaLanzador();
-		this.misLanzamientos = misLanzamientos;
+		this.misLanzamientos = null;
 		this.rolLanzador = rolLanzador;
 	}
 

@@ -1,6 +1,7 @@
 package Logico;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Equipo {
 	private String id;
@@ -10,24 +11,23 @@ public class Equipo {
 	private int numeroVictorias;
 	private int numeroDerrotas;
 	private String estadio;
-	private int agnoFundado;
+	private Date agnoFundado;
 	private int totalCarreras;
 	private int cantJuegos;
 	
 	
-	public Equipo(String id, String nombre, String ciudad, ArrayList<Jugador> misJugadores, int numeroVictorias,
-			int numeroDerrotas, String estadio, int agnoFundado, int totalCarreras, int cantJuegos) {
+	public Equipo(String id, String nombre, String ciudad,String estadio) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.ciudad = ciudad;
-		this.misJugadores = misJugadores;
-		this.numeroVictorias = numeroVictorias;
-		this.numeroDerrotas = numeroDerrotas;
+		this.misJugadores = null;
+		this.numeroVictorias = 0;
+		this.numeroDerrotas = 0;
 		this.estadio = estadio;
-		this.agnoFundado = agnoFundado;
-		this.totalCarreras = totalCarreras;
-		this.cantJuegos = cantJuegos;
+		this.agnoFundado = new Date();
+		this.totalCarreras = 0;
+		this.cantJuegos = 0;
 	}
 	
 	public String getNombre() {
@@ -66,10 +66,10 @@ public class Equipo {
 	public void setEstadio(String estadio) {
 		this.estadio = estadio;
 	}
-	public int getAgnoFundado() {
+	public Date getAgnoFundado() {
 		return agnoFundado;
 	}
-	public void setAgnoFundado(int agnoFundado) {
+	public void setAgnoFundado(Date agnoFundado) {
 		this.agnoFundado = agnoFundado;
 	}
 	public int getTotalCarreras() {
@@ -86,6 +86,10 @@ public class Equipo {
 	}
 	public String getId() {
 		return id;
+	}
+	
+	public String toString() {
+		return nombre;
 	}
 	
 	

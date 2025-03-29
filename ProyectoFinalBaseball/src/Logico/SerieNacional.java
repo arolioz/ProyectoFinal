@@ -8,10 +8,10 @@ public class SerieNacional {
 	private ArrayList<Juego> misJuegos;
 	private ArrayList<Lesion> misLesiones;
 	
-	private static int generadorEquipos;
-	private static int generadorJugadores;
-	private static int generadorJuegos;
-	private static int generadorLesiones;
+	private static int generadorEquipos = 1;
+	private static int generadorJugadores = 1;
+	private static int generadorJuegos = 1;
+	private static int generadorLesiones = 1;
 	
 	private static SerieNacional serieNacional = null;
 	
@@ -77,7 +77,12 @@ public class SerieNacional {
 		return generadorLesiones;
 	}
 	
-	public void ingresarJugador(Jugador jugador) {
+	public void ingresarJugadorPosicion(JugadorPosicion jugador) {
+		misJugadores.add(jugador);
+		generadorJugadores++;
+	}
+	
+	public void ingresarLanzador(Lanzador jugador) {
 		misJugadores.add(jugador);
 		generadorJugadores++;
 	}
