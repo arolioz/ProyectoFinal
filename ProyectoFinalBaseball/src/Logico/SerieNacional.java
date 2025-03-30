@@ -79,11 +79,17 @@ public class SerieNacional {
 	
 	public void ingresarJugadorPosicion(JugadorPosicion jugador) {
 		misJugadores.add(jugador);
+		Equipo equipo = buscarEquipoDadoId(jugador.getEquipo().getId());
+		equipo.getMisJugadores().add(jugador);
+		
 		generadorJugadores++;
 	}
 	
 	public void ingresarLanzador(Lanzador jugador) {
 		misJugadores.add(jugador);
+		Equipo equipo = buscarEquipoDadoId(jugador.getEquipo().getId());
+		equipo.getMisJugadores().add(jugador);
+		
 		generadorJugadores++;
 	}
 
