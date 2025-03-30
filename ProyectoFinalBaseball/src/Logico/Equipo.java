@@ -28,6 +28,7 @@ public class Equipo {
 		this.agnoFundado = new Date();
 		this.totalCarreras = 0;
 		this.cantJuegos = 0;
+		this.misJugadores = new ArrayList<Jugador>();
 	}
 	
 	public String getNombre() {
