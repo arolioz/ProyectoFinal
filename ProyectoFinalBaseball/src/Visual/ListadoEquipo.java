@@ -104,7 +104,7 @@ public class ListadoEquipo extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				cancelButton = new JButton("Cancel");
+				cancelButton = new JButton("Salir");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

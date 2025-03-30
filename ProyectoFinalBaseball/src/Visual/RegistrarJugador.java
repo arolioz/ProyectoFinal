@@ -227,7 +227,7 @@ public class RegistrarJugador extends JDialog {
 			panel.add(spPeso);
 			
 			spAltura = new JSpinner();
-			spAltura.setModel(new SpinnerNumberModel(new Float(0), null, null, new Float(1)));
+			spAltura.setModel(new SpinnerNumberModel(new Float(0), new Float(0), null, new Float(1)));
 			spAltura.setBounds(481, 125, 61, 20);
 			panel.add(spAltura);
 			
@@ -353,6 +353,7 @@ public class RegistrarJugador extends JDialog {
 		txtNombre.setText("");
 		txtApellido.setText("");
 		txtDir.setText("");
+		txtTelefono.setText("");
 		txtCorreo.setText("");
 		txtNac.setText("");
 		spNumeroCami.setValue(0);
