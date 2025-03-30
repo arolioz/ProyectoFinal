@@ -7,14 +7,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Logico.Equipo;
+import Logico.SerieNacional;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class PrincipalVisual extends JFrame {
-
+	
 	private JPanel contentPane;
 	private Dimension dim;
 
@@ -63,7 +70,7 @@ public class PrincipalVisual extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Listado de jugadores");
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {				
 				ListadoJugadores aux = new ListadoJugadores();
 				aux.setModal(true);
 				aux.setVisible(true);
@@ -87,6 +94,13 @@ public class PrincipalVisual extends JFrame {
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Listado de equipos");
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ArrayList<Equipo> equipo = SerieNacional.getInstance().getMisEquipos();
+		        
+		        if (equipo == null || equipo.isEmpty()) {
+		            JOptionPane.showMessageDialog(null, "No hay equipos para mostrar", "Aviso", JOptionPane.WARNING_MESSAGE);
+		            return;
+		        }
+		        
 				ListadoEquipo aux = new ListadoEquipo();
 				aux.setModal(true);
 				aux.setVisible(true);

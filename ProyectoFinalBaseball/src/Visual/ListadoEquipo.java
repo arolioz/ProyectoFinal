@@ -56,13 +56,6 @@ public class ListadoEquipo extends JDialog {
 	 */
 	public ListadoEquipo() {
 		
-		ArrayList<Equipo> aux = SerieNacional.getInstance().getMisEquipos();
-		
-		if( aux == null || aux.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "No hay equipos para mostrar", "Aviso", JOptionPane.WARNING_MESSAGE);
-		    return;
-		
-		}
 		setFont(new Font("Broadway", Font.BOLD, 16));
 		getContentPane().setFont(new Font("Broadway", Font.PLAIN, 16));
 		setTitle("Listado de Equipos");
