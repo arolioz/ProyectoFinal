@@ -115,6 +115,7 @@ public class PrincipalVisual extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
+
 	}
 
 }
