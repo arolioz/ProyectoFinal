@@ -38,6 +38,7 @@ import java.beans.PropertyChangeEvent;
 
 public class ListadoJugadores extends JDialog {
 
+	
 	private final JPanel contentPanel = new JPanel();
 	private static JTable tableEquipo;
 	static DefaultTableModel tableModel;
