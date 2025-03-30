@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class PrincipalVisual extends JFrame {
-	
+
 	private JPanel contentPane;
 	private Dimension dim;
 
