@@ -281,7 +281,7 @@ public class RegistrarJugador extends JDialog {
 			CBLanzador = new JComboBox();
 			CBLanzador.setBounds(88, 8, 121, 20);
 			panel_2.add(CBLanzador);
-			CBLanzador.setModel(new DefaultComboBoxModel(new String[] {"<Selecciones>", "Abridor", "Cerrador"}));
+			CBLanzador.setModel(new DefaultComboBoxModel(new String[] {"<Selecciones>", "Abridor", "Cerrador", "Relevista"}));
 			{
 				panel_3 = new JPanel();
 				panel_3.setBounds(10, 36, 512, 46);
@@ -294,7 +294,7 @@ public class RegistrarJugador extends JDialog {
 				}
 				{
 					CBBateador = new JComboBox();
-					CBBateador.setModel(new DefaultComboBoxModel(new String[] {"<Selecciones>", "Abridor", "Cerrador"}));
+					CBBateador.setModel(new DefaultComboBoxModel(new String[] {"<Selecciones>", "1B", "2B", "3B", "SS", "C", "RF", "CF", "LF"}));
 					CBBateador.setBounds(133, 8, 136, 20);
 					panel_3.add(CBBateador);
 				}
