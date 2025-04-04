@@ -3,6 +3,8 @@ package Logico;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+
+
 public class SerieNacional {
 	private ArrayList<Equipo> misEquipos;
 	private ArrayList<Jugador> misJugadores;
@@ -150,6 +152,17 @@ public class SerieNacional {
 		return juego;
 	}
 	
+	public Lesion buscarLesionDadoId(String id)
+	{
+		Lesion lesion = null;
+		for (Lesion aux : misLesiones) {
+			if(aux.getId().equalsIgnoreCase(id)) {
+				lesion = aux;
+			}
+		}
+		return lesion;
+	}
+	
 	public void crearJuego(Equipo equipoLocal,Equipo equipoVisitante) {
 		
 		Juego juego = new Juego(String.valueOf(getGeneradorJuegos()), equipoLocal, equipoVisitante, fechaActual);
@@ -169,5 +182,49 @@ public class SerieNacional {
 			}
 		}
 	}
+
+
+	public void ordenarEquipos(ArrayList<Equipo> misEquipos) {
+		int n = misEquipos.size();
+		
+		for(int ind = 0; ind < n - 1; ind++){
+			for(int ind2 = 0; ind2 < n - ind - 1; ind2++){
+				
+				Equipo actual = misEquipos.get(ind2);
+				Equipo sig = misEquipos.get(ind2 + 1);
+				
+				if(actual.getNumeroVictorias() < sig.getNumeroVictorias())
+				{
+					misEquipos.set(ind2, sig);
+					misEquipos.set(ind2+1, actual);
+				}
+			}
+		}
+	}
+
+
+	public float calcularPorcentajeVictorias(Equipo equipo) {
+		if(equipo.getCantJuegos() == 0)
+		{
+			return 0;
+		}
+		return (float) equipo.getNumeroVictorias() / equipo.getCantJuegos();
+	}
+
+
+	public float calcularDif(Equipo equipo) {
+		Equipo mejor = misEquipos.get(0);
+		int victoriasMejor = mejor.getNumeroVictorias();
+		int derrotasMejor = mejor.getNumeroDerrotas();
+		
+		int victoriasEquipo = equipo.getNumeroVictorias();
+		int derrotasEquipo = equipo.getNumeroDerrotas();
+		
+		int difVictorias = victoriasMejor - victoriasEquipo;
+		int difDerrotas = derrotasEquipo - derrotasMejor;
+		
+		return (float)(difVictorias + difDerrotas) / 2 ;
+	}
+	
 	
 } 
