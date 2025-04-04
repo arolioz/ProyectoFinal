@@ -1,6 +1,7 @@
 package Visual;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.BorderFactory;
 
 import Logico.Equipo;
@@ -22,6 +25,7 @@ import Logico.Juego;
 import Logico.SerieNacional;
 
 public class SeleccionarJuego extends JDialog {
+	private JButton cancelButton;
     public static void main(String[] args) {
         try {
             SeleccionarJuego dialog = new SeleccionarJuego();
@@ -33,6 +37,7 @@ public class SeleccionarJuego extends JDialog {
     }
 
     public SeleccionarJuego() {
+    	setTitle("Seleccionar juego");
 
         Equipo equipo = new Equipo("1", "Lakers", "Santiago", "Contreras");
         Equipo equipo1 = new Equipo("2", "Chicago Bull", "Santiago", "Contreras");
@@ -84,10 +89,11 @@ public class SeleccionarJuego extends JDialog {
             JButton btnIniciar = new JButton("Iniciar Juego");
             btnIniciar.setBounds(10, 95, 200, 26);
             
-
+            tarjeta.setBorder(new TitledBorder(new LineBorder(Color.BLUE, 2), "Juego"));
                         
             if(juego.getFechaPartido().isAfter(LocalDate.now())) {
             	btnIniciar.setEnabled(false);
+            	tarjeta.setBorder(new TitledBorder(new LineBorder(Color.RED, 2), "Juego"));
             }
             
             if(juego.isJuegoTerminado()) {
@@ -98,7 +104,11 @@ public class SeleccionarJuego extends JDialog {
                 tarjeta.add(btnTerminado);
                 btnTerminado.setEnabled(false);
                 btnIniciar.setBounds(10, 250, 200, 26);
+                tarjeta.setBorder(new TitledBorder(new LineBorder(Color.GREEN, 2), "Juego"));
+                
             }
+            
+            
             
             btnIniciar.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -117,9 +127,9 @@ public class SeleccionarJuego extends JDialog {
         JPanel buttonPane = new JPanel();
         getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-        JButton cancelButton = new JButton("Cancelar");
+        cancelButton = new JButton("Cancelar");
         cancelButton.addActionListener(e -> dispose());
         buttonPane.setLayout(new BorderLayout(0, 0));
-        buttonPane.add(cancelButton);
+        buttonPane.add(cancelButton, BorderLayout.CENTER);
     }
 }
