@@ -28,6 +28,9 @@ public class PrincipalVisual extends JFrame {
 	private JPanel contentPane;
 	private Dimension dim;
 	private JPanel panel;
+	private JMenu TablaDePosiciones;
+	private JMenu tablaDePosiciones;
+	private JMenuItem mntmNewMenuItem_4;
 
 	/**
 	 * Launch the application.
@@ -110,6 +113,23 @@ public class PrincipalVisual extends JFrame {
 			}
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_3);
+		
+		
+		
+		
+		tablaDePosiciones = new JMenu("Tabla de Posiciones");
+		menuBar.add(tablaDePosiciones);
+		
+		mntmNewMenuItem_4 = new JMenuItem("Ver tabla");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TablaDePosiciones aux = new TablaDePosiciones();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
+		
+		tablaDePosiciones.add(mntmNewMenuItem_4);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
