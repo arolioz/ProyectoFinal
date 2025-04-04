@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class PrincipalVisual extends JFrame {
 
@@ -115,8 +117,12 @@ public class PrincipalVisual extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("E:\\Descargas\\Estadio.jpeg"));
+		lblNewLabel.setBounds(0, 0, 1894, 1010);
+		panel.add(lblNewLabel);
 
 	}
-
 }
