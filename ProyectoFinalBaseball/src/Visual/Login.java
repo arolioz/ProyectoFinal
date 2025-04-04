@@ -61,6 +61,8 @@ public class Login extends JFrame {
 					SerieNacional.setSerieNacional(temp1);
 					serieNacional1.close();
 					serieNacionalRead.close();
+					
+					SerieNacional.getInstance().cargarGeneradores();
 				} catch (FileNotFoundException e) {
 					try {
 						usuario2 = new  FileOutputStream("Usuarios.dat");

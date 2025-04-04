@@ -55,6 +55,9 @@ public class PrincipalVisual extends JFrame {
 				
 				FileOutputStream serieNacional;
 				ObjectOutputStream serieNacionarWrite;
+				
+				FileOutputStream generador;
+				ObjectOutputStream generadorWrite;
 				try {
 					usuario = new  FileOutputStream("Usuarios.dat");
 					usuarioWrite = new ObjectOutputStream(usuario);
@@ -63,6 +66,8 @@ public class PrincipalVisual extends JFrame {
 					serieNacional = new  FileOutputStream("SerieNacional.dat");
 					serieNacionarWrite = new ObjectOutputStream(serieNacional);
 					serieNacionarWrite.writeObject(SerieNacional.getInstance());
+					
+					SerieNacional.getInstance().guardarGeneradores();
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

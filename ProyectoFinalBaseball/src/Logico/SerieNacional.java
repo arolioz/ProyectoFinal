@@ -1,5 +1,10 @@
 package Logico;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -238,6 +243,41 @@ public class SerieNacional implements Serializable {
 	public static void setSerieNacional(SerieNacional serieNacional) {
 		SerieNacional.serieNacional = serieNacional;
 	}
+	
+	public void guardarGeneradores() {
+	    try {
+
+	        FileOutputStream generadoresFile = new FileOutputStream("Generadores.dat");
+	        ObjectOutputStream generadoresWrite = new ObjectOutputStream(generadoresFile);
+	        generadoresWrite.writeInt(generadorEquipos);
+	        generadoresWrite.writeInt(generadorJugadores);
+	        generadoresWrite.writeInt(generadorJuegos);
+	        generadoresWrite.writeInt(generadorLesiones);
+	        generadoresWrite.close();
+	        generadoresFile.close();
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public void cargarGeneradores() {
+	    try {
+	        FileInputStream generadoresFile = new FileInputStream("Generadores.dat");
+	        ObjectInputStream generadoresRead = new ObjectInputStream(generadoresFile);
+	        generadorEquipos = generadoresRead.readInt();
+	        generadorJugadores = generadoresRead.readInt();
+	        generadorJuegos = generadoresRead.readInt();
+	        generadorLesiones = generadoresRead.readInt();
+	        generadoresRead.close();
+	        generadoresFile.close();
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	
 	
 	
 } 
