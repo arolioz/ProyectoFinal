@@ -9,6 +9,7 @@ public class Juego {
 	private LocalDate fechaPartido;
 	private int carrerasEquipoLocal;
 	private int carrerasEquipoVisitante;
+	private boolean juegoTerminado;
 	
 	public Juego(String id, Equipo equipoLocal, Equipo equipoVisitante, LocalDate fechaPartido) {
 		super();
@@ -18,6 +19,7 @@ public class Juego {
 		this.fechaPartido = fechaPartido;
 		this.carrerasEquipoLocal = 0;
 		this.carrerasEquipoVisitante = 0;
+		this.juegoTerminado = false;
 	}
 
 	public String getId() {
@@ -83,6 +85,14 @@ public class Juego {
 		
 		return null;
 		
+	}
+
+	public boolean isJuegoTerminado() {
+		return juegoTerminado;
+	}
+
+	public void setJuegoTerminado(boolean juegoTerminado) {
+		this.juegoTerminado = juegoTerminado;
 	}
 	
 }
