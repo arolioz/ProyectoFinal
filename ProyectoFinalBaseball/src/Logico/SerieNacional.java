@@ -19,6 +19,7 @@ public class SerieNacional {
 	private static SerieNacional serieNacional = null;
 	private LocalDate fechaActual = LocalDate.now();
 	
+	
 	private SerieNacional() {
 		super();
 		
@@ -224,6 +225,16 @@ public class SerieNacional {
 		int difDerrotas = derrotasEquipo - derrotasMejor;
 		
 		return (float)(difVictorias + difDerrotas) / 2 ;
+	}
+
+
+	public static SerieNacional getSerieNacional() {
+		return serieNacional;
+	}
+
+
+	public static void setSerieNacional(SerieNacional serieNacional) {
+		SerieNacional.serieNacional = serieNacional;
 	}
 	
 	

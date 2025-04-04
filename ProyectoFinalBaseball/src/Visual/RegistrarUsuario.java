@@ -17,6 +17,10 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 
 public class RegistrarUsuario extends JDialog {
@@ -39,6 +43,8 @@ public class RegistrarUsuario extends JDialog {
 			e.printStackTrace();
 		}
 	}
+	
+
 
 	/**
 	 * Create the dialog.

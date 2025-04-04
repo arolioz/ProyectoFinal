@@ -40,8 +40,7 @@ public class PrincipalVisual extends JFrame {
 	private JMenuItem mntmNewMenuItem_4;
 	private JMenuItem mnAdmin;
 	private JMenu mnmAdmin;
-
-
+	
 
 	/**
 	 * Create the frame.
@@ -51,12 +50,19 @@ public class PrincipalVisual extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				FileOutputStream usuario;
+				ObjectOutputStream usuarioWrite;
+				
 				FileOutputStream serieNacional;
 				ObjectOutputStream serieNacionarWrite;
 				try {
-					serieNacional = new  FileOutputStream("Usuarios.dat");
+					usuario = new  FileOutputStream("Usuarios.dat");
+					usuarioWrite = new ObjectOutputStream(usuario);
+					usuarioWrite.writeObject(Control.getInstance());
+					
+					serieNacional = new  FileOutputStream("SerieNacional.dat");
 					serieNacionarWrite = new ObjectOutputStream(serieNacional);
-					serieNacionarWrite.writeObject(Control.getInstance());
+					serieNacionarWrite.writeObject(SerieNacional.getInstance());
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

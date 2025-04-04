@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Logico.Control;
+import Logico.SerieNacional;
 import Logico.User;
 
 import javax.swing.JLabel;
@@ -34,24 +35,45 @@ public class Login extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				FileInputStream usuario1;
+				FileOutputStream usuario2;
+				ObjectInputStream usuarioRead;
+				ObjectOutputStream usuarioWrite;
+				
 				FileInputStream serieNacional1;
 				FileOutputStream serieNacional2;
 				ObjectInputStream serieNacionalRead;
 				ObjectOutputStream serieNacionalWrite;
+				
+
+				
 				try {
-					serieNacional1 = new FileInputStream ("Usuarios.dat");
-					serieNacionalRead = new ObjectInputStream(serieNacional1);
-					Control temp = (Control)serieNacionalRead.readObject();
+					usuario1 = new FileInputStream ("Usuarios.dat");
+					usuarioRead = new ObjectInputStream(usuario1);
+					Control temp = (Control)usuarioRead.readObject();
 					Control.setControl(temp);
+					usuario1.close();
+					usuarioRead.close();
+					
+					serieNacional1 = new FileInputStream ("SerieNacional.dat");
+					serieNacionalRead = new ObjectInputStream(serieNacional1);
+					SerieNacional temp1 = (SerieNacional)serieNacionalRead.readObject();
+					SerieNacional.setSerieNacional(temp1);
 					serieNacional1.close();
 					serieNacionalRead.close();
 				} catch (FileNotFoundException e) {
 					try {
-						serieNacional2 = new  FileOutputStream("Usuarios.dat");
-						serieNacionalWrite = new ObjectOutputStream(serieNacional2);
+						usuario2 = new  FileOutputStream("Usuarios.dat");
+						usuarioWrite = new ObjectOutputStream(usuario2);
 						User aux = new User("Administrador", "Admin", "Admin");
 						Control.getInstance().regUser(aux);
-						serieNacionalWrite.writeObject(Control.getInstance());
+						usuarioWrite.writeObject(Control.getInstance());
+						usuario2.close();
+						usuarioWrite.close();
+						
+						serieNacional2 = new  FileOutputStream("SerieNacional.dat");
+						serieNacionalWrite = new ObjectOutputStream(serieNacional2);
+						serieNacionalWrite.writeObject(SerieNacional.getInstance());
 						serieNacional2.close();
 						serieNacionalWrite.close();
 					} catch (FileNotFoundException e1) {
