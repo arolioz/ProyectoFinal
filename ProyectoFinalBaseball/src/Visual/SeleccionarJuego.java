@@ -35,6 +35,8 @@ public class SeleccionarJuego extends JDialog {
             e.printStackTrace();
         }
     }
+    
+    
 
     public SeleccionarJuego() {
     	setTitle("Seleccionar juego");
@@ -42,7 +44,23 @@ public class SeleccionarJuego extends JDialog {
         getContentPane().setLayout(new BorderLayout());
         ArrayList<Juego> juegos = SerieNacional.getInstance().getMisJuegos();
 
-
+        
+		Equipo equipo = new Equipo("1", "Lakers", "Santiago", "Contreras");
+		Equipo equipo1 = new Equipo("2", "Chicago bull", "Santiago", "Contreras");
+		Equipo equipo2 = new Equipo("3", "Golden state", "Santiago", "Contreras");
+		Equipo equipo3 = new Equipo("4", "Santiago", "Santiago", "Contreras");
+		
+		ArrayList<Equipo> misEquipos = new ArrayList<>();
+		misEquipos.add(equipo);
+		misEquipos.add(equipo1);
+		misEquipos.add(equipo2);
+		misEquipos.add(equipo3);
+		
+		SerieNacional.getInstance().crearTorneo(misEquipos);
+		for(int i = 0; i < SerieNacional.getInstance().getMisJuegos().size();i++) {
+			System.out.println("Equipo Local:"+SerieNacional.getInstance().getMisJuegos().get(i).getEquipoLocal().getNombre() +" Equipo visitante:"+SerieNacional.getInstance().getMisJuegos().get(i).getEquipoVisitante().getNombre()+"\n");
+		}
+        
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new GridLayout(0, 3, 10, 10));
         contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -94,6 +112,10 @@ public class SeleccionarJuego extends JDialog {
             btnIniciar.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     JOptionPane.showMessageDialog(null, "Iniciando juego entre "+ juego.getEquipoLocal().getNombre() + " vs "+ juego.getEquipoVisitante().getNombre());
+                    SimuladorJuego sim = new SimuladorJuego(juego);
+                    sim.setVisible(true);
+                    sim.setModal(true);
+                    
                 }
             });
 
