@@ -19,6 +19,7 @@ import Logico.Equipo;
 import Logico.SerieNacional;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.UIManager;
@@ -30,6 +31,7 @@ import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SeleccionarEquipo extends JDialog {
 
@@ -66,6 +68,15 @@ public class SeleccionarEquipo extends JDialog {
 	 * Create the dialog.
 	 */
 	public SeleccionarEquipo() {
+		
+		Equipo equipo = new Equipo("1", "Lakers", "Santiago", "Contreras");
+		Equipo equipo1 = new Equipo("2", "Chicago bull", "Santiago", "Contreras");
+		Equipo equipo2 = new Equipo("3", "Golden state", "Santiago", "Contreras");
+		Equipo equipo3 = new Equipo("4", "Santiago", "Santiago", "Contreras");
+		
+		tempEquipo.add(equipo2);
+		tempEquipo.add(equipo3);
+		
 		setTitle("Seleccionar equipo");
 		setBounds(100, 100, 742, 375);
 		getContentPane().setLayout(new BorderLayout());
@@ -96,6 +107,7 @@ public class SeleccionarEquipo extends JDialog {
 						btnCarrito.setEnabled(true);
 						codigo = (String) tableEquipo.getValueAt(tableEquipo.getSelectedRow(), 0);
 						selectEquipo1 = SerieNacional.getInstance().buscarEquipoDadoId(codigo);
+
 
 					}
 				}
@@ -133,8 +145,7 @@ public class SeleccionarEquipo extends JDialog {
 					if(tableCarrito.getSelectedRow()!= -1){
 						btnEquipo.setEnabled(true);
 						codigo = (String) tableCarrito.getValueAt(tableCarrito.getSelectedRow(), 0);
-						selectEquipo2 = SerieNacional.getInstance().buscarEquipoDadoId(codigo);
-
+						selectEquipo2 = buscarEquipoTempDadoId(codigo);
 					}
 				}
 			});
@@ -187,6 +198,10 @@ public class SeleccionarEquipo extends JDialog {
 				JButton okButton = new JButton("Aceptar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+										
+						SerieNacional.getInstance().crearTorneo(tempCarrito);
+						JOptionPane.showMessageDialog(null, "Se ha creado el torneo", "Exito", JOptionPane.INFORMATION_MESSAGE);
+						clear();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -205,12 +220,13 @@ public class SeleccionarEquipo extends JDialog {
 			}
 		}
 		cargarEquipos(tempEquipo);
+		
 	}
 	
-	public static void cargarEquipos(ArrayList<Equipo> tempEquipo){
+	private static void cargarEquipos(ArrayList<Equipo> tempEquipo){
 		tableModel.setRowCount(0);
 		fila = new Object[tableModel.getColumnCount()];
-		tempEquipo = new ArrayList<Equipo>(SerieNacional.getInstance().getMisEquipos());
+
 
 			for (Equipo aux : tempEquipo) {
 				fila[0] = aux.getId();
@@ -233,16 +249,15 @@ public class SeleccionarEquipo extends JDialog {
 
 	}
 
-	public static void cargarCarrito(ArrayList<Equipo> tempEquipo){
+	private static void cargarCarrito(ArrayList<Equipo> tempEquipo){
 		tableModel1.setRowCount(0);
 		fila1 = new Object[tableModel1.getColumnCount()];
 
 		for (Equipo aux : tempEquipo) {
-			Object[] fila1 = new Object[tableModel1.getColumnCount()];
-			fila[0] = aux.getId();
-			fila[1] = aux.getNombre();
-			fila[2] = aux.getCiudad();
-			fila[3] = aux.getEstadio();
+			fila1[0] = aux.getId();
+			fila1[1] = aux.getNombre();
+			fila1[2] = aux.getCiudad();
+			fila1[3] = aux.getEstadio();
 			tableModel1.addRow(fila1);
 		}
 
@@ -258,4 +273,21 @@ public class SeleccionarEquipo extends JDialog {
 
 
 	}
+		
+	private Equipo buscarEquipoTempDadoId(String id){
+		Equipo equipo = null;
+		for( Equipo aux : tempCarrito) {
+			if(aux.getId().equalsIgnoreCase(id)) {
+				equipo = aux;
+			}
+		}
+		return equipo;
+	}
+	
+	private void clear() {
+		tempCarrito.clear();
+		cargarCarrito(tempCarrito);
+	}
+	
+	
 }

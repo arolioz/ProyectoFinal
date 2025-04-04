@@ -1,5 +1,6 @@
 package Logico;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SerieNacional {
@@ -14,6 +15,7 @@ public class SerieNacional {
 	private static int generadorLesiones = 1;
 	
 	private static SerieNacional serieNacional = null;
+	private LocalDate fechaActual = LocalDate.now();
 	
 	private SerieNacional() {
 		super();
@@ -146,6 +148,26 @@ public class SerieNacional {
 			}
 		}
 		return juego;
+	}
+	
+	public void crearJuego(Equipo equipoLocal,Equipo equipoVisitante) {
+		
+		Juego juego = new Juego(String.valueOf(getGeneradorJuegos()), equipoLocal, equipoVisitante, fechaActual);
+		fechaActual = fechaActual.plusWeeks(1);
+		misJuegos.add(juego);
+	}
+	
+	public void crearTorneo(ArrayList<Equipo> misEquipos) {
+		for(int i = 0; i < misEquipos.size();i++) {
+			for(int j = 0; j < misEquipos.size();j++) {
+				if(i != j) {
+					crearJuego(misEquipos.get(i), misEquipos.get(j));
+					generadorJuegos++;
+					System.out.println(i+""+j);
+					
+				}
+			}
+		}
 	}
 	
 } 

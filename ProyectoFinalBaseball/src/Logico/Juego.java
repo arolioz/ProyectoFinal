@@ -1,16 +1,16 @@
 package Logico;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Juego {
 	private String id;
 	private Equipo equipoLocal;
 	private Equipo equipoVisitante;
-	private Date fechaPartido;
+	private LocalDate fechaPartido;
 	private int carrerasEquipoLocal;
 	private int carrerasEquipoVisitante;
 	
-	public Juego(String id, Equipo equipoLocal, Equipo equipoVisitante, Date fechaPartido) {
+	public Juego(String id, Equipo equipoLocal, Equipo equipoVisitante, LocalDate fechaPartido) {
 		super();
 		this.id = id;
 		this.equipoLocal = equipoLocal;
@@ -44,11 +44,11 @@ public class Juego {
 		this.equipoVisitante = equipoVisitante;
 	}
 
-	public Date getFechaPartido() {
+	public LocalDate getFechaPartido() {
 		return fechaPartido;
 	}
 
-	public void setFechaPartido(Date fechaPartido) {
+	public void setFechaPartido(LocalDate fechaPartido) {
 		this.fechaPartido = fechaPartido;
 	}
 
