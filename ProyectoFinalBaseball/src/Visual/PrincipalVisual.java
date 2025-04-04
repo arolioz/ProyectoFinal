@@ -120,7 +120,7 @@ public class PrincipalVisual extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("E:\\Descargas\\Estadio.jpeg"));
+		lblNewLabel.setIcon(new ImageIcon(PrincipalVisual.class.getResource("/Image/Estadio.jpeg")));
 		lblNewLabel.setBounds(0, 0, 1894, 1010);
 		panel.add(lblNewLabel);
 
