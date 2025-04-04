@@ -38,25 +38,6 @@ public class SeleccionarJuego extends JDialog {
 
     public SeleccionarJuego() {
     	setTitle("Seleccionar juego");
-
-        Equipo equipo = new Equipo("1", "Lakers", "Santiago", "Contreras");
-        Equipo equipo1 = new Equipo("2", "Chicago Bull", "Santiago", "Contreras");
-        Equipo equipo2 = new Equipo("3", "Golden State", "Santiago", "Contreras");
-        Equipo equipo3 = new Equipo("4", "Santiago", "Santiago", "Contreras");
-        Equipo equipo4 = new Equipo("4", "Santiago", "Santiago", "Contreras");
-        Equipo equipo5 = new Equipo("4", "Santiago", "Santiago", "Contreras");
-        Equipo equipo6 = new Equipo("4", "Santiago", "Santiago", "Contreras");
-        ArrayList<Equipo> misEquipos = new ArrayList<>();
-        misEquipos.add(equipo);
-        misEquipos.add(equipo1);
-        misEquipos.add(equipo2);
-        misEquipos.add(equipo3);
-        misEquipos.add(equipo4);
-        misEquipos.add(equipo5);
-        misEquipos.add(equipo6);
-        SerieNacional.getInstance().crearTorneo(misEquipos);
-
-
         setBounds(100, 100, 920, 620);
         getContentPane().setLayout(new BorderLayout());
         ArrayList<Juego> juegos = SerieNacional.getInstance().getMisJuegos();
