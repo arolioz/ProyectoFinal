@@ -27,6 +27,7 @@ public class PrincipalVisual extends JFrame {
 	
 	private JPanel contentPane;
 	private Dimension dim;
+	private JPanel panel;
 
 	/**
 	 * Launch the application.
@@ -54,7 +55,6 @@ public class PrincipalVisual extends JFrame {
 		dim.setSize(dim.getWidth(), dim.getHeight()-50);
 		super.setSize(dim);
 
-		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -115,14 +115,16 @@ public class PrincipalVisual extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PrincipalVisual.class.getResource("/Image/Estadio.jpeg")));
-		lblNewLabel.setBounds(0, 0, 1894, 1010);
+		lblNewLabel.setBounds(129, 106, 1765, 904);
 		panel.add(lblNewLabel);
+		
+
 
 	}
 }
