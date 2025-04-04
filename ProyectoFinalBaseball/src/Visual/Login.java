@@ -47,7 +47,7 @@ public class Login extends JFrame {
 					serieNacionalRead.close();
 				} catch (FileNotFoundException e) {
 					try {
-						serieNacional2 = new  FileOutputStream("Usuarios.dat.dat");
+						serieNacional2 = new  FileOutputStream("Usuarios.dat");
 						serieNacionalWrite = new ObjectOutputStream(serieNacional2);
 						User aux = new User("Administrador", "Admin", "Admin");
 						Control.getInstance().regUser(aux);
