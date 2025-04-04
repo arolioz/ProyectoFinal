@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -22,6 +24,9 @@ import javax.swing.BorderFactory;
 
 import Logico.Equipo;
 import Logico.Juego;
+import Logico.Jugador;
+import Logico.JugadorPosicion;
+import Logico.Lanzador;
 import Logico.SerieNacional;
 
 public class SeleccionarJuego extends JDialog {
@@ -49,6 +54,16 @@ public class SeleccionarJuego extends JDialog {
 		Equipo equipo1 = new Equipo("2", "Chicago bull", "Santiago", "Contreras");
 		Equipo equipo2 = new Equipo("3", "Golden state", "Santiago", "Contreras");
 		Equipo equipo3 = new Equipo("4", "Santiago", "Santiago", "Contreras");
+		
+		JugadorPosicion jugador2 = new JugadorPosicion("1", "Carlos", "Gómez", new Date(), "829-444-5678", "Avenida 456, Santiago", "Dominicana", "carlosg@example.com", 6, equipo, 78, 1, "Izquierdo", "Jardinero Central");
+		JugadorPosicion jugador1 = new JugadorPosicion("2", "CABALLO", "Gómez", new Date(), "829-444-5678", "Avenida 456, Santiago", "Dominicana", "carlosg@example.com", 6, equipo, 78, 1, "Izquierdo", "Jardinero Central");
+		Lanzador l1 = new Lanzador("30","Aaron","Escano",new Date(),"829-444-5678", "Avenida 456, Santiago", "Dominicana", "carlosg@example.com", 6, equipo, 78, 1, "Izquierdo", "Abridor");
+		Lanzador l2 = new Lanzador("29","Aaron","Escano",new Date(),"829-444-5678", "Avenida 456, Santiago", "Dominicana", "carlosg@example.com", 6, equipo, 78, 1, "Izquierdo", "Abridor");
+		
+		equipo.getMisJugadores().add(l1);
+		equipo.getMisJugadores().add(jugador2);
+		equipo1.getMisJugadores().add(jugador1);
+		equipo1.getMisJugadores().add(l2);
 		
 		ArrayList<Equipo> misEquipos = new ArrayList<>();
 		misEquipos.add(equipo);

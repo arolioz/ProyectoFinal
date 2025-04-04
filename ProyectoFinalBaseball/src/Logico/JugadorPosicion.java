@@ -17,7 +17,7 @@ public class JugadorPosicion extends Jugador {
 				numCamiseta, equipo, peso, altura, ladoDominante);
 		
 		this.posicion = posicion;
-		this.estadisticas = new EstadisticaJugadorPosicion();
+		this.estadisticas = new EstadisticaJugadorPosicion(idJugador);
 		this.promedio = 0;
 	}
 

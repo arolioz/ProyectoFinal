@@ -1,6 +1,7 @@
 package Logico;
 
 public class EstadisticaLanzador {
+	String idJugador;
 	private int ponches;
 	private int strikes;
 	private int bolas;
@@ -11,8 +12,9 @@ public class EstadisticaLanzador {
 	private int inningsJugados;
 	private int error;
 	
-	public EstadisticaLanzador() {
+	public EstadisticaLanzador(String idJugador) {
 		super();
+		this.idJugador = idJugador;
 		this.ponches = 0;
 		this.strikes = 0;
 		this.bolas = 0;
@@ -94,6 +96,15 @@ public class EstadisticaLanzador {
 
 	public void setError(int error) {
 		this.error = error;
+	}
+
+	public void setIdJugador(String idJugador) {
+		this.idJugador = idJugador;
+	}
+
+	public String getIdJugador() {
+		
+		return idJugador;
 	}
 
 }

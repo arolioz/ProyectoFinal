@@ -8,12 +8,17 @@ import Logico.Juego;
 import Logico.Jugador;
 import Logico.JugadorPosicion;
 import Logico.Lanzador;
+import Logico.EstadisticaJugadorPosicion;
+import Logico.EstadisticaLanzador;
 
 import java.awt.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.beans.PropertyChangeEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SimuladorJuego extends JDialog {
 
@@ -22,6 +27,8 @@ public class SimuladorJuego extends JDialog {
     private DefaultTableModel model;
     private DefaultTableModel modelVisitante;
     private DefaultTableModel modelLocal;
+    private DefaultTableModel modelEstBateador;
+    private DefaultTableModel modelEstLanzador;
     private JTextField textField;
     private JTextField textField_2;
     private JTextField textField_1;
@@ -32,6 +39,14 @@ public class SimuladorJuego extends JDialog {
     static Object[] filaVisitante;
     static Object[] filaLocal;
     private JTable tablaVisitante;
+    private ArrayList<EstadisticaJugadorPosicion> estadisticasBateadores = new ArrayList<EstadisticaJugadorPosicion>();
+    private ArrayList<EstadisticaLanzador> estadisticasLanzadores = new ArrayList<EstadisticaLanzador>();
+    private JTable tablaEstBateadores;
+    private JTextField txtEstadisticas;
+    private JTable tablaEstLanzdores;
+    private JPanel panelEstLanzadores;
+    private JPanel panelEstBateadores;
+    
 
     public static void main(String[] args) {
         try {
@@ -66,17 +81,72 @@ public class SimuladorJuego extends JDialog {
         contentPanel.add(panel);
         panel.setLayout(new BorderLayout());
 
-        String[] columnasJugadores = {"Nombre", "Rol","Posicion"};
+        String[] columnasJugadores = {"Id","Nombre", "Rol","Posicion"};
         String[] columnas = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
         String[][] datos = {
                 {"0", "0", "0", "0", "0", "0", "0", "0", "0"},
                 {"0", "0", "0", "0", "0", "0", "0", "0", "0"}
         };
+        
+        String[] columnasEstBateadores = {"Estadisticas","Cantidad"};
+        String[][] datosEstBateadores = {
+        		{"Id jugador","null"},
+        		{"Hits","0"},
+        		{"Base por bolas","0"},
+        		{"Home runs","0"},
+        		{"Remolcadas","0"},
+        		{"Carreras anotadas","0"},
+        		{"Turnos al bate","0"},
+        		{"Ponches","0"},
+        		{"Errores","0"}
+        		};
 
+        String[] columnasEstLanzador = {"Estadisticas","Cantidad"};
+        String[][] datosEstLanzadores = {
+        		{"Id jugador","null"},
+        		{"Ponches","0"},
+        		{"Strikes","0"},
+        		{"Bolas","0"},
+        		{"Hit by pitch","0"},
+        		{"Base por Bolas","0"},
+        		{"carreras permitidas","0"},
+        		{"Hits permitidos","0"},
+        		{"Innings Lanzados","0"},
+        		{"Errores","0"}
+        		};
+        
+
+        
         model = new DefaultTableModel(datos, columnas);
-        modelLocal = new DefaultTableModel(columnasJugadores, 0);
-        modelVisitante = new DefaultTableModel(columnasJugadores, 0);
+        modelVisitante = new DefaultTableModel(columnasJugadores, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; 
+            }
+        };
 
+
+        modelLocal = new DefaultTableModel(columnasJugadores, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; 
+            }
+        };
+
+        
+        modelEstBateador = new DefaultTableModel(datosEstBateadores, columnasEstBateadores) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column != 0; 
+            }
+        };
+        modelEstLanzador = new DefaultTableModel(datosEstLanzadores, columnasEstLanzador) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column != 0; 
+            }
+        };
+        
         table = new JTable(model);
         table.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent arg0) {
@@ -180,6 +250,34 @@ public class SimuladorJuego extends JDialog {
         contentPanel.add(panel_1);
 
         tablaVisitante = new JTable(modelVisitante);
+        tablaVisitante.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		tablaLocal.clearSelection();
+        		txtEstadisticas.setText("Estadisticas de " + (modelVisitante.getValueAt(tablaVisitante.getSelectedRow(), 1).toString()));
+        		
+        		String id = modelVisitante.getValueAt(tablaVisitante.getSelectedRow(), 0).toString();
+        		EstadisticaJugadorPosicion estBateador = buscarEstadisticaBatedorByIdJugador(id);
+        		if (estBateador != null) {
+        			panelEstBateadores.setVisible(true);
+        			panelEstLanzadores.setVisible(false);
+        			cargarEstadisticaBateador(estBateador);
+        		}
+        		else {
+        			EstadisticaLanzador estLanzador = buscarEstadisticaLanzadorByIdJugador(id);
+        			panelEstBateadores.setVisible(false);
+        			panelEstLanzadores.setVisible(true);
+        			cargarEstadisticasLanzador(estLanzador);
+        		}
+        		
+
+        	}
+        });
+        tablaVisitante.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tablaVisitante.setRowSelectionAllowed(true);
+        tablaVisitante.setColumnSelectionAllowed(false);
+        tablaVisitante.setCellSelectionEnabled(false);
+        
         JScrollPane scrollPaneVisitante = new JScrollPane(tablaVisitante);
         panel_1.add(scrollPaneVisitante, BorderLayout.CENTER);
 
@@ -189,8 +287,92 @@ public class SimuladorJuego extends JDialog {
         contentPanel.add(panel_2);
 
         tablaLocal = new JTable(modelLocal);
+        tablaLocal.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		tablaVisitante.clearSelection();
+        		txtEstadisticas.setText("Estadisticas de " + (modelLocal.getValueAt(tablaLocal.getSelectedRow(), 1).toString()));
+        		
+        		String id = modelLocal.getValueAt(tablaLocal.getSelectedRow(), 0).toString();
+        		EstadisticaJugadorPosicion estBateador = buscarEstadisticaBatedorByIdJugador(id);
+        		if (estBateador != null) {
+        			panelEstBateadores.setVisible(true);
+        			panelEstLanzadores.setVisible(false);
+        			cargarEstadisticaBateador(estBateador);
+        		}
+        		else {
+        			EstadisticaLanzador estLanzador = buscarEstadisticaLanzadorByIdJugador(id);
+        			panelEstBateadores.setVisible(false);
+        			panelEstLanzadores.setVisible(true);
+        			cargarEstadisticasLanzador(estLanzador);
+        		}
+        		
+        		
+                tablaLocal.setSelectionBackground(Color.RED);
+                tablaLocal.setSelectionForeground(Color.RED);
+        	}
+        });
+        tablaLocal.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tablaLocal.setRowSelectionAllowed(true);
+        tablaLocal.setColumnSelectionAllowed(false);
+        tablaLocal.setCellSelectionEnabled(false);
+        
+        
         JScrollPane scrollPaneLocal = new JScrollPane(tablaLocal);
         panel_2.add(scrollPaneLocal, BorderLayout.CENTER);
+        
+        panelEstBateadores = new JPanel(new BorderLayout());
+        panelEstBateadores.setVisible(false);
+        panelEstBateadores.setBounds(807, 193, 286, 156);
+        contentPanel.add(panelEstBateadores);
+
+        
+        tablaEstBateadores = new JTable(modelEstBateador);
+        tablaEstBateadores.addPropertyChangeListener(new PropertyChangeListener() {
+        	public void propertyChange(PropertyChangeEvent evt) {
+                try {
+                	
+                    actualizarEstadisticasBateador(tablaEstBateadores.getValueAt(0, 1).toString());;
+                } catch (Exception e) {
+                    System.out.println("Ha ocurrido un error" + e.getMessage());
+                }
+        	}
+        });
+        JScrollPane scrollPaneEstadisticaBateador = new JScrollPane(tablaEstBateadores);
+        panelEstBateadores.add(scrollPaneEstadisticaBateador, BorderLayout.CENTER);
+        
+        txtEstadisticas = new JTextField();
+        txtEstadisticas.setText("Estadisticas");
+        txtEstadisticas.setHorizontalAlignment(SwingConstants.CENTER);
+        txtEstadisticas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 16));
+        txtEstadisticas.setEditable(false);
+        txtEstadisticas.setColumns(10);
+        txtEstadisticas.setBorder(null);
+        txtEstadisticas.setBackground(SystemColor.menu);
+        txtEstadisticas.setBounds(807, 150, 286, 32);
+        contentPanel.add(txtEstadisticas);
+        
+        panelEstLanzadores = new JPanel((LayoutManager) null);
+        panelEstLanzadores.setVisible(false);
+        panelEstLanzadores.setBounds(807, 193, 286, 156);
+        contentPanel.add(panelEstLanzadores);
+        panelEstLanzadores.setLayout(new BorderLayout());
+        
+        tablaEstLanzdores = new JTable(modelEstLanzador);
+        tablaEstLanzdores.addPropertyChangeListener(new PropertyChangeListener() {
+        	public void propertyChange(PropertyChangeEvent arg0) {
+                try {
+              
+                    actualizarEstadisticasLanzador(tablaEstLanzdores.getValueAt(0, 1).toString());;
+                } catch (Exception e) {
+                    System.out.println("Ha ocurrido un error " + e.getMessage());
+                }
+        	}
+        });
+        JScrollPane scrollPaneEstadisticaLanzador = new JScrollPane(tablaEstLanzdores);
+        panelEstLanzadores.add(scrollPaneEstadisticaLanzador, BorderLayout.CENTER);
+        
+
 
         JPanel buttonPane = new JPanel();
         buttonPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -201,6 +383,11 @@ public class SimuladorJuego extends JDialog {
         buttonPane.add(btnNewButton);
         
         loadJugadores(partido);
+        cargarEstadisticas(partido);
+        for(int i = 0; i < estadisticasBateadores.size(); i++) {
+        	System.out.println(estadisticasBateadores.get(i).getIdJugador());
+        }
+
     }
 
     private void actualizarMarcador() {
@@ -243,36 +430,210 @@ public class SimuladorJuego extends JDialog {
 		
 		if (partido.getEquipoLocal() != null) {
 			for (Jugador jugador : partido.getEquipoLocal().getMisJugadores()) {
-				filaLocal[0] = jugador.getNombre();
+				filaLocal[0] = jugador.getIdJugador();
+				filaLocal[1] = jugador.getNombre();
 				 if (jugador instanceof Lanzador) {
-					 filaLocal[1] = "Lanzador";
-					 filaLocal[2] = ((Lanzador)jugador).getRolLanzador();
+					 filaLocal[2] = "Lanzador";
+					 filaLocal[3] = ((Lanzador)jugador).getRolLanzador();
 				 }
 
 				if (jugador instanceof JugadorPosicion) {
-					filaLocal[1] = "Bateador";
-					filaLocal[2] = ((JugadorPosicion)jugador).getPosicion();
+					filaLocal[2] = "Bateador";
+					filaLocal[3] = ((JugadorPosicion)jugador).getPosicion();
 				}
 				modelLocal.addRow(filaLocal);
 			}
 		}
 		
 		modelVisitante.setRowCount(0);
-		filaVisitante = new Object[modelLocal.getColumnCount()];
+		filaVisitante = new Object[modelVisitante.getColumnCount()];
 		if (partido.getEquipoVisitante() != null) {
 			for (Jugador jugador : partido.getEquipoVisitante().getMisJugadores()) {
-				filaVisitante[0] = jugador.getNombre();
+				filaVisitante[0] = jugador.getIdJugador();
+				filaVisitante[1] = jugador.getNombre();
 				 if (jugador instanceof Lanzador) {
-					 filaVisitante[1] = "Lanzador";
-					 filaVisitante[2] = ((Lanzador)jugador).getRolLanzador();
+					 filaVisitante[2] = "Lanzador";
+					 filaVisitante[3] = ((Lanzador)jugador).getRolLanzador();
 				 }
 
 				if (jugador instanceof JugadorPosicion) {
-					filaVisitante[1] = "Bateador";
-					filaVisitante[2] = ((JugadorPosicion)jugador).getPosicion();
+					filaVisitante[2] = "Bateador";
+					filaVisitante[3] = ((JugadorPosicion)jugador).getPosicion();
 				}
 				modelVisitante.addRow(filaVisitante);
 			}
 		}
     }
+    
+    private void cargarEstadisticas(Juego juego) {
+    	if (juego == null) {
+    		return;
+    	}
+    	
+    	if (juego.getEquipoLocal() != null) {
+    		for (Jugador jugador : juego.getEquipoLocal().getMisJugadores()) {
+    			if (jugador instanceof JugadorPosicion) {
+    				estadisticasBateadores.add(new EstadisticaJugadorPosicion(jugador.getIdJugador()));
+    			}
+    			if (jugador instanceof Lanzador) {
+    				estadisticasLanzadores.add(new EstadisticaLanzador(jugador.getIdJugador()));
+    			}
+    		}
+    	}
+    	
+    	if (juego.getEquipoVisitante() != null) {
+    		for (Jugador jugador : juego.getEquipoVisitante().getMisJugadores()) {
+    			if (jugador instanceof JugadorPosicion) {
+    				estadisticasBateadores.add(new EstadisticaJugadorPosicion(jugador.getIdJugador()));
+    			}
+    			if (jugador instanceof Lanzador) {
+    				estadisticasLanzadores.add(new EstadisticaLanzador(jugador.getIdJugador()));
+    			}
+    		}
+    	}
+    }
+    
+    private void cargarEstadisticaBateador(EstadisticaJugadorPosicion est) {
+        
+    	
+        String[] columnas = {"Estadística", "Valor"};
+        String[][] datos = {
+        	{"Id jugador",String.valueOf(est.getIdJugador())},
+            {"Hits", String.valueOf(est.getHits())},
+            {"Base por Bolas (BB)", String.valueOf(est.getBasePorBolas())},
+            {"Home Runs (HR)", String.valueOf(est.getCantHomeruns())},
+            {"Carreras Remolcadas", String.valueOf(est.getCarrerasRemolcadas())},
+            {"Carreras Anotadas", String.valueOf(est.getCarrerasAnotadas())},
+            {"Turnos al Bate", String.valueOf(est.getTurnosAlBate())},
+            {"Ponches", String.valueOf(est.getPonches())},
+            {"Errores", String.valueOf(est.getError())}
+        };
+
+        DefaultTableModel modeloEst = new DefaultTableModel(datos, columnas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return (column != 0 && row != 0); 
+                }
+            };
+        tablaEstBateadores.setModel(modeloEst);
+    }
+    
+    
+    private void cargarEstadisticasLanzador(EstadisticaLanzador est) {
+    	
+    	
+        String[] columnas = {"Estadística", "Valor"};
+        String[][] datos = {
+        	{"Id jugador",String.valueOf(est.getIdJugador())},
+            {"Ponches", String.valueOf(est.getPonches())},
+            {"Strikes", String.valueOf(est.getStrikes())},
+            {"Bolas", String.valueOf(est.getBolas())},
+            {"Hit by pitch", String.valueOf(est.getBateadoresGolpeados())},
+            {"Base por Bolas", String.valueOf(est.getBasePorBolas())},
+            {"Carreras Permitidas", String.valueOf(est.getCarrerasPermitidas())},
+            {"Hits Permitidos", String.valueOf(est.getHitsPermitidos())},
+            {"Innings Lanzados", String.valueOf(est.getInningsJugados())},
+            {"Errores", String.valueOf(est.getError())}
+        };
+
+        DefaultTableModel modeloEst = new DefaultTableModel(datos, columnas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return (column != 0 && row != 0); 
+                }
+            };
+        tablaEstLanzdores.setModel(modeloEst);
+    }
+    
+    private EstadisticaJugadorPosicion buscarEstadisticaBatedorByIdJugador(String id) {
+    	EstadisticaJugadorPosicion est = null;
+		for( EstadisticaJugadorPosicion aux : estadisticasBateadores) {
+			if(aux.getIdJugador().equalsIgnoreCase(id)) {
+				est = aux;
+			}
+		}
+		return est;
+    }
+    
+    private EstadisticaLanzador buscarEstadisticaLanzadorByIdJugador(String id) {
+    	EstadisticaLanzador est = null;
+		for( EstadisticaLanzador aux : estadisticasLanzadores) {
+			if(aux.getIdJugador().equalsIgnoreCase(id)) {
+				est = aux;
+			}
+		}
+		return est;
+    }
+    
+    private void actualizarEstadisticasBateador(String id) {
+        for (int i = 0; i < estadisticasBateadores.size(); i++) {
+            EstadisticaJugadorPosicion est = estadisticasBateadores.get(i);
+            if (est.getIdJugador().equalsIgnoreCase(id)) {
+
+                try {
+                    
+                    int hits = Integer.parseInt(tablaEstBateadores.getValueAt(1, 1).toString()); 
+                    int basePorBolas = Integer.parseInt(tablaEstBateadores.getValueAt(2, 1).toString()); 
+                    int homeRuns = Integer.parseInt(tablaEstBateadores.getValueAt(3, 1).toString()); 
+                    int remolcadas = Integer.parseInt(tablaEstBateadores.getValueAt(4, 1).toString()); 
+                    int carrerasAnotadas = Integer.parseInt(tablaEstBateadores.getValueAt(5, 1).toString()); 
+                    int turnosAlBate = Integer.parseInt(tablaEstBateadores.getValueAt(6, 1).toString());
+                    int ponches = Integer.parseInt(tablaEstBateadores.getValueAt(7, 1).toString()); 
+                    int errores = Integer.parseInt(tablaEstBateadores.getValueAt(8, 1).toString()); 
+
+                    est.setHits(hits);
+                    est.setBasePorBolas(basePorBolas);
+                    est.setCantHomeruns(homeRuns);
+                    est.setCarrerasRemolcadas(remolcadas);
+                    est.setCarrerasAnotadas(carrerasAnotadas);
+                    est.setTurnosAlBate(turnosAlBate);
+                    est.setPonches(ponches);
+                    est.setError(errores);
+                    
+                    return; 
+                } catch (NumberFormatException e) {
+                    System.out.println("Error al convertir los datos de la tabla a enteros: " + e.getMessage());
+                }
+            }
+        }
+        return;
+    }
+    
+    private void actualizarEstadisticasLanzador(String id) {
+        for (int i = 0; i < estadisticasLanzadores.size(); i++) {
+            EstadisticaLanzador est = estadisticasLanzadores.get(i);
+            if (est.getIdJugador().equalsIgnoreCase(id)) {
+                try {
+                   
+                   
+                    int ponches = Integer.parseInt(tablaEstLanzdores.getValueAt(1, 1).toString()); 
+                    int strikes = Integer.parseInt(tablaEstLanzdores.getValueAt(2, 1).toString()); 
+                    int bolas = Integer.parseInt(tablaEstLanzdores.getValueAt(3, 1).toString()); 
+                    int bateadoresGolpeados = Integer.parseInt(tablaEstLanzdores.getValueAt(4, 1).toString());
+                    int basePorBolas = Integer.parseInt(tablaEstLanzdores.getValueAt(5, 1).toString()); 
+                    int carrerasPermitidas = Integer.parseInt(tablaEstLanzdores.getValueAt(6, 1).toString()); 
+                    int hitsPermitidos = Integer.parseInt(tablaEstLanzdores.getValueAt(7, 1).toString()); 
+                    int inningsJugados = Integer.parseInt(tablaEstLanzdores.getValueAt(8, 1).toString()); 
+                    int error = Integer.parseInt(tablaEstLanzdores.getValueAt(9, 1).toString()); 
+
+                    
+                   
+                    est.setPonches(ponches);
+                    est.setStrikes(strikes);
+                    est.setBolas(bolas);
+                    est.setBateadoresGolpeados(bateadoresGolpeados);
+                    est.setBasePorBolas(basePorBolas);
+                    est.setCarrerasPermitidas(carrerasPermitidas);
+                    est.setHitsPermitidos(hitsPermitidos);
+                    est.setInningsJugados(inningsJugados);
+                    est.setError(error);
+                } catch (NumberFormatException e) {
+                    System.out.println("Error " + e.getMessage());
+                }
+                return; 
+            }
+        }
+        return;
+    }
+
 }
