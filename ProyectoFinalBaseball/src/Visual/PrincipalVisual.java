@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import Logico.Equipo;
 import Logico.SerieNacional;
+import Logico.Control;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -17,6 +18,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -32,26 +39,33 @@ public class PrincipalVisual extends JFrame {
 	private JMenu tablaDePosiciones;
 	private JMenuItem mntmNewMenuItem_4;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PrincipalVisual frame = new PrincipalVisual();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
 	 */
 	public PrincipalVisual() {
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				FileOutputStream serieNacional;
+				ObjectOutputStream serieNacionarWrite;
+				try {
+					serieNacional = new  FileOutputStream("SerieNacional.dat");
+					serieNacionarWrite = new ObjectOutputStream(serieNacional);
+					serieNacionarWrite.writeObject(Control.getInstance());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		
 		setTitle("Serie Nacional");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dim = super.getToolkit().getScreenSize();
@@ -130,6 +144,19 @@ public class PrincipalVisual extends JFrame {
 		});
 		
 		tablaDePosiciones.add(mntmNewMenuItem_4);
+		
+		JMenu mnNewMenu_2 = new JMenu("Administraccion");
+		menuBar.add(mnNewMenu_2);
+		
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Registrar Usuarios");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistrarUsuario reg = new RegistrarUsuario();
+				reg.setModal(true);
+				reg.setVisible(true);
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_5);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
