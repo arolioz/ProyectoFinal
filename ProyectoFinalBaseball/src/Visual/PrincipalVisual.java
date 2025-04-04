@@ -38,6 +38,8 @@ public class PrincipalVisual extends JFrame {
 	private JMenu TablaDePosiciones;
 	private JMenu tablaDePosiciones;
 	private JMenuItem mntmNewMenuItem_4;
+	private JMenuItem mnAdmin;
+	private JMenu mnmAdmin;
 
 
 
@@ -52,7 +54,7 @@ public class PrincipalVisual extends JFrame {
 				FileOutputStream serieNacional;
 				ObjectOutputStream serieNacionarWrite;
 				try {
-					serieNacional = new  FileOutputStream("SerieNacional.dat");
+					serieNacional = new  FileOutputStream("Usuarios.dat");
 					serieNacionarWrite = new ObjectOutputStream(serieNacional);
 					serieNacionarWrite.writeObject(Control.getInstance());
 				} catch (FileNotFoundException e1) {
@@ -145,22 +147,26 @@ public class PrincipalVisual extends JFrame {
 		
 		tablaDePosiciones.add(mntmNewMenuItem_4);
 		
-		JMenu mnNewMenu_2 = new JMenu("Administraccion");
-		menuBar.add(mnNewMenu_2);
+		mnmAdmin = new JMenu("Administraccion");
+		menuBar.add(mnmAdmin);
 		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Registrar Usuarios");
-		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+		mnAdmin = new JMenuItem("Registrar Usuarios");
+		mnAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistrarUsuario reg = new RegistrarUsuario();
 				reg.setModal(true);
 				reg.setVisible(true);
 			}
 		});
-		mnNewMenu_2.add(mntmNewMenuItem_5);
+		mnmAdmin.add(mnAdmin);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		if(!Control.getLoginUser().getTipo().equalsIgnoreCase("Administrador")) {
+			mnmAdmin.setEnabled(false);
+		}
 		
 		panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);

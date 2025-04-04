@@ -39,7 +39,7 @@ public class Login extends JFrame {
 				ObjectInputStream serieNacionalRead;
 				ObjectOutputStream serieNacionalWrite;
 				try {
-					serieNacional1 = new FileInputStream ("SerieNacional.dat");
+					serieNacional1 = new FileInputStream ("Usuarios.dat");
 					serieNacionalRead = new ObjectInputStream(serieNacional1);
 					Control temp = (Control)serieNacionalRead.readObject();
 					Control.setControl(temp);
@@ -47,7 +47,7 @@ public class Login extends JFrame {
 					serieNacionalRead.close();
 				} catch (FileNotFoundException e) {
 					try {
-						serieNacional2 = new  FileOutputStream("SerieNacional.dat");
+						serieNacional2 = new  FileOutputStream("Usuarios.dat.dat");
 						serieNacionalWrite = new ObjectOutputStream(serieNacional2);
 						User aux = new User("Administrador", "Admin", "Admin");
 						Control.getInstance().regUser(aux);
