@@ -1,11 +1,12 @@
 package Logico;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 
 
-public class SerieNacional {
+public class SerieNacional implements Serializable {
 	private ArrayList<Equipo> misEquipos;
 	private ArrayList<Jugador> misJugadores;
 	private ArrayList<Juego> misJuegos;
@@ -18,6 +19,7 @@ public class SerieNacional {
 	
 	private static SerieNacional serieNacional = null;
 	private LocalDate fechaActual = LocalDate.now();
+	private static final long serialVersionUID = 1L;
 	
 	
 	private SerieNacional() {
