@@ -94,6 +94,32 @@ public class Equipo implements Serializable {
 	public String toString() {
 		return nombre;
 	}
+
+	public boolean actualizarEstadisticasJugadorPosicion(String idJugador, EstadisticaJugadorPosicion est) {
+		for (Jugador jugador : misJugadores) {
+			if (jugador.getIdJugador().equalsIgnoreCase(idJugador)) {
+				if (jugador instanceof JugadorPosicion) {
+					((JugadorPosicion) jugador).actualizarEstadisticas(est);
+					return true;
+				}
+			}
+		}
+		return false;
+		
+	}
+	
+	public boolean actualizarEstadisticasLanzador(String idJugador, EstadisticaLanzador est) {
+		for (Jugador jugador : misJugadores) {
+			if (jugador.getIdJugador().equalsIgnoreCase(idJugador)) {
+				if (jugador instanceof Lanzador) {
+					((Lanzador) jugador).actualizarEstadisticas(est);
+					return true;
+				}
+			}
+		}
+		return false;
+		
+	}
 	
 	
 }

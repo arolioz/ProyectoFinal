@@ -8,6 +8,7 @@ import Logico.Juego;
 import Logico.Jugador;
 import Logico.JugadorPosicion;
 import Logico.Lanzador;
+import Logico.SerieNacional;
 import Logico.EstadisticaJugadorPosicion;
 import Logico.EstadisticaLanzador;
 
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 import java.beans.PropertyChangeEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SimuladorJuego extends JDialog {
 
@@ -29,8 +32,8 @@ public class SimuladorJuego extends JDialog {
     private DefaultTableModel modelLocal;
     private DefaultTableModel modelEstBateador;
     private DefaultTableModel modelEstLanzador;
-    private JTextField textField;
-    private JTextField textField_2;
+    private JTextField txtCarrerasVisitante;
+    private JTextField txtCarrerasLocal;
     private JTextField textField_1;
     private JTextField textField_3;
     private JTextField textField_4;
@@ -46,6 +49,7 @@ public class SimuladorJuego extends JDialog {
     private JTable tablaEstLanzdores;
     private JPanel panelEstLanzadores;
     private JPanel panelEstBateadores;
+    private JButton btnSalir;
     
 
     public static void main(String[] args) {
@@ -170,27 +174,27 @@ public class SimuladorJuego extends JDialog {
         lblNewLabel.setBounds(823, 25, 77, 21);
         contentPanel.add(lblNewLabel);
 
-        textField = new JTextField();
-        textField.setBorder(new LineBorder(new Color(171, 173, 179)));
-        textField.setBackground(Color.WHITE);
-        textField.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 16));
-        textField.setHorizontalAlignment(SwingConstants.CENTER);
-        textField.setText("0");
-        textField.setEditable(false);
-        textField.setBounds(823, 46, 78, 32);
-        contentPanel.add(textField);
-        textField.setColumns(10);
+        txtCarrerasVisitante = new JTextField();
+        txtCarrerasVisitante.setBorder(new LineBorder(new Color(171, 173, 179)));
+        txtCarrerasVisitante.setBackground(Color.WHITE);
+        txtCarrerasVisitante.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 16));
+        txtCarrerasVisitante.setHorizontalAlignment(SwingConstants.CENTER);
+        txtCarrerasVisitante.setText("0");
+        txtCarrerasVisitante.setEditable(false);
+        txtCarrerasVisitante.setBounds(823, 46, 78, 32);
+        contentPanel.add(txtCarrerasVisitante);
+        txtCarrerasVisitante.setColumns(10);
 
-        textField_2 = new JTextField();
-        textField_2.setBorder(new LineBorder(new Color(171, 173, 179)));
-        textField_2.setBackground(Color.WHITE);
-        textField_2.setHorizontalAlignment(SwingConstants.CENTER);
-        textField_2.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 16));
-        textField_2.setText("0");
-        textField_2.setEditable(false);
-        textField_2.setColumns(10);
-        textField_2.setBounds(823, 77, 78, 32);
-        contentPanel.add(textField_2);
+        txtCarrerasLocal = new JTextField();
+        txtCarrerasLocal.setBorder(new LineBorder(new Color(171, 173, 179)));
+        txtCarrerasLocal.setBackground(Color.WHITE);
+        txtCarrerasLocal.setHorizontalAlignment(SwingConstants.CENTER);
+        txtCarrerasLocal.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 16));
+        txtCarrerasLocal.setText("0");
+        txtCarrerasLocal.setEditable(false);
+        txtCarrerasLocal.setColumns(10);
+        txtCarrerasLocal.setBounds(823, 77, 78, 32);
+        contentPanel.add(txtCarrerasLocal);
 
         JLabel lblEquipo = new JLabel("Equipo");
         lblEquipo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -378,9 +382,51 @@ public class SimuladorJuego extends JDialog {
         buttonPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
         buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
         getContentPane().add(buttonPane, BorderLayout.SOUTH);
+        
+        btnSalir = new JButton("Salir");
+        btnSalir.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+                int respuesta = JOptionPane.showConfirmDialog(null, 
+                    "¿Estás seguro de que quieres salir?", 
+                    "Confirmar", 
+                    JOptionPane.YES_NO_OPTION);
 
-        JButton btnNewButton = new JButton("New button");
-        buttonPane.add(btnNewButton);
+               
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    dispose();
+                }
+            }
+        });
+        buttonPane.add(btnSalir);
+
+        JButton btnTerminarJuego = new JButton("Terminar partido");
+        btnTerminarJuego.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+                int respuesta = JOptionPane.showConfirmDialog(null, 
+                        "¿Estás seguro de que quieres terminar el partido?", 
+                        "Confirmar", 
+                        JOptionPane.YES_NO_OPTION);
+
+                   
+                    if (respuesta == JOptionPane.YES_OPTION) {
+                    	String mensaje = "";
+                    	partido.setCarrerasEquipoLocal(Integer.parseInt(txtCarrerasLocal.getText()));
+                    	partido.setCarrerasEquipoVisitante(Integer.parseInt(txtCarrerasVisitante.getText()));
+                    	
+                    	if (partido.getGanadorJuego() == "Empate") {
+                    		mensaje = "Partido finalizado, hubo un empate";
+                    	}
+                    	else {
+                    		mensaje = "Partido finalizado, el ganador es " + partido.getGanadorJuego();
+                    	}
+                    	JOptionPane.showMessageDialog(null, mensaje, "Finalización de Partido", JOptionPane.INFORMATION_MESSAGE);
+                    	finalizarpartido(partido);
+                    	
+                        dispose();
+                    }
+        	}
+        });
+        buttonPane.add(btnTerminarJuego);
         
         loadJugadores(partido);
         cargarEstadisticas(partido);
@@ -411,9 +457,9 @@ public class SimuladorJuego extends JDialog {
             }
 
             if (i == 0) {
-                textField.setText(String.valueOf(total));
+                txtCarrerasVisitante.setText(String.valueOf(total));
             } else {
-                textField_2.setText(String.valueOf(total));
+                txtCarrerasLocal.setText(String.valueOf(total));
             }
         }
     }
@@ -605,7 +651,6 @@ public class SimuladorJuego extends JDialog {
             if (est.getIdJugador().equalsIgnoreCase(id)) {
                 try {
                    
-                   
                     int ponches = Integer.parseInt(tablaEstLanzdores.getValueAt(1, 1).toString()); 
                     int strikes = Integer.parseInt(tablaEstLanzdores.getValueAt(2, 1).toString()); 
                     int bolas = Integer.parseInt(tablaEstLanzdores.getValueAt(3, 1).toString()); 
@@ -635,5 +680,11 @@ public class SimuladorJuego extends JDialog {
         }
         return;
     }
-
+    
+	private void finalizarpartido(Juego juego) {
+		
+    	SerieNacional.getInstance().actualizarEstBateadores(estadisticasBateadores);
+    	SerieNacional.getInstance().actualizarEstLanzadores(estadisticasLanzadores);
+    	SerieNacional.getInstance().terminarPartido(juego);
+    }
 }

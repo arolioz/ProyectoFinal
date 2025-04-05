@@ -54,8 +54,20 @@ public class JugadorPosicion extends Jugador {
 	
 	
 	public float calcularPromedio() {
+		if (estadisticas.getTurnosAlBate() == 0) {
+			return 0;
+		}
 		return (float) (estadisticas.getHits() / estadisticas.getTurnosAlBate());
 	}
 	
-
+	public void actualizarEstadisticas(EstadisticaJugadorPosicion est) {
+	    estadisticas.setHits(estadisticas.getHits() + est.getHits());
+	    estadisticas.setBasePorBolas(estadisticas.getBasePorBolas() + est.getBasePorBolas());
+	    estadisticas.setCantHomeruns(estadisticas.getCantHomeruns() + est.getCantHomeruns());
+	    estadisticas.setPonches(estadisticas.getPonches() + est.getPonches());
+	    estadisticas.setCarrerasRemolcadas(estadisticas.getCarrerasRemolcadas() + est.getCarrerasRemolcadas());
+	    estadisticas.setTurnosAlBate(estadisticas.getTurnosAlBate() + est.getTurnosAlBate());
+	    estadisticas.setCarrerasAnotadas(estadisticas.getCarrerasAnotadas() + est.getCarrerasAnotadas());
+	    estadisticas.setError(estadisticas.getError() + est.getError());
+	}
 }

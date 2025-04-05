@@ -109,5 +109,6 @@ public class EstadisticaLanzador implements Serializable {
 		
 		return idJugador;
 	}
-
+	
+	
 }

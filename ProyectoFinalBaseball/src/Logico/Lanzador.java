@@ -46,6 +46,21 @@ public class Lanzador extends Jugador {
 	}
 	
 	public float calcularEfectividad() {
+		if (estadisticas.getInningsJugados() == 0) {
+			return 0;
+		}
 		return (float) ((estadisticas.getCarrerasPermitidas() * 9)/ estadisticas.getInningsJugados());
+	}
+	
+	public void actualizarEstadisticas(EstadisticaLanzador est) {
+	    estadisticas.setPonches(estadisticas.getPonches() + est.getPonches());
+	    estadisticas.setStrikes(estadisticas.getStrikes() + est.getStrikes());
+	    estadisticas.setBolas(estadisticas.getBolas() + est.getBolas());
+	    estadisticas.setBateadoresGolpeados(estadisticas.getBateadoresGolpeados() + est.getBateadoresGolpeados());
+	    estadisticas.setBasePorBolas(estadisticas.getBasePorBolas() + est.getBasePorBolas());
+	    estadisticas.setCarrerasPermitidas(estadisticas.getCarrerasPermitidas() + est.getCarrerasPermitidas());
+	    estadisticas.setHitsPermitidos(estadisticas.getHitsPermitidos() + est.getHitsPermitidos());
+	    estadisticas.setInningsJugados(estadisticas.getInningsJugados() + est.getInningsJugados());
+	    estadisticas.setError(estadisticas.getError() + est.getError());
 	}
 }

@@ -72,17 +72,17 @@ public class Juego implements Serializable {
 		this.carrerasEquipoVisitante = carrerasEquipoVisitante;
 	}
 	
-	public Equipo getGanadorJuego() {
+	public String getGanadorJuego() {
 		if (carrerasEquipoLocal == carrerasEquipoVisitante) {
-			return null;
+			return "Empate";
 		}
 		
 		if (carrerasEquipoLocal > carrerasEquipoVisitante) {
-			return equipoLocal;
+			return equipoLocal.getNombre();
 		}
 		
 		if (carrerasEquipoVisitante > carrerasEquipoLocal) {
-			return equipoVisitante;
+			return equipoVisitante.getNombre();
 		}
 		
 		return null;

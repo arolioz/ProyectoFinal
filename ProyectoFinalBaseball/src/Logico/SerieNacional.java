@@ -132,7 +132,7 @@ public class SerieNacional implements Serializable
 		misJugadores.remove(jugador);
 	}
 	
-	public Jugador buscarjugadorDadoId(String id){
+	public Jugador buscarJugadorDadoId(String id){
 		Jugador jugador = null;
 		for (Jugador aux : misJugadores) {
 			if(aux.getIdJugador().equalsIgnoreCase(id)){
@@ -326,18 +326,59 @@ public class SerieNacional implements Serializable
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
+	   
+	    
 	}
 
 
-	
+    public void actualizarEstBateadores(ArrayList<EstadisticaJugadorPosicion> estadisticasJuego) {
+    	for (EstadisticaJugadorPosicion aux : estadisticasJuego) {
+    		Jugador bateador = buscarJugadorDadoId(aux.getIdJugador());
+    		if (bateador instanceof JugadorPosicion) {
+    			Equipo equipoJugador = buscarEquipoDadoId(bateador.getEquipo().getId());
+    			((JugadorPosicion) bateador).actualizarEstadisticas(aux);
+    			equipoJugador.actualizarEstadisticasJugadorPosicion(bateador.getIdJugador(), aux);
+    		}
+    	}
+    }	
+    
+    public void actualizarEstLanzadores(ArrayList<EstadisticaLanzador> estadisticasJuego) {
+    	for (EstadisticaLanzador aux : estadisticasJuego) {
+    		Jugador lanzador = buscarJugadorDadoId(aux.getIdJugador());
+    		if (lanzador instanceof Lanzador) {
+    			Equipo equipoJugador = buscarEquipoDadoId(lanzador.getEquipo().getId());
+    			((Lanzador) lanzador).actualizarEstadisticas(aux);
+    			equipoJugador.actualizarEstadisticasLanzador(lanzador.getIdJugador(), aux);
+    		}
+    		
+    	}
+    }
+    
+    public void terminarPartido(Juego juego) {
+        Juego partido = buscarJuegoDadoId(juego.getId());
+        if (partido != null && !partido.isJuegoTerminado()) {
+            partido.setCarrerasEquipoLocal(juego.getCarrerasEquipoLocal());
+            partido.setCarrerasEquipoVisitante(juego.getCarrerasEquipoVisitante());
+            partido.setJuegoTerminado(true);
 
+            Equipo local = buscarEquipoDadoId(juego.getEquipoLocal().getId());
+            Equipo visitante = buscarEquipoDadoId(juego.getEquipoVisitante().getId());
+            local.setCantJuegos(local.getCantJuegos() + 1);
+            visitante.setCantJuegos(visitante.getCantJuegos() + 1);
+            
+            if (partido.getGanadorJuego() != null) {
+                if (partido.getGanadorJuego().equalsIgnoreCase(local.getNombre())) {
+                    local.setNumeroVictorias(local.getNumeroVictorias() + 1);
+                    visitante.setNumeroDerrotas(visitante.getNumeroDerrotas() + 1);
+                }
+                else if (partido.getGanadorJuego().equalsIgnoreCase(visitante.getNombre())) {
+                    visitante.setNumeroVictorias(visitante.getNumeroVictorias() + 1);
+                    local.setNumeroDerrotas(local.getNumeroDerrotas() + 1);
+                }
+            }
+        }
+    }
 
-	
-
-
-	
-	
-	
 	
 	
 } 
