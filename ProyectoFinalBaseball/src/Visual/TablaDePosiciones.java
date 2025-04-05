@@ -72,7 +72,7 @@ public class TablaDePosiciones extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					model = new DefaultTableModel();
-					String[] headers = {"Posición", "Nombre", "J" , "G", "P", "PCT", "DIF"}; 
+					String[] headers = {"Posición", "Equipo", "J" , "G", "P", "PCT", "DIF"}; 
 					model.setColumnIdentifiers(headers);
 					
 					table = new JTable();
