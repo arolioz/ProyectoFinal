@@ -35,11 +35,12 @@ public class PrincipalVisual extends JFrame {
 	private JPanel contentPane;
 	private Dimension dim;
 	private JPanel panel;
-	private JMenu TablaDePosiciones;
+	//private JMenu TablaDePosiciones;
 	private JMenu tablaDePosiciones;
 	private JMenuItem mntmNewMenuItem_4;
 	private JMenuItem mnAdmin;
 	private JMenu mnmAdmin;
+	private JMenuItem mntmNewMenuItem_5;
 	
 
 	/**
@@ -147,9 +148,11 @@ public class PrincipalVisual extends JFrame {
 		tablaDePosiciones = new JMenu("Tabla de Posiciones");
 		menuBar.add(tablaDePosiciones);
 		
-		mntmNewMenuItem_4 = new JMenuItem("Ver tabla");
-		mntmNewMenuItem_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		mntmNewMenuItem_4 = new JMenuItem("Equipos");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				TablaDePosiciones aux = new TablaDePosiciones();
 				aux.setModal(true);
 				aux.setVisible(true);
@@ -157,6 +160,19 @@ public class PrincipalVisual extends JFrame {
 		});
 		
 		tablaDePosiciones.add(mntmNewMenuItem_4);
+		
+		mntmNewMenuItem_5 = new JMenuItem("Jugadores");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				
+				ListadoMejoresJugadores aux = new ListadoMejoresJugadores();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
+		tablaDePosiciones.add(mntmNewMenuItem_5);
 		
 		mnmAdmin = new JMenu("Administraccion");
 		menuBar.add(mnmAdmin);
