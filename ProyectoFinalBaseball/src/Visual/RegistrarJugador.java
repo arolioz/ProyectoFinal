@@ -88,6 +88,8 @@ public class RegistrarJugador extends JDialog {
 	public RegistrarJugador() {
 		setTitle("Registrar jugador");
 		setBounds(100, 100, 607, 437);
+		setLocationRelativeTo(null);
+		
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

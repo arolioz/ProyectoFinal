@@ -145,8 +145,10 @@ public class RegistrarLesion extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				okButton = new JButton("Registrar");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+				okButton.addActionListener(new ActionListener() 
+				{
+					public void actionPerformed(ActionEvent e) 
+					{
 						Lesion lesion = new Lesion(txtId.getText(), txtTipoLesion.getText(), (Juego) cbxJuego.getSelectedItem(), (Jugador) cbxJugador.getSelectedItem(), 0, new Date(), (Date) spnReincorporacion.getValue(), txtDescripcion.getText() );
 						SerieNacional.getInstance().ingresarLesion(lesion);
 						JOptionPane.showMessageDialog(null, "La lesión ha sido registrada satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
@@ -179,14 +181,16 @@ public class RegistrarLesion extends JDialog {
 		txtDescripcion.setText("");
 		
 	}
-	private void cargarJugador() {
+	private void cargarJugador() 
+	{
 		ArrayList<Jugador> listJugador = SerieNacional.getInstance().getMisJugadores();
 		for (Jugador jugador : listJugador) {
 			cbxJugador.addItem(jugador);
 		}
 	}
 	
-	private void cargarJuego() {
+	private void cargarJuego() 
+	{
 		ArrayList<Juego> listJuego = SerieNacional.getInstance().getMisJuegos();
 		for(Juego juego : listJuego) {
 			cbxJuego.addItem(juego);

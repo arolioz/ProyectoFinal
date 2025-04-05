@@ -12,7 +12,8 @@ import java.util.ArrayList;
 
 
 
-public class SerieNacional implements Serializable {
+public class SerieNacional implements Serializable 
+{
 	private ArrayList<Equipo> misEquipos;
 	private ArrayList<Jugador> misJugadores;
 	private ArrayList<Juego> misJuegos;
@@ -193,11 +194,14 @@ public class SerieNacional implements Serializable {
 	}
 
 
-	public void ordenarEquipos(ArrayList<Equipo> misEquipos) {
+	public void ordenarEquipos(ArrayList<Equipo> misEquipos) 
+	{
 		int n = misEquipos.size();
 		
-		for(int ind = 0; ind < n - 1; ind++){
-			for(int ind2 = 0; ind2 < n - ind - 1; ind2++){
+		for(int ind = 0; ind < n - 1; ind++)
+		{
+			for(int ind2 = 0; ind2 < n - ind - 1; ind2++)
+			{
 				
 				Equipo actual = misEquipos.get(ind2);
 				Equipo sig = misEquipos.get(ind2 + 1);
@@ -256,7 +260,8 @@ public class SerieNacional implements Serializable {
 	
 
 
-	public float calcularPorcentajeVictorias(Equipo equipo) {
+	public float calcularPorcentajeVictorias(Equipo equipo) 
+	{
 		if(equipo.getCantJuegos() == 0)
 		{
 			return 0;
@@ -265,7 +270,8 @@ public class SerieNacional implements Serializable {
 	}
 
 
-	public float calcularDif(Equipo equipo) {
+	public float calcularDif(Equipo equipo) 
+	{
 		Equipo mejor = misEquipos.get(0);
 		int victoriasMejor = mejor.getNumeroVictorias();
 		int derrotasMejor = mejor.getNumeroDerrotas();

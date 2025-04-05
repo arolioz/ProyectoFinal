@@ -45,6 +45,7 @@ public class RegistrarEquipo extends JDialog {
 	public RegistrarEquipo() {
 		setTitle("Registrar equipo");
 		setBounds(100, 100, 341, 228);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
