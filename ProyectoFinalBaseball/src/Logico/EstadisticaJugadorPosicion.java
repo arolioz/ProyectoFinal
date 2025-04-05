@@ -12,6 +12,7 @@ public class EstadisticaJugadorPosicion implements Serializable {
 	private int turnosAlBate;
 	private int ponches;
 	private int error;
+	private static final long serialVersionUID = 1L;
 	
 	public EstadisticaJugadorPosicion(String idJugador) {
 		super();

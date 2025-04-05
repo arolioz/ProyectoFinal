@@ -11,6 +11,7 @@ public class Juego implements Serializable {
 	private int carrerasEquipoLocal;
 	private int carrerasEquipoVisitante;
 	private boolean juegoTerminado;
+	private static final long serialVersionUID = 1L;
 	
 	public Juego(String id, Equipo equipoLocal, Equipo equipoVisitante, LocalDate fechaPartido) {
 		super();

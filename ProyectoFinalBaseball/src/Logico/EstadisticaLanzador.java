@@ -13,6 +13,7 @@ public class EstadisticaLanzador implements Serializable {
 	private int hitsPermitidos;
 	private int inningsJugados;
 	private int error;
+	private static final long serialVersionUID = 1L;
 	
 	public EstadisticaLanzador(String idJugador) {
 		super();

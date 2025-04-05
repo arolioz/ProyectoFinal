@@ -20,6 +20,7 @@ public class Jugador implements Serializable {
 	protected String ladoDominante;
 	protected boolean estaLesionado;
 	protected ArrayList<Lesion> misLesiones;
+	private static final long serialVersionUID = 1L;
 	
 	protected String cedula;
 	

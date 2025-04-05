@@ -6,6 +6,7 @@ public class JugadorPosicion extends Jugador {
 	private String posicion;
 	private EstadisticaJugadorPosicion estadisticas;
 	private float promedio;
+	private static final long serialVersionUID = 1L;
 	
 	
 	public JugadorPosicion(String idJugador, String nombre, String apellido, Date fechaNacimiento, String telefono,

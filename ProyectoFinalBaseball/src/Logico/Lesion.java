@@ -12,6 +12,7 @@ public class Lesion implements Serializable {
 	private Date fechaLesion;
 	private Date fechaReincorporacion;
 	private String descripcion;
+	private static final long serialVersionUID = 1L;
 	
 	public Lesion(String id, String tipoLesion, Juego juego, Jugador jugador, int prorroga, Date fechaLesion,
 			Date fechaReincorporacion, String descripcion) {
