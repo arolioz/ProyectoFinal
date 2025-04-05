@@ -1,8 +1,9 @@
 package Logico;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Lesion {
+public class Lesion implements Serializable {
 	private String id;
 	private String tipoLesion;
 	private Juego juego;

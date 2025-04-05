@@ -1,8 +1,9 @@
 package Logico;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Juego {
+public class Juego implements Serializable {
 	private String id;
 	private Equipo equipoLocal;
 	private Equipo equipoVisitante;

@@ -1,6 +1,8 @@
 package Logico;
 
-public class EstadisticaLanzador {
+import java.io.Serializable;
+
+public class EstadisticaLanzador implements Serializable {
 	String idJugador;
 	private int ponches;
 	private int strikes;

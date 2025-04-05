@@ -1,9 +1,10 @@
 package Logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Jugador {
+public class Jugador implements Serializable {
 	protected String idJugador;
 	protected String nombre;
 	protected String apellido;
@@ -18,7 +19,7 @@ public class Jugador {
 	protected float altura;
 	protected String ladoDominante;
 	protected boolean estaLesionado;
-	//protected ArrayList<Lesion> misLesiones;
+	protected ArrayList<Lesion> misLesiones;
 	
 	protected String cedula;
 	
@@ -40,7 +41,7 @@ public class Jugador {
 		this.altura = altura;
 		this.ladoDominante = ladoDominante;
 		this.estaLesionado = false;
-		//this.misLesiones = new ArrayList<Lesion>;
+		this.misLesiones = new ArrayList<Lesion>();
 	}
 
 	public String getNombre() {
