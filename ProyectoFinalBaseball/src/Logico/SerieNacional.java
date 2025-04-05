@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -209,6 +210,50 @@ public class SerieNacional implements Serializable {
 			}
 		}
 	}
+	
+	public void ordenarMejoresLanzadores(ArrayList<Lanzador> misLanzadores) 
+	{
+		int n = misLanzadores.size();
+		
+		for(int ind = 0; ind < n - 1; ind++)
+		{
+			for(int ind2 = 0; ind2 < n - ind - 1; ind2++)
+			{
+				
+				Lanzador actual = misLanzadores.get(ind2);
+				Lanzador sig = misLanzadores.get(ind2+1);
+				
+				if(actual.calcularEfectividad() > sig.calcularEfectividad())
+				{
+					misLanzadores.set(ind2, sig);
+					misLanzadores.set(ind2+1, actual);
+				}
+			}
+		}
+		
+	}
+	
+	public void ordenarMejoresBateadores(ArrayList<JugadorPosicion> misBateadores)
+	{
+		int n = misBateadores.size();
+		
+		for (int i = 0; i < n - 1; i++) 
+		{
+			for (int j = 0; j < n - i - 1; j++) 
+			{
+		       JugadorPosicion actual = misBateadores.get(j);
+		       JugadorPosicion siguiente = misBateadores.get(j + 1);
+
+		       if (actual.getPromedio() < siguiente.getPromedio()) 
+		       {
+		           misBateadores.set(j, siguiente);
+		           misBateadores.set(j + 1, actual);
+		       }
+			}
+		}
+	}
+	
+	
 
 
 	public float calcularPorcentajeVictorias(Equipo equipo) {
@@ -276,6 +321,15 @@ public class SerieNacional implements Serializable {
 	        e.printStackTrace();
 	    }
 	}
+
+
+	
+
+
+	
+
+
+	
 	
 	
 	
