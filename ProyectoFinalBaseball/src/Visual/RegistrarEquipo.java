@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
+import Excepcion.CamposVaciosException;
 import Logico.Equipo;
 import Logico.SerieNacional;
 
@@ -99,11 +99,20 @@ public class RegistrarEquipo extends JDialog {
 			{
 				JButton okButton = new JButton("Confirmar");
 				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Equipo equipo = new Equipo(txtId.getText(), txtNombre.getText(), txtCiudad.getText(), txtEstadio.getText());
-						SerieNacional.getInstance().ingresarEquipo(equipo);
-						JOptionPane.showMessageDialog(null, "El equipo ha sido registrado satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
-						clean(); 
+					public void actionPerformed(ActionEvent e) 
+					{
+						try {
+							validarCampos();
+							
+							Equipo equipo = new Equipo(txtId.getText(), txtNombre.getText(), txtCiudad.getText(), txtEstadio.getText());
+							SerieNacional.getInstance().ingresarEquipo(equipo);
+							JOptionPane.showMessageDialog(null, "El equipo ha sido registrado satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+							clean(); 
+						} catch (CamposVaciosException ex) {
+							// TODO: handle exception
+							JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+						
 						
 					}
 				});
@@ -124,6 +133,22 @@ public class RegistrarEquipo extends JDialog {
 		}
 		
 		clean();
+	}
+	
+	private void validarCampos() throws CamposVaciosException 
+	{
+		if (txtNombre.getText().isEmpty()) 
+		{
+			throw new CamposVaciosException("El nombre del equipo es obligatorio.");
+		}
+		if (txtCiudad.getText().isEmpty()) 
+		{
+			throw new CamposVaciosException("La ciudad del equipo es obligatoria.");
+		}
+		if (txtEstadio.getText().isEmpty()) 
+		{
+			throw new CamposVaciosException("El estadio del equipo es obligatorio.");
+		}
 	}
 	
 	private void clean() {

@@ -89,7 +89,7 @@ public class ListadoLesion extends JDialog {
 							int ind = table.getSelectedRow();
 							if(ind != -1)
 							{
-								//miLesion = SerieNacional.getInstance().buscarLesionDadoId(table.getValueAt(ind, 0).toString());
+								miLesion = SerieNacional.getInstance().buscarLesionDadoId(table.getValueAt(ind, 0).toString());
 								
 							}
 						}

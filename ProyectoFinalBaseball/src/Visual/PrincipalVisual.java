@@ -8,7 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Excepcion.SinEquiposException;
+import Excepcion.SinJugadoresException;
 import Logico.Equipo;
+import Logico.Jugador;
 import Logico.SerieNacional;
 import Logico.Control;
 
@@ -94,20 +97,46 @@ public class PrincipalVisual extends JFrame {
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Registrar Jugador");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegistrarJugador aux = new RegistrarJugador();
-				aux.setModal(true);
-				aux.setVisible(true);
+			public void actionPerformed(ActionEvent e) 
+			{
+				try {
+					if(SerieNacional.getInstance().getMisEquipos().isEmpty())
+					{
+						throw new SinEquiposException("Debe registrar al menos un equipo antes de ingresar un jugador.");
+					}
+					
+					RegistrarJugador aux = new RegistrarJugador();
+					aux.setModal(true);
+					aux.setVisible(true);
+				} catch ( SinEquiposException ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Listado de jugadores");
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {				
-				ListadoJugadores aux = new ListadoJugadores();
-				aux.setModal(true);
-				aux.setVisible(true);
+			public void actionPerformed(ActionEvent e) {
+				try 
+				{
+					ArrayList<Jugador> jugadores = SerieNacional.getInstance().getMisJugadores();
+					
+					if(jugadores == null || jugadores.isEmpty()) 
+					{
+						throw new SinJugadoresException("No hay jugadores para mostrar.");
+					}
+					
+					ListadoJugadores aux = new ListadoJugadores();
+					aux.setModal(true);
+					aux.setVisible(true);
+					
+				} catch ( SinJugadoresException ex ) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, ex.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+				}
+				
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_2);
@@ -127,17 +156,26 @@ public class PrincipalVisual extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Listado de equipos");
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ArrayList<Equipo> equipo = SerieNacional.getInstance().getMisEquipos();
-		        
-		        if (equipo == null || equipo.isEmpty()) {
-		            JOptionPane.showMessageDialog(null, "No hay equipos para mostrar", "Aviso", JOptionPane.WARNING_MESSAGE);
-		            return;
-		        }
-		        
-				ListadoEquipo aux = new ListadoEquipo();
-				aux.setModal(true);
-				aux.setVisible(true);
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				try 
+				{
+					ArrayList<Equipo> equipo = SerieNacional.getInstance().getMisEquipos();
+			        
+			        if (equipo == null || equipo.isEmpty()) 
+			        {
+			            throw new SinEquiposException("No hay equipos para mostrar.");
+			        }
+			        
+					ListadoEquipo aux = new ListadoEquipo();
+					aux.setModal(true);
+					aux.setVisible(true);
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+				}
+				
 			}
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_3);
@@ -153,9 +191,24 @@ public class PrincipalVisual extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				TablaDePosiciones aux = new TablaDePosiciones();
-				aux.setModal(true);
-				aux.setVisible(true);
+				try 
+				{
+					ArrayList<Equipo> equipos = SerieNacional.getInstance().getMisEquipos();
+					
+					if(equipos == null || equipos.isEmpty()) 
+					{
+						throw new SinEquiposException("No hay equipos para mostrar");
+					}
+					
+					TablaDePosiciones aux = new TablaDePosiciones();
+					aux.setModal(true);
+					aux.setVisible(true);
+					
+				} catch(SinEquiposException ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+					
+				}
+				
 			}
 		});
 		
@@ -166,10 +219,24 @@ public class PrincipalVisual extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				try 
+				{
+					ArrayList<Jugador> jugadores = SerieNacional.getInstance().getMisJugadores();
+					
+					if(jugadores == null || jugadores.isEmpty()) 
+					{
+						throw new SinJugadoresException("No hay jugadores para mostrar.");
+					}
+					
+					ListadoMejoresJugadores aux = new ListadoMejoresJugadores();
+					aux.setModal(true);
+					aux.setVisible(true);
+					
+				} catch ( SinJugadoresException ex ) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, ex.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+				}
 				
-				ListadoMejoresJugadores aux = new ListadoMejoresJugadores();
-				aux.setModal(true);
-				aux.setVisible(true);
 			}
 		});
 		tablaDePosiciones.add(mntmNewMenuItem_5);

@@ -30,6 +30,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
 import javax.swing.border.TitledBorder;
 
+import Excepcion.CamposVaciosException;
+
 public class RegistrarJugador extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -316,19 +318,29 @@ public class RegistrarJugador extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						if(CBRol.getSelectedIndex() == 1) {
+						try {
+							validarCampos();
 							
-							Lanzador lanzador = new Lanzador(txtId.getText(), txtNombre.getText(), txtApellido.getText(), (Date)spFecha.getValue() , txtTelefono.getText(), txtDir.getText(), txtNac.getText(), txtCorreo.getText(), Integer.valueOf(spNumeroCami.getValue().toString()), (Equipo)CBEquipo.getSelectedItem(),Float.valueOf(spPeso.getValue().toString()) , Float.valueOf(spAltura.getValue().toString()), CBLado.getSelectedItem().toString(),CBLanzador.getSelectedItem().toString());
-							SerieNacional.getInstance().ingresarLanzador(lanzador);
-							JOptionPane.showMessageDialog(null, "El jugador ha sido registrado satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
-						} 
-						
-						if(CBRol.getSelectedIndex() == 2) {
-							JugadorPosicion jugadorPosicion = new JugadorPosicion(txtId.getText(), txtNombre.getText(), txtApellido.getText(), (Date)spFecha.getValue() , txtTelefono.getText(), txtDir.getText(), txtNac.getText(), txtCorreo.getText(), Integer.valueOf(spNumeroCami.getValue().toString()), (Equipo)CBEquipo.getSelectedItem(),Float.valueOf(spPeso.getValue().toString()) , Float.valueOf(spAltura.getValue().toString()), CBLado.getSelectedItem().toString(),CBBateador.getSelectedItem().toString());
-							SerieNacional.getInstance().ingresarJugadorPosicion(jugadorPosicion);
-							JOptionPane.showMessageDialog(null, "El jugador ha sido registrado satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
-						}						
-						clean(); 
+							if(CBRol.getSelectedIndex() == 1) {
+								
+								Lanzador lanzador = new Lanzador(txtId.getText(), txtNombre.getText(), txtApellido.getText(), (Date)spFecha.getValue() , txtTelefono.getText(), txtDir.getText(), txtNac.getText(), txtCorreo.getText(), Integer.valueOf(spNumeroCami.getValue().toString()), (Equipo)CBEquipo.getSelectedItem(),Float.valueOf(spPeso.getValue().toString()) , Float.valueOf(spAltura.getValue().toString()), CBLado.getSelectedItem().toString(),CBLanzador.getSelectedItem().toString());
+								SerieNacional.getInstance().ingresarLanzador(lanzador);
+								JOptionPane.showMessageDialog(null, "El jugador ha sido registrado satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+							} 
+							
+							if(CBRol.getSelectedIndex() == 2) {
+								JugadorPosicion jugadorPosicion = new JugadorPosicion(txtId.getText(), txtNombre.getText(), txtApellido.getText(), (Date)spFecha.getValue() , txtTelefono.getText(), txtDir.getText(), txtNac.getText(), txtCorreo.getText(), Integer.valueOf(spNumeroCami.getValue().toString()), (Equipo)CBEquipo.getSelectedItem(),Float.valueOf(spPeso.getValue().toString()) , Float.valueOf(spAltura.getValue().toString()), CBLado.getSelectedItem().toString(),CBBateador.getSelectedItem().toString());
+								SerieNacional.getInstance().ingresarJugadorPosicion(jugadorPosicion);
+								JOptionPane.showMessageDialog(null, "El jugador ha sido registrado satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+							}						
+							clean();
+							
+						} catch (CamposVaciosException ex) {
+							// TODO: handle exception
+							
+							JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE );
+						}
+						 
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -348,6 +360,38 @@ public class RegistrarJugador extends JDialog {
 		}
 		
 		clean();
+	}
+	
+	private void validarCampos() throws CamposVaciosException {
+		if (txtNombre.getText().isEmpty())
+		{
+			throw new CamposVaciosException("El nombre es obligatorio.");
+		}
+		if (txtApellido.getText().isEmpty()) {
+			throw new CamposVaciosException("El apellido es obligatorio");
+		}
+		if (txtDir.getText().isEmpty()) {
+			throw new CamposVaciosException("La dirección es obligatoria.");
+		}
+		if (txtTelefono.getText().isEmpty()) {
+			throw new CamposVaciosException("El teléfono es obligatorio.");
+		}
+		if (txtCorreo.getText().isEmpty()) {
+			throw new CamposVaciosException("El correo es obligatorio.");
+		}
+		if(CBEquipo.getSelectedIndex() == 0) {
+			throw new CamposVaciosException("Debe seleccionar un equipo.");
+		}
+		if (CBRol.getSelectedIndex() == 0) {
+			throw new CamposVaciosException("Debe seleccionar un rol.");
+		}
+		if (CBLado.getSelectedIndex() == 0) {
+			throw new CamposVaciosException("El lado dominante es obligatorio.");
+		}
+		if (spFecha.getValue() == null) {
+			throw new CamposVaciosException("Seleccione una fecha de nacimiento.");
+		}
+		
 	}
 
 	private void clean() {
