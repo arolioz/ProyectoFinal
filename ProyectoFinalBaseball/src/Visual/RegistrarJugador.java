@@ -31,6 +31,7 @@ import javax.swing.JSeparator;
 import javax.swing.border.TitledBorder;
 
 import Excepcion.CamposVaciosException;
+import java.awt.Toolkit;
 
 public class RegistrarJugador extends JDialog {
 
@@ -88,6 +89,7 @@ public class RegistrarJugador extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistrarJugador() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarJugador.class.getResource("/Image/Logo.png")));
 		setTitle("Registrar jugador");
 		setBounds(100, 100, 607, 437);
 		setLocationRelativeTo(null);

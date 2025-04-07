@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class RegistrarUsuario extends JDialog {
 
@@ -50,6 +51,7 @@ public class RegistrarUsuario extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistrarUsuario() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarUsuario.class.getResource("/Image/Logo.png")));
 		setBounds(100, 100, 450, 228);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());

@@ -32,6 +32,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
+import java.awt.Toolkit;
 
 public class SeleccionarEquipo extends JDialog {
 
@@ -68,6 +69,7 @@ public class SeleccionarEquipo extends JDialog {
 	 * Create the dialog.
 	 */
 	public SeleccionarEquipo() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(SeleccionarEquipo.class.getResource("/Image/Logo.png")));
 		
 		Equipo equipo = new Equipo("1", "Lakers", "Santiago", "Contreras");
 		Equipo equipo1 = new Equipo("2", "Chicago bull", "Santiago", "Contreras");

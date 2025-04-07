@@ -27,6 +27,7 @@ import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
 import javax.swing.JSpinner.DateEditor;
+import java.awt.Toolkit;
 
 public class RegistrarLesion extends JDialog {
 
@@ -64,6 +65,7 @@ public class RegistrarLesion extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistrarLesion() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarLesion.class.getResource("/Image/Logo.png")));
 		setTitle("Registrar lesión");
 		setBounds(100, 100, 483, 300);
 		setLocationRelativeTo(null);

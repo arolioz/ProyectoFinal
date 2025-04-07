@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class PrincipalVisual extends JFrame {
 
@@ -50,6 +51,7 @@ public class PrincipalVisual extends JFrame {
 	 * Create the frame.
 	 */
 	public PrincipalVisual() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PrincipalVisual.class.getResource("/Image/Logo.png")));
 		
 		addWindowListener(new WindowAdapter() {
 			@Override

@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Logico.Equipo;
 import Logico.SerieNacional;
+import java.awt.Toolkit;
 
 public class TablaDePosiciones extends JDialog {
 	
@@ -49,6 +50,7 @@ public class TablaDePosiciones extends JDialog {
 	 * Create the dialog.
 	 */
 	public TablaDePosiciones() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TablaDePosiciones.class.getResource("/Image/Logo.png")));
 
 		setFont(new Font("Broadway", Font.BOLD, 16));
 		getContentPane().setFont(new Font("Broadway", Font.PLAIN, 16));

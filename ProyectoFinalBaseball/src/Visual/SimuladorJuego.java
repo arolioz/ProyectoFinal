@@ -63,6 +63,7 @@ public class SimuladorJuego extends JDialog {
     }
 
     public SimuladorJuego(Juego partido) {
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(SimuladorJuego.class.getResource("/Image/Logo.png")));
         setTitle("Partido de {Local} vs {Visitante}");
 
         setBounds(100, 100, 1191, 765);

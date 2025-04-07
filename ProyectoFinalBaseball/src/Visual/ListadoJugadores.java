@@ -35,6 +35,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import java.awt.Toolkit;
 
 public class ListadoJugadores extends JDialog {
 
@@ -65,6 +66,7 @@ public class ListadoJugadores extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListadoJugadores() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoJugadores.class.getResource("/Image/Logo.png")));
 		setTitle("Listado de jugadores");
 		setBounds(100, 100, 1054, 604);
 		getContentPane().setLayout(new BorderLayout());

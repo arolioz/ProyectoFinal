@@ -25,6 +25,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class ListadoLesion extends JDialog {
 
@@ -55,6 +56,7 @@ public class ListadoLesion extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListadoLesion() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoLesion.class.getResource("/Image/Logo.png")));
 		
 		setFont(new Font("Broadway", Font.BOLD, 16));
 		getContentPane().setFont(new Font("Broadway", Font.PLAIN, 16));

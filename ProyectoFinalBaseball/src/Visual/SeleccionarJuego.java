@@ -28,6 +28,7 @@ import Logico.Jugador;
 import Logico.JugadorPosicion;
 import Logico.Lanzador;
 import Logico.SerieNacional;
+import java.awt.Toolkit;
 
 public class SeleccionarJuego extends JDialog {
 	private JButton cancelButton;
@@ -44,6 +45,7 @@ public class SeleccionarJuego extends JDialog {
     
 
     public SeleccionarJuego() {
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(SeleccionarJuego.class.getResource("/Image/Logo.png")));
     	setTitle("Seleccionar juego");
         setBounds(100, 100, 920, 620);
         getContentPane().setLayout(new BorderLayout());

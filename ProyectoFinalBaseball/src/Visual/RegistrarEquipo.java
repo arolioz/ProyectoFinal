@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import java.awt.Toolkit;
 
 public class RegistrarEquipo extends JDialog {
 
@@ -43,6 +44,7 @@ public class RegistrarEquipo extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistrarEquipo() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarEquipo.class.getResource("/Image/Logo.png")));
 		setTitle("Registrar equipo");
 		setBounds(100, 100, 341, 228);
 		setLocationRelativeTo(null);

@@ -26,6 +26,7 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class ListadoMejoresJugadores extends JDialog {
 
@@ -50,6 +51,7 @@ public class ListadoMejoresJugadores extends JDialog {
     }
 
     public ListadoMejoresJugadores() {
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoMejoresJugadores.class.getResource("/Image/Logo.png")));
         setTitle("Listado de los mejores jugadores");
         setBounds(100, 100, 1004, 604);
         getContentPane().setLayout(new BorderLayout());
