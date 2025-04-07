@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -124,13 +125,16 @@ public class ListadoEquipo extends JDialog {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		ArrayList<Equipo> aux = SerieNacional.getInstance().getMisEquipos();
+		SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy");
+		
 		
 		for (Equipo equipo : aux) {
+			String anio = formatoFecha.format(equipo.getAgnoFundado());
 			fila[0] = equipo.getId();
 			fila[1] = equipo.getNombre();
 			fila[2] = equipo.getCiudad();
 			fila[3] = equipo.getEstadio();
-			fila[4] = equipo.getAgnoFundado();	
+			fila[4] = anio;	
 			
 			model.addRow(fila);
 		}
