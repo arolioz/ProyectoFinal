@@ -29,6 +29,7 @@ import Logico.JugadorPosicion;
 import Logico.Lanzador;
 import Logico.SerieNacional;
 import java.awt.Toolkit;
+import java.awt.FlowLayout;
 
 public class SeleccionarJuego extends JDialog {
 	private JButton cancelButton;
@@ -116,11 +117,28 @@ public class SeleccionarJuego extends JDialog {
 
 
         JPanel buttonPane = new JPanel();
+        buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
         cancelButton = new JButton("Cancelar");
         cancelButton.addActionListener(e -> dispose());
-        buttonPane.setLayout(new BorderLayout(0, 0));
-        buttonPane.add(cancelButton, BorderLayout.CENTER);
+        buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        
+        JButton btnNewButton = new JButton("Terminar Torneo");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		int respuesta = JOptionPane.showConfirmDialog(null, 
+                        "¿Estás seguro de que quieres terminar el partido?", 
+                        "Confirmar", 
+                        JOptionPane.YES_NO_OPTION);
+                  
+                    if (respuesta == JOptionPane.YES_OPTION) {
+                    	SerieNacional.getInstance().terminarTroneo();              
+                        dispose();
+                    }
+        	}
+        });
+        buttonPane.add(btnNewButton);
+        buttonPane.add(cancelButton);
     }
 }
