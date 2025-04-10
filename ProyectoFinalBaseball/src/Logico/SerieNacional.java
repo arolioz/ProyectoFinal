@@ -381,7 +381,35 @@ public class SerieNacional implements Serializable
         }
     }
     
-
+    public void terminarTroneo() {
+    	vaciarJuegos();
+    	Equipo ganador = buscarGanadorDelTorneo();
+    	ganador.aumentarTorneosGanados();
+    	reiniciarJuegosEquipos();
+    }
+    
+    public void vaciarJuegos() {
+        misJuegos.clear();
+        generadorJuegos = 1;
+        fechaActual = LocalDate.now(); 
+    }
 	
-	
+    public Equipo buscarGanadorDelTorneo() {
+    	Equipo aux = misEquipos.get(0);
+    	for (int i = 0; i < misEquipos.size(); i++) {
+    		if (misEquipos.get(i).getNumeroVictorias() > aux.getNumeroVictorias()) {
+    			aux = misEquipos.get(i);
+    		}
+    	}
+    	return aux;
+    }
+    
+    public void reiniciarJuegosEquipos() {
+    	for (Equipo equipo : misEquipos) {
+    		equipo.setNumeroDerrotas(0);
+    		equipo.setNumeroVictorias(0);
+    		equipo.setCantJuegos(0);
+    	}
+    }
+    
 } 

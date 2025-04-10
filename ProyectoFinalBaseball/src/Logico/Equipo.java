@@ -15,6 +15,7 @@ public class Equipo implements Serializable {
 	private Date agnoFundado;
 	private int totalCarreras;
 	private int cantJuegos;
+	private int torneosGanados;
 	private static final long serialVersionUID = 1L;
 	
 	
@@ -31,6 +32,7 @@ public class Equipo implements Serializable {
 		this.totalCarreras = 0;
 		this.cantJuegos = 0;
 		this.misJugadores = new ArrayList<Jugador>();
+		this.torneosGanados = 0;
 	}
 	
 	public String getNombre() {
@@ -121,5 +123,8 @@ public class Equipo implements Serializable {
 		
 	}
 	
+	public void aumentarTorneosGanados() {
+		torneosGanados += 1;
+	}
 	
 }
