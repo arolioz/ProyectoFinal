@@ -160,4 +160,8 @@ public class Jugador implements Serializable {
 	public String getIdJugador() {
 		return idJugador;
 	}
+	
+	public String toString() {
+		return nombre;
+	}
 }

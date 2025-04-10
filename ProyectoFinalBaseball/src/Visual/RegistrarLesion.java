@@ -172,6 +172,8 @@ public class RegistrarLesion extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		
+	clear();
 	}
 	
 	private void clean() {
@@ -181,6 +183,12 @@ public class RegistrarLesion extends JDialog {
 		txtTipoLesion.setText("");
 		spnReincorporacion.setValue(new Date());
 		txtDescripcion.setText("");
+		
+		
+	}
+	
+	private void clear() {
+		txtId.setText("L-"+SerieNacional.getGeneradorLesiones());
 		
 	}
 	private void cargarJugador() 

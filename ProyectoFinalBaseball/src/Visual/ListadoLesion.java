@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Logico.Equipo;
 import Logico.Lesion;
 import Logico.SerieNacional;
 
@@ -22,6 +23,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -125,17 +127,23 @@ public class ListadoLesion extends JDialog {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		ArrayList<Lesion> aux = SerieNacional.getInstance().getMisLesiones();
+		SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 		
 		for (Lesion lesion : aux) {
+			String fechaLesion = formatoFecha.format(lesion.getFechaLesion());
+			String fechaReincorporacion = formatoFecha.format(lesion.getFechaReincorporacion());
 			fila[0] = lesion.getId();
 			fila[1] = lesion.getJugador().getIdJugador();
 			fila[2] = lesion.getJuego().getId();
 			fila[3] = lesion.getTipoLesion();
-			fila[4] = lesion.getFechaLesion();
-			fila[5] = lesion.getFechaReincorporacion();
+			fila[4] = fechaLesion;
+			fila[5] = fechaReincorporacion;
 			fila[6] = lesion.getDescripcion();
 			
 			model.addRow(fila);
 		}
 	}
+	
+	
+	
 }

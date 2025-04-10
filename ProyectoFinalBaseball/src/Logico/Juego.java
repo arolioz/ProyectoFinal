@@ -97,4 +97,8 @@ public class Juego implements Serializable {
 		this.juegoTerminado = juegoTerminado;
 	}
 	
+	public String toString() {
+		return id;
+	}
+	
 }
