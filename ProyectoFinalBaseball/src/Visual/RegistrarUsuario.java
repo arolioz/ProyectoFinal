@@ -31,9 +31,7 @@ public class RegistrarUsuario extends JDialog {
 	private JTextField txtConfirContra;
 	private JComboBox CBTipo;
 
-	/**
-	 * Launch the application.
-	 */
+	/*
 	public static void main(String[] args) {
 		try {
 			RegistrarUsuario dialog = new RegistrarUsuario();
@@ -45,9 +43,6 @@ public class RegistrarUsuario extends JDialog {
 	}
 	
 
-
-	/**
-	 * Create the dialog.
 	 */
 	public RegistrarUsuario() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarUsuario.class.getResource("/Image/Logo.png")));

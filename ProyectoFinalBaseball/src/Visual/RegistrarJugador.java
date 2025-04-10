@@ -72,9 +72,7 @@ public class RegistrarJugador extends JDialog {
 	private JPanel panel_2;
 	private JComboBox CBLanzador;
 
-	/**
-	 * Launch the application.
-	 */
+	/*
 	public static void main(String[] args) {
 		try {
 			RegistrarJugador dialog = new RegistrarJugador();
@@ -85,8 +83,6 @@ public class RegistrarJugador extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
 	 */
 	public RegistrarJugador() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarJugador.class.getResource("/Image/Logo.png")));

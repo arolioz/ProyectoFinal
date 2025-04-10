@@ -51,7 +51,7 @@ public class SimuladorJuego extends JDialog {
     private JPanel panelEstBateadores;
     private JButton btnSalir;
     
-
+    /*
     public static void main(String[] args) {
         try {
             SimuladorJuego dialog = new SimuladorJuego(null);
@@ -60,7 +60,7 @@ public class SimuladorJuego extends JDialog {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    } */
 
     public SimuladorJuego(Juego partido) {
     	setIconImage(Toolkit.getDefaultToolkit().getImage(SimuladorJuego.class.getResource("/Image/Logo.png")));

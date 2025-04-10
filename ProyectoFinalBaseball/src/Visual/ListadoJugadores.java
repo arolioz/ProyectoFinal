@@ -50,9 +50,7 @@ public class ListadoJugadores extends JDialog {
 	private JRadioButton rdbBateador;
 	private JButton okButton;
 
-	/**
-	 * Launch the application.
-	 */
+	/*
 	public static void main(String[] args) {
 		try {
 			ListadoJugadores dialog = new ListadoJugadores();
@@ -62,10 +60,8 @@ public class ListadoJugadores extends JDialog {
 			e.printStackTrace();
 		}
 	}
+	*/
 
-	/**
-	 * Create the dialog.
-	 */
 	public ListadoJugadores() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoJugadores.class.getResource("/Image/Logo.png")));
 		setTitle("Listado de jugadores");

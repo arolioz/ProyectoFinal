@@ -52,9 +52,7 @@ public class SeleccionarEquipo extends JDialog {
 	private JButton btnCarrito;
 	
 
-	/**
-	 * Launch the application.
-	 */
+	/*
 	public static void main(String[] args) {
 		try {
 			SeleccionarEquipo dialog = new SeleccionarEquipo();
@@ -65,8 +63,6 @@ public class SeleccionarEquipo extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
 	 */
 	public SeleccionarEquipo() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(SeleccionarEquipo.class.getResource("/Image/Logo.png")));		

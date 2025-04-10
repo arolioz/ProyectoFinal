@@ -31,9 +31,7 @@ public class MostrarEstJugador extends JDialog {
 	private JTable tablaBateadores;
 	private JTable tablaLanzadores;
 
-	/**
-	 * Launch the application.
-	 */
+	/*
 	public static void main(String[] args) {
 		try {
 			
@@ -45,8 +43,6 @@ public class MostrarEstJugador extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
 	 */
 	public MostrarEstJugador(Jugador jugador) {
 		setTitle("Estadísticas de jugador");

@@ -31,8 +31,12 @@ import Logico.SerieNacional;
 import java.awt.Toolkit;
 import java.awt.FlowLayout;
 
+
 public class SeleccionarJuego extends JDialog {
+	
 	private JButton cancelButton;
+	
+	/*
     public static void main(String[] args) {
         try {
             SeleccionarJuego dialog = new SeleccionarJuego();
@@ -41,7 +45,8 @@ public class SeleccionarJuego extends JDialog {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    } */
+    
     
     
 

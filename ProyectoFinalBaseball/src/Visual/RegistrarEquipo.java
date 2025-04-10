@@ -27,9 +27,7 @@ public class RegistrarEquipo extends JDialog {
 	private JTextField txtCiudad;
 	private JTextField txtEstadio;
 
-	/**
-	 * Launch the application.
-	 */
+	/*
 	public static void main(String[] args) {
 		try {
 			RegistrarEquipo dialog = new RegistrarEquipo();
@@ -39,9 +37,7 @@ public class RegistrarEquipo extends JDialog {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Create the dialog.
+.
 	 */
 	public RegistrarEquipo() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarEquipo.class.getResource("/Image/Logo.png")));

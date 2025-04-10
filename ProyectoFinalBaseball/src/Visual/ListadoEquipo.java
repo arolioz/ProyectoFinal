@@ -39,10 +39,9 @@ public class ListadoEquipo extends JDialog {
 	private JButton cancelButton;
 	private static Object[] fila;
 	private JPanel buttonPane;
-
-	/**
-	 * Launch the application.
-	 */
+	
+	
+	/*
 	public static void main(String[] args) {
 		try {
 			ListadoEquipo dialog = new ListadoEquipo();
@@ -52,10 +51,10 @@ public class ListadoEquipo extends JDialog {
 			e.printStackTrace();
 		}
 	}
+	*/
 
-	/**
-	 * Create the dialog.
-	 */
+	
+	
 	public ListadoEquipo() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoEquipo.class.getResource("/Image/Logo.png")));
 		

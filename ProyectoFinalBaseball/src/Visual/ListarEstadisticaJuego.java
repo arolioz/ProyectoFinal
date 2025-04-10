@@ -35,9 +35,7 @@ public class ListarEstadisticaJuego extends JDialog {
 	private static Object[] fila;
 	private JPanel buttonPane;
 
-	/**
-	 * Launch the application.
-	 */
+	/*
 	public static void main(String[] args) {
 		try {
 			ListarEstadisticaJuego dialog = new ListarEstadisticaJuego();
@@ -48,9 +46,7 @@ public class ListarEstadisticaJuego extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
-	 */
+	*/
 	public ListarEstadisticaJuego() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TablaDePosiciones.class.getResource("/Image/Logo.png")));
 

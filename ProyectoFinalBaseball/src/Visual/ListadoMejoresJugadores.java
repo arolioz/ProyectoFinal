@@ -39,6 +39,7 @@ public class ListadoMejoresJugadores extends JDialog {
     private JRadioButton rdbBateadores;
     private JPanel panel_1;
     private JLabel lblNewLabel;
+    /*
 
     public static void main(String[] args) {
         try {
@@ -49,6 +50,7 @@ public class ListadoMejoresJugadores extends JDialog {
             e.printStackTrace();
         }
     }
+    */
 
     public ListadoMejoresJugadores() {
     	setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoMejoresJugadores.class.getResource("/Image/Logo.png")));

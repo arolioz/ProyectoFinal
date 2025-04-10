@@ -48,9 +48,7 @@ public class RegistrarLesion extends JDialog {
 	private JTextField txtDescripcion;
 	private JSpinner spnReincorporacion;
 
-	/**
-	 * Launch the application.
-	 */
+	/*
 	public static void main(String[] args) {
 		try {
 			RegistrarLesion dialog = new RegistrarLesion();
@@ -61,8 +59,6 @@ public class RegistrarLesion extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
 	 */
 	public RegistrarLesion() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarLesion.class.getResource("/Image/Logo.png")));

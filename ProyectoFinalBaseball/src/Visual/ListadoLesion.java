@@ -41,10 +41,9 @@ public class ListadoLesion extends JDialog {
 	private static Object[] fila;
 	private JPanel buttonPane;
 	private JButton btnNewButton;
+	
+	/*
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		try {
 			ListadoEquipo dialog = new ListadoEquipo();
@@ -54,10 +53,9 @@ public class ListadoLesion extends JDialog {
 			e.printStackTrace();
 		}
 	}
+	*/
 
-	/**
-	 * Create the dialog.
-	 */
+
 	public ListadoLesion() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoLesion.class.getResource("/Image/Logo.png")));
 		
