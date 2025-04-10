@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Excepcion.CamposVaciosException;
+import Excepcion.UsuarioYaExisteException;
 import Logico.Control;
 import Logico.SerieNacional;
 import Logico.User;
@@ -99,19 +101,35 @@ public class RegistrarUsuario extends JDialog {
 				JButton okButton = new JButton("Aceptar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(txtContrasena.getText().equals(txtConfirContra.getText())) {
-							User user = new User(CBTipo.getSelectedItem().toString(),txtNombre.getText(),txtContrasena.getText());
-							Control.getInstance().regUser(user);
-						    JOptionPane.showMessageDialog(null, "Usuaria registrado exitosamente!!! ");
-						    clear();
-						} else {
+						
+						try {
+							validarCampos();
+								
+							if(txtContrasena.getText().equals(txtConfirContra.getText())) 
+							{
+								User user = new User(CBTipo.getSelectedItem().toString(),txtNombre.getText(),txtContrasena.getText());
+								
+								try {
+									Control.getInstance().regUser(user);
+								    JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente!!! ");
+								    clear();
+								} catch (UsuarioYaExisteException ex) {
+									JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+									txtNombre.setText("");
+								}
+								
+							}else {
 
-						    
-							JOptionPane.showMessageDialog(null, "La contraseña no coincide", null, JOptionPane.WARNING_MESSAGE, null);
-							txtConfirContra.setText("");
-							txtContrasena.setText("");
+								JOptionPane.showMessageDialog(null, "La contraseña no coincide", null, JOptionPane.WARNING_MESSAGE, null);
+								txtConfirContra.setText("");
+								txtContrasena.setText("");
 							
+							}	
+						}catch (CamposVaciosException exc) {
+								// TODO: handle exception
+							JOptionPane.showConfirmDialog(null, exc.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
 						}
+					
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -128,6 +146,25 @@ public class RegistrarUsuario extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+		}
+	}
+	
+	private void validarCampos() throws CamposVaciosException {
+			
+		if(txtNombre.getText().isEmpty()) {
+			throw new CamposVaciosException("El nombre es obligatorio.");
+		}
+		if(txtContrasena.getText().isEmpty()) {
+			throw new CamposVaciosException("La contraseña es obligatoria.");
+		}
+		if(txtConfirContra.getText().isEmpty()) {
+			throw new CamposVaciosException("La confirmación de la contraseña es obligatorio.");
+		}
+		if(!txtNombre.getText().matches("[a-zA-Z ]+")) {
+			throw new CamposVaciosException("El nombre solo debe contener letras y espacios.");
+		}
+		if(CBTipo.getSelectedIndex() == 0) {
+			throw new CamposVaciosException("Debe seleccionar un tipo de usuario");
 		}
 	}
 	

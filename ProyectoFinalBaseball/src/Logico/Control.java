@@ -3,6 +3,8 @@ package Logico;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import Excepcion.UsuarioYaExisteException;
+
 public class Control implements Serializable{
     
 	/**
@@ -49,7 +51,16 @@ public class Control implements Serializable{
 		Control.loginUser = loginUser;
 	}
 
-	public void regUser(User user) {
+	public void regUser(User user) throws UsuarioYaExisteException {
+		
+		for(User u : misUsers)
+		{
+			if(u.getUserName().equalsIgnoreCase(user.getUserName())) 
+			{
+				throw new UsuarioYaExisteException("Ya existe un usuario con ese nombre.");
+			}
+		}
+		
 		misUsers.add(user);
 		
 	}
