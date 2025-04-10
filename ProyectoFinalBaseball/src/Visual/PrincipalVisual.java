@@ -274,9 +274,14 @@ public class PrincipalVisual extends JFrame {
 		mmRegistrarLesion = new JMenuItem("Registrar Lesion");
 		mmRegistrarLesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegistrarLesion lesion = new RegistrarLesion();
-				lesion.setModal(true);
-				lesion.setVisible(true);
+				if (SerieNacional.getInstance().getMisJuegos().size() > 0) {
+					RegistrarLesion lesion = new RegistrarLesion();
+					lesion.setModal(true);
+					lesion.setVisible(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Debe haber al menos un partido para registrar una lesion", "Aviso", JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});
 		mnNewMenu_2.add(mmRegistrarLesion);
