@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Logico.Control;
+import Logico.SerieNacional;
 import Logico.User;
 
 import javax.swing.JLabel;
@@ -17,10 +18,6 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
@@ -41,7 +38,7 @@ public class RegistrarUsuario extends JDialog {
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace();  
 		}
 	}
 	
@@ -104,7 +101,7 @@ public class RegistrarUsuario extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if(txtContrasena.getText().equals(txtConfirContra.getText())) {
 							User user = new User(CBTipo.getSelectedItem().toString(),txtNombre.getText(),txtContrasena.getText());
-						    Control.getInstance().regUser(user);
+							Control.getInstance().regUser(user);
 						    JOptionPane.showMessageDialog(null, "Usuaria registrado exitosamente!!! ");
 						    clear();
 						} else {

@@ -49,35 +49,7 @@ public class SeleccionarJuego extends JDialog {
     	setTitle("Seleccionar juego");
         setBounds(100, 100, 920, 620);
         getContentPane().setLayout(new BorderLayout());
-        ArrayList<Juego> juegos = SerieNacional.getInstance().getMisJuegos();
-
-        
-		Equipo equipo = new Equipo("1", "Lakers", "Santiago", "Contreras");
-		Equipo equipo1 = new Equipo("2", "Chicago bull", "Santiago", "Contreras");
-		Equipo equipo2 = new Equipo("3", "Golden state", "Santiago", "Contreras");
-		Equipo equipo3 = new Equipo("4", "Santiago", "Santiago", "Contreras");
-		
-		JugadorPosicion jugador2 = new JugadorPosicion("1", "Carlos", "Gómez", new Date(), "829-444-5678", "Avenida 456, Santiago", "Dominicana", "carlosg@example.com", 6, equipo, 78, 1, "Izquierdo", "Jardinero Central");
-		JugadorPosicion jugador1 = new JugadorPosicion("2", "CABALLO", "Gómez", new Date(), "829-444-5678", "Avenida 456, Santiago", "Dominicana", "carlosg@example.com", 6, equipo, 78, 1, "Izquierdo", "Jardinero Central");
-		Lanzador l1 = new Lanzador("30","Aaron","Escano",new Date(),"829-444-5678", "Avenida 456, Santiago", "Dominicana", "carlosg@example.com", 6, equipo, 78, 1, "Izquierdo", "Abridor");
-		Lanzador l2 = new Lanzador("29","Aaron","Escano",new Date(),"829-444-5678", "Avenida 456, Santiago", "Dominicana", "carlosg@example.com", 6, equipo, 78, 1, "Izquierdo", "Abridor");
-		
-		equipo.getMisJugadores().add(l1);
-		equipo.getMisJugadores().add(jugador2);
-		equipo1.getMisJugadores().add(jugador1);
-		equipo1.getMisJugadores().add(l2);
-		
-		ArrayList<Equipo> misEquipos = new ArrayList<>();
-		misEquipos.add(equipo);
-		misEquipos.add(equipo1);
-		misEquipos.add(equipo2);
-		misEquipos.add(equipo3);
-		
-		SerieNacional.getInstance().crearTorneo(misEquipos);
-		for(int i = 0; i < SerieNacional.getInstance().getMisJuegos().size();i++) {
-			System.out.println("Equipo Local:"+SerieNacional.getInstance().getMisJuegos().get(i).getEquipoLocal().getNombre() +" Equipo visitante:"+SerieNacional.getInstance().getMisJuegos().get(i).getEquipoVisitante().getNombre()+"\n");
-		}
-        
+        ArrayList<Juego> juegos = SerieNacional.getInstance().getMisJuegos();		        
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new GridLayout(0, 3, 10, 10));
         contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -124,15 +96,14 @@ public class SeleccionarJuego extends JDialog {
                 
             }
             
-            
-            
+                       
             btnIniciar.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     JOptionPane.showMessageDialog(null, "Iniciando juego entre "+ juego.getEquipoLocal().getNombre() + " vs "+ juego.getEquipoVisitante().getNombre());
                     SimuladorJuego sim = new SimuladorJuego(juego);
-                    sim.setVisible(true);
                     sim.setModal(true);
-                    
+                    sim.setVisible(true); 
+                   
                 }
             });
 

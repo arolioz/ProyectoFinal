@@ -22,10 +22,11 @@ public class SerieNacional implements Serializable
 	private static int generadorEquipos = 1;
 	private static int generadorJugadores = 1;
 	private static int generadorJuegos = 1;
-	private static int generadorLesiones = 1;
+	private static int generadorLesiones = 1; 
 	
 	private static SerieNacional serieNacional = null;
 	private LocalDate fechaActual = LocalDate.now();
+	
 	private static final long serialVersionUID = 1L;
 	
 	
@@ -90,6 +91,7 @@ public class SerieNacional implements Serializable
 	public static int getGeneradorLesiones() {
 		return generadorLesiones;
 	}
+	
 	
 	public void ingresarJugadorPosicion(JugadorPosicion jugador) {
 		misJugadores.add(jugador);
@@ -378,6 +380,7 @@ public class SerieNacional implements Serializable
             }
         }
     }
+    
 
 	
 	

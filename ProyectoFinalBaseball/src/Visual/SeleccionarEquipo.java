@@ -69,16 +69,7 @@ public class SeleccionarEquipo extends JDialog {
 	 * Create the dialog.
 	 */
 	public SeleccionarEquipo() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(SeleccionarEquipo.class.getResource("/Image/Logo.png")));
-		
-		Equipo equipo = new Equipo("1", "Lakers", "Santiago", "Contreras");
-		Equipo equipo1 = new Equipo("2", "Chicago bull", "Santiago", "Contreras");
-		Equipo equipo2 = new Equipo("3", "Golden state", "Santiago", "Contreras");
-		Equipo equipo3 = new Equipo("4", "Santiago", "Santiago", "Contreras");
-		
-		tempEquipo.add(equipo2);
-		tempEquipo.add(equipo3);
-		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(SeleccionarEquipo.class.getResource("/Image/Logo.png")));		
 		setTitle("Seleccionar equipo");
 		setBounds(100, 100, 742, 375);
 		getContentPane().setLayout(new BorderLayout());
@@ -109,7 +100,6 @@ public class SeleccionarEquipo extends JDialog {
 						btnCarrito.setEnabled(true);
 						codigo = (String) tableEquipo.getValueAt(tableEquipo.getSelectedRow(), 0);
 						selectEquipo1 = SerieNacional.getInstance().buscarEquipoDadoId(codigo);
-
 
 					}
 				}

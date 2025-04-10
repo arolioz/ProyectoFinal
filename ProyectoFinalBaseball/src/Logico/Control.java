@@ -66,4 +66,3 @@ public class Control implements Serializable{
 	}
 
 }
-

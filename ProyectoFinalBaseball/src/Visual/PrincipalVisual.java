@@ -13,12 +13,13 @@ import Excepcion.SinJugadoresException;
 import Logico.Equipo;
 import Logico.Jugador;
 import Logico.SerieNacional;
-import Logico.Control;
+
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
 
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -28,10 +29,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import Logico.Control;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class PrincipalVisual extends JFrame {
 
@@ -45,6 +51,8 @@ public class PrincipalVisual extends JFrame {
 	private JMenuItem mnAdmin;
 	private JMenu mnmAdmin;
 	private JMenuItem mntmNewMenuItem_5;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
 	
 
 	/**
@@ -63,15 +71,17 @@ public class PrincipalVisual extends JFrame {
 				ObjectOutputStream serieNacionarWrite;
 				
 				FileOutputStream generador;
-				ObjectOutputStream generadorWrite;
+				ObjectOutputStream generadorWrite; 
 				try {
 					usuario = new  FileOutputStream("Usuarios.dat");
 					usuarioWrite = new ObjectOutputStream(usuario);
-					usuarioWrite.writeObject(Control.getInstance());
+					usuarioWrite.writeObject(Control.getInstance()); 
 					
 					serieNacional = new  FileOutputStream("SerieNacional.dat");
 					serieNacionarWrite = new ObjectOutputStream(serieNacional);
 					serieNacionarWrite.writeObject(SerieNacional.getInstance());
+					
+					SerieNacional.getInstance().guardarGeneradores();
 					
 					SerieNacional.getInstance().guardarGeneradores();
 				} catch (FileNotFoundException e1) {
@@ -243,6 +253,29 @@ public class PrincipalVisual extends JFrame {
 		});
 		tablaDePosiciones.add(mntmNewMenuItem_5);
 		
+		JMenu mnNewMenu_2 = new JMenu("Lesion");
+		menuBar.add(mnNewMenu_2);
+		
+		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Registrar Lesion");
+		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistrarLesion lesion = new RegistrarLesion();
+				lesion.setModal(true);
+				lesion.setVisible(true);
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_6);
+		
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Listar lesiones");
+		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListadoLesion lesion = new ListadoLesion();
+				lesion.setModal(true);
+				lesion.setVisible(true);
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_7);
+		
 		mnmAdmin = new JMenu("Administraccion");
 		menuBar.add(mnmAdmin);
 		
@@ -269,9 +302,57 @@ public class PrincipalVisual extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PrincipalVisual.class.getResource("/Image/Estadio.jpeg")));
-		lblNewLabel.setBounds(129, 106, 1765, 904);
+		lblNewLabel.setIcon(new ImageIcon(PrincipalVisual.class.getResource("/Image/Estadio.png")));
+		lblNewLabel.setBounds(305, 0, 1716, 776);
 		panel.add(lblNewLabel);
+		
+		btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(PrincipalVisual.class.getResource("/Image/BotonIniciarTorneo.png")));
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setFont(new Font("Calisto MT", Font.PLAIN, 30));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(SerieNacional.getInstance().getMisEquipos().size() >= 2) {
+					SeleccionarEquipo eq = new SeleccionarEquipo(); 
+					eq.setModal(true);
+					eq.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog( null, "Debes ingresar al menos dos equipos para poder iniciar un torneo!!!","Advertencia",JOptionPane.WARNING_MESSAGE);
+				}
+				
+				if(SerieNacional.getInstance().getMisJuegos().size() > 0) {
+					JOptionPane.showMessageDialog( null, "No pueden haber dos torneos al mismo tiempo, primero debes terminar el anterior para crear uno nuevo","Advertencia",JOptionPane.WARNING_MESSAGE);
+				}
+
+
+				
+			}
+		});
+		btnNewButton.setBounds(817, 787, 192, 165);
+		panel.add(btnNewButton);
+		
+
+		btnNewButton_1 = new JButton("");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(SerieNacional.getInstance().getMisJuegos().size() < 0) {
+					SeleccionarJuego juego = new SeleccionarJuego();
+					juego.setModal(true);
+					juego.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog( null, "Primero debes iniciar un torneo.","Advertencia",JOptionPane.WARNING_MESSAGE);
+				}
+
+
+			}
+		});
+
+		btnNewButton_1.setForeground(Color.WHITE);
+		btnNewButton_1.setIcon(new ImageIcon(PrincipalVisual.class.getResource("/Image/BotonCalendario.png")));
+		btnNewButton_1.setBounds(10, 11, 200, 196);
+		panel.add(btnNewButton_1);
 		
 
 
