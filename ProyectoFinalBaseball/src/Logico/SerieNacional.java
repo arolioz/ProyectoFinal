@@ -42,6 +42,7 @@ public class SerieNacional implements Serializable
 		generadorJugadores = 1;
 		generadorJuegos = 1;
 		generadorLesiones = 1;
+		
 	}
 	
 	
