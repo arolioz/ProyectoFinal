@@ -177,7 +177,7 @@ public class RegistrarLesion extends JDialog {
 	}
 	
 	private void clean() {
-		txtId.setText("L-"+SerieNacional.getGeneradorLesiones());
+		txtId.setText("L-"+SerieNacional.getInstance().getGeneradorLesiones());
 		cbxJugador.setSelectedIndex(0);
 		cbxJuego.setSelectedIndex(0);
 		txtTipoLesion.setText("");
@@ -188,7 +188,7 @@ public class RegistrarLesion extends JDialog {
 	}
 	
 	private void clear() {
-		txtId.setText("L-"+SerieNacional.getGeneradorLesiones());
+		txtId.setText("L-"+SerieNacional.getInstance().getGeneradorLesiones());
 		
 	}
 	private void cargarJugador() 

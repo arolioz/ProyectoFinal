@@ -400,7 +400,7 @@ public class RegistrarJugador extends JDialog {
 	}
 
 	private void clean() {
-		txtId.setText("J-"+SerieNacional.getGeneradorJugadores());
+		txtId.setText("J-"+SerieNacional.getInstance().getGeneradorJugadores());
 		txtNombre.setText("");
 		txtApellido.setText("");
 		txtDir.setText("");

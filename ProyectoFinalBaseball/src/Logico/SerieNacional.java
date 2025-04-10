@@ -10,6 +10,8 @@ import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import Excepcion.UsuarioYaExisteException;
+
 
 
 public class SerieNacional implements Serializable 
@@ -19,13 +21,16 @@ public class SerieNacional implements Serializable
 	private ArrayList<Juego> misJuegos;
 	private ArrayList<Lesion> misLesiones;
 	
-	private static int generadorEquipos = 1;
-	private static int generadorJugadores = 1;
-	private static int generadorJuegos = 1;
-	private static int generadorLesiones = 1; 
+	private int generadorEquipos = 1;
+	private int generadorJugadores = 1;
+	private int generadorJuegos = 1;
+	private int generadorLesiones = 1; 
 	
 	private static SerieNacional serieNacional = null;
 	private LocalDate fechaActual = LocalDate.now();
+	
+	private ArrayList<User> misUsers;
+	private static User loginUser;
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -37,12 +42,8 @@ public class SerieNacional implements Serializable
 		misJuegos = new ArrayList<Juego>();
 		misLesiones = new ArrayList<Lesion>();
 		
-		generadorEquipos = 1;
-		generadorJugadores = 1;
-		generadorJuegos = 1;
-		generadorLesiones = 1;
-		
 	}
+	
 	
 	
 	public static SerieNacional getInstance() {
@@ -73,24 +74,7 @@ public class SerieNacional implements Serializable
 	}
 
 
-	public static int getGeneradorEquipos() {
-		return generadorEquipos;
-	}
 
-
-	public static int getGeneradorJugadores() {
-		return generadorJugadores;
-	}
-
-
-	public static int getGeneradorJuegos() {
-		return generadorJuegos;
-	}
-
-
-	public static int getGeneradorLesiones() {
-		return generadorLesiones;
-	}
 	
 	
 	public void ingresarJugadorPosicion(JugadorPosicion jugador) {
@@ -411,25 +395,99 @@ public class SerieNacional implements Serializable
     		equipo.setCantJuegos(0);
     	}
     }
+    
+    
+    
+    public ArrayList<User> getMisUsers() {
+		return misUsers;
+	}
 
-
-	public static void setGeneradorEquipos(int generadorEquipos) {
-		SerieNacional.generadorEquipos = generadorEquipos;
+	public void setMisUsers(ArrayList<User> misUsers) {
+		this.misUsers = misUsers;
 	}
 
 
-	public static void setGeneradorJugadores(int generadorJugadores) {
-		SerieNacional.generadorJugadores = generadorJugadores;
+	public static User getLoginUser() {
+		return loginUser;
+	}
+
+	public static void setLoginUser(User loginUser) {
+		SerieNacional.loginUser = loginUser;
+	}
+
+	public void regUser(User user) throws UsuarioYaExisteException {
+		
+		for(User u : misUsers)
+		{
+			if(u.getUserName().equalsIgnoreCase(user.getUserName())) 
+			{
+				throw new UsuarioYaExisteException("Ya existe un usuario con ese nombre.");
+			}
+		}
+		
+		misUsers.add(user);
+		
+	}
+
+	public boolean confirmLogin(String text, String text2) {
+		boolean login = false;
+		for (User user : misUsers) {
+			if(user.getUserName().equals(text) && user.getPass().equals(text2)){
+				loginUser = user;
+				login = true;
+			}
+		}
+		return login;
+	}
+	
+	
+	
+	
+
+
+	public int getGeneradorEquipos() {
+		return generadorEquipos;
 	}
 
 
-	public static void setGeneradorJuegos(int generadorJuegos) {
-		SerieNacional.generadorJuegos = generadorJuegos;
+	public void setGeneradorEquipos(int generadorEquipos) {
+		this.generadorEquipos = generadorEquipos;
 	}
 
 
-	public static void setGeneradorLesiones(int generadorLesiones) {
-		SerieNacional.generadorLesiones = generadorLesiones;
+	public int getGeneradorJugadores() {
+		return generadorJugadores;
 	}
+
+
+	public void setGeneradorJugadores(int generadorJugadores) {
+		this.generadorJugadores = generadorJugadores;
+	}
+
+
+	public int getGeneradorJuegos() {
+		return generadorJuegos;
+	}
+
+
+	public void setGeneradorJuegos(int generadorJuegos) {
+		this.generadorJuegos = generadorJuegos;
+	}
+
+
+	public int getGeneradorLesiones() {
+		return generadorLesiones;
+	}
+
+
+	public void setGeneradorLesiones(int generadorLesiones) {
+		this.generadorLesiones = generadorLesiones;
+	}
+
+
+
+
+
+
     
 } 

@@ -154,7 +154,7 @@ public class RegistrarEquipo extends JDialog {
 	}
 	
 	private void clean() {
-		txtId.setText("E-"+SerieNacional.getGeneradorEquipos());
+		txtId.setText("E-"+SerieNacional.getInstance().getGeneradorEquipos());
 		txtNombre.setText("");
 		txtEstadio.setText("");
 		txtCiudad.setText("");
