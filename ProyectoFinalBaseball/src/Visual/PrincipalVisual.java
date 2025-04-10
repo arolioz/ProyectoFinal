@@ -324,7 +324,7 @@ public class PrincipalVisual extends JFrame {
 			    {
 			      sfd = new Socket("0",7000); //IP
 			      
-			      File[] archivos = {new File("SerieNacional.dat"), new File("Generadores.dat"), new File("Usuarios.dat")};
+			      File[] archivos = {new File("SerieNacional.dat"), new File("Usuarios.dat")};
 
 			      SalidaSocket = new DataOutputStream((sfd.getOutputStream()));
 			      
@@ -344,9 +344,11 @@ public class PrincipalVisual extends JFrame {
                               SalidaSocket.flush();
                           }
                           aux.close();
-                          System.out.println("Archivo " + arch.getName() + " enviado.");
+                          System.out.println("Archivo " + arch.getName() + " enviado."); 
+                          JOptionPane.showMessageDialog(null, "Se ha hecho el respaldo del archivo. " + arch.getName() + " correctamente", null, JOptionPane.INFORMATION_MESSAGE, null);
                       } 
 			    	  catch (IOException ioe) {
+			    		  JOptionPane.showMessageDialog(null, "No se ha podido hacer el respaldo.", null, JOptionPane.WARNING_MESSAGE, null);
                           System.out.println("Error al enviar archivo " + arch.getName() + ": " + ioe);
                       }
 				      

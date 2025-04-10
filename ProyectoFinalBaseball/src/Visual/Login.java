@@ -150,12 +150,20 @@ public class Login extends JFrame {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Control.getInstance().confirmLogin(textNombre.getText(),textContrasena.getText())){
-					PrincipalVisual frame = new PrincipalVisual();
-					dispose();
-					frame.setVisible(true);
-					
-				};
+				
+				if(Control.getInstance().buscarUsuarioDadoNombre(textNombre.toString()) != null) {
+					if(Control.getInstance().confirmLogin(textNombre.getText(),textContrasena.getText())){
+						PrincipalVisual frame = new PrincipalVisual();
+						dispose();
+						frame.setVisible(true);
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "La contraseña ingresada es invalida! ", "Error", JOptionPane.WARNING_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "El usuario no existe!!", "Error", JOptionPane.WARNING_MESSAGE);
+				}
+
 				
 			}
 		});

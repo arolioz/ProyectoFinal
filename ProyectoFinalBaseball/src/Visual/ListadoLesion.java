@@ -40,6 +40,7 @@ public class ListadoLesion extends JDialog {
 	private JButton cancelButton;
 	private static Object[] fila;
 	private JPanel buttonPane;
+	private JButton btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -109,12 +110,22 @@ public class ListadoLesion extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				cancelButton = new JButton("Cancel");
+				cancelButton = new JButton("Salir");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
+				{
+					btnNewButton = new JButton("Prorroga");
+					btnNewButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							
+							
+						}
+					});
+					buttonPane.add(btnNewButton);
+				}
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

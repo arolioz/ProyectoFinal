@@ -30,18 +30,6 @@ public class Cliente extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Cliente frame = new Cliente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -63,7 +51,7 @@ public class Cliente extends JFrame {
 				{
 					sfd = new Socket("0",7000); //IP
 
-					File[] archivos = {new File("SerieNacional.dat"), new File("Generadores.dat"), new File("Usuarios.dat")};
+					File[] archivos = {new File("SerieNacional.dat"), new File("Usuarios.dat")};
 
 					SalidaSocket = new DataOutputStream((sfd.getOutputStream()));
 
