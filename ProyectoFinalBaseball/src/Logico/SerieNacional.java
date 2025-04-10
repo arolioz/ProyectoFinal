@@ -29,7 +29,6 @@ public class SerieNacional implements Serializable
 	
 	private static final long serialVersionUID = 1L;
 	
-	
 	private SerieNacional() {
 		super();
 		
@@ -42,6 +41,7 @@ public class SerieNacional implements Serializable
 		generadorJugadores = 1;
 		generadorJuegos = 1;
 		generadorLesiones = 1;
+		
 	}
 	
 	

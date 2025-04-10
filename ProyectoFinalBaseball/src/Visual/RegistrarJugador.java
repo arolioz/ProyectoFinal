@@ -228,7 +228,7 @@ public class RegistrarJugador extends JDialog {
 			txtCorreo.setColumns(10);
 			
 			spPeso = new JSpinner();
-			spPeso.setModel(new SpinnerNumberModel(new Float(0), null, null, new Float(1)));
+			spPeso.setModel(new SpinnerNumberModel(new Float(0), new Float(0), null, new Float(1)));
 			spPeso.setBounds(324, 125, 55, 20);
 			panel.add(spPeso);
 			

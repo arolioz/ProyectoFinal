@@ -13,11 +13,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Excepcion.CamposVaciosException;
+import Excepcion.UsuarioYaExisteException;
 import Logico.Control;
 import Logico.SerieNacional;
 import Logico.User;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -27,8 +30,8 @@ import java.awt.Toolkit;
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textNombre;
+	private JTextField textContrasena;
 
 	/**
 	 * Launch the application.
@@ -69,7 +72,14 @@ public class Login extends JFrame {
 						usuario2 = new  FileOutputStream("Usuarios.dat");
 						usuarioWrite = new ObjectOutputStream(usuario2);
 						User aux = new User("Administrador", "Admin", "Admin");
-						Control.getInstance().regUser(aux);
+						
+						try {
+							Control.getInstance().regUser(aux);
+						} catch (UsuarioYaExisteException exc) {
+							// TODO: handle exception
+							JOptionPane.showConfirmDialog(null, exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+						
 						usuarioWrite.writeObject(Control.getInstance());
 						usuario2.close();
 						usuarioWrite.close();
@@ -126,20 +136,20 @@ public class Login extends JFrame {
 		lblContrasea.setBounds(39, 98, 105, 14);
 		panel.add(lblContrasea);
 		
-		textField = new JTextField();
-		textField.setBounds(39, 64, 191, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		textNombre = new JTextField();
+		textNombre.setBounds(39, 64, 191, 20);
+		panel.add(textNombre);
+		textNombre.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(39, 128, 191, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		textContrasena = new JTextField();
+		textContrasena.setBounds(39, 128, 191, 20);
+		panel.add(textContrasena);
+		textContrasena.setColumns(10);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Control.getInstance().confirmLogin(textField.getText(),textField_1.getText())){
+				if(Control.getInstance().confirmLogin(textNombre.getText(),textContrasena.getText())){
 					PrincipalVisual frame = new PrincipalVisual();
 					dispose();
 					frame.setVisible(true);
@@ -150,4 +160,5 @@ public class Login extends JFrame {
 		btnLogin.setBounds(37, 175, 89, 23);
 		panel.add(btnLogin);
 	}
+	
 }
