@@ -371,9 +371,6 @@ public class PrincipalVisual extends JFrame {
 			}
 		});
 		mnmAdmin.add(Respaldo);
-		
-		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Cargar respaldo");
-		mnmAdmin.add(mntmNewMenuItem_9);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
