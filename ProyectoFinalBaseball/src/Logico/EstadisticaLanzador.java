@@ -14,7 +14,7 @@ public class EstadisticaLanzador implements Serializable {
 	private int inningsJugados;
 	private int error;
 	private static final long serialVersionUID = 1L;
-	
+
 	public EstadisticaLanzador(String idJugador) {
 		super();
 		this.idJugador = idJugador;
@@ -106,9 +106,9 @@ public class EstadisticaLanzador implements Serializable {
 	}
 
 	public String getIdJugador() {
-		
+
 		return idJugador;
 	}
-	
-	
+
+
 }

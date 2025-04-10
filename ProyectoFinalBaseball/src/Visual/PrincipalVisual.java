@@ -59,13 +59,17 @@ public class PrincipalVisual extends JFrame {
 	private JMenuItem mnAdmin;
 	private JMenu mnmAdmin;
 	private JMenuItem mntmNewMenuItem_5;
-	private JButton btnNewButton;
+	private JButton btnIniciarTorneo;
 	private JButton btnNewButton_1;
 	private JMenuItem Respaldo;
 	
 	static Socket sfd = null;
 	static DataInputStream EntradaSocket;
 	static DataOutputStream SalidaSocket;
+	private JMenuItem mmRegistrarJugador;
+	private JMenu mnNewMenu_1;
+	private JMenuItem mmRegistrarEquipo;
+	private JMenuItem mmRegistrarLesion;
 	
 
 	/**
@@ -86,6 +90,9 @@ public class PrincipalVisual extends JFrame {
 				FileOutputStream generador;
 				ObjectOutputStream generadorWrite; 
 				try {
+					usuario = new  FileOutputStream("Usuarios.dat");
+					usuarioWrite = new ObjectOutputStream(usuario);
+					usuarioWrite.writeObject(Control.getInstance());
 					
 					serieNacional = new  FileOutputStream("SerieNacional.dat");
 					serieNacionarWrite = new ObjectOutputStream(serieNacional);
@@ -115,8 +122,8 @@ public class PrincipalVisual extends JFrame {
 		JMenu mnNewMenu = new JMenu("Jugador");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Registrar Jugador");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
+		mmRegistrarJugador = new JMenuItem("Registrar Jugador");
+		mmRegistrarJugador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
 				try {
@@ -134,7 +141,7 @@ public class PrincipalVisual extends JFrame {
 				
 			}
 		});
-		mnNewMenu.add(mntmNewMenuItem);
+		mnNewMenu.add(mmRegistrarJugador);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Listado de jugadores");
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
@@ -161,18 +168,18 @@ public class PrincipalVisual extends JFrame {
 		});
 		mnNewMenu.add(mntmNewMenuItem_2);
 		
-		JMenu mnNewMenu_1 = new JMenu("Equipo");
+		mnNewMenu_1 = new JMenu("Equipo");
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Registrar Equipo");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+		mmRegistrarEquipo = new JMenuItem("Registrar Equipo");
+		mmRegistrarEquipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistrarEquipo aux = new RegistrarEquipo();
 				aux.setModal(true);
 				aux.setVisible(true);
 			}
 		});
-		mnNewMenu_1.add(mntmNewMenuItem_1);
+		mnNewMenu_1.add(mmRegistrarEquipo);
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Listado de equipos");
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
@@ -264,15 +271,15 @@ public class PrincipalVisual extends JFrame {
 		JMenu mnNewMenu_2 = new JMenu("Lesion");
 		menuBar.add(mnNewMenu_2);
 		
-		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Registrar Lesion");
-		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+		mmRegistrarLesion = new JMenuItem("Registrar Lesion");
+		mmRegistrarLesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistrarLesion lesion = new RegistrarLesion();
 				lesion.setModal(true);
 				lesion.setVisible(true);
 			}
 		});
-		mnNewMenu_2.add(mntmNewMenuItem_6);
+		mnNewMenu_2.add(mmRegistrarLesion);
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Listar lesiones");
 		mntmNewMenuItem_7.addActionListener(new ActionListener() {
@@ -364,11 +371,9 @@ public class PrincipalVisual extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		if(!Control.getLoginUser().getTipo().equalsIgnoreCase("Administrador")) {
-			mnmAdmin.setEnabled(false);
-		}
-		
+
+
+
 		panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
@@ -378,12 +383,12 @@ public class PrincipalVisual extends JFrame {
 		lblNewLabel.setBounds(305, 0, 1716, 776);
 		panel.add(lblNewLabel);
 		
-		btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(PrincipalVisual.class.getResource("/Image/BotonIniciarTorneo.png")));
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setBackground(Color.WHITE);
-		btnNewButton.setFont(new Font("Calisto MT", Font.PLAIN, 30));
-		btnNewButton.addActionListener(new ActionListener() {
+		btnIniciarTorneo = new JButton("");
+		btnIniciarTorneo.setIcon(new ImageIcon(PrincipalVisual.class.getResource("/Image/BotonIniciarTorneo.png")));
+		btnIniciarTorneo.setForeground(Color.WHITE);
+		btnIniciarTorneo.setBackground(Color.WHITE);
+		btnIniciarTorneo.setFont(new Font("Calisto MT", Font.PLAIN, 30));
+		btnIniciarTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(SerieNacional.getInstance().getMisJuegos().size() > 0) {
@@ -407,8 +412,8 @@ public class PrincipalVisual extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(817, 787, 192, 165);
-		panel.add(btnNewButton);
+		btnIniciarTorneo.setBounds(817, 787, 192, 165);
+		panel.add(btnIniciarTorneo);
 		
 
 		btnNewButton_1 = new JButton("");
@@ -434,6 +439,17 @@ public class PrincipalVisual extends JFrame {
 		
 		
 
-
+		Anotador();
+	}
+	
+	private void Anotador() {
+		if(!Control.getLoginUser().getTipo().equalsIgnoreCase("Administrador")) {
+			mnmAdmin.setEnabled(false);
+			mmRegistrarEquipo.setVisible(false);
+			mmRegistrarJugador.setVisible(false);
+			mmRegistrarLesion.setVisible(false);
+			mnmAdmin.setVisible(false);
+			btnIniciarTorneo.setVisible(false);
+		}
 	}
 }

@@ -17,8 +17,8 @@ public class Equipo implements Serializable {
 	private int cantJuegos;
 	private int torneosGanados;
 	private static final long serialVersionUID = 1L;
-	
-	
+
+
 	public Equipo(String id, String nombre, String ciudad,String estadio) {
 		super();
 		this.id = id;
@@ -34,7 +34,7 @@ public class Equipo implements Serializable {
 		this.misJugadores = new ArrayList<Jugador>();
 		this.torneosGanados = 0;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -92,7 +92,7 @@ public class Equipo implements Serializable {
 	public String getId() {
 		return id;
 	}
-	
+
 	public String toString() {
 		return nombre;
 	}
@@ -107,9 +107,9 @@ public class Equipo implements Serializable {
 			}
 		}
 		return false;
-		
+
 	}
-	
+
 	public boolean actualizarEstadisticasLanzador(String idJugador, EstadisticaLanzador est) {
 		for (Jugador jugador : misJugadores) {
 			if (jugador.getIdJugador().equalsIgnoreCase(idJugador)) {
@@ -120,9 +120,9 @@ public class Equipo implements Serializable {
 			}
 		}
 		return false;
-		
+
 	}
-	
+
 	public void aumentarTorneosGanados() {
 		torneosGanados += 1;
 	}
@@ -134,5 +134,5 @@ public class Equipo implements Serializable {
 	public void setTorneosGanados(int torneosGanados) {
 		this.torneosGanados = torneosGanados;
 	}
-	
+
 }

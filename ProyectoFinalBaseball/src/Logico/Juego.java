@@ -12,7 +12,7 @@ public class Juego implements Serializable {
 	private int carrerasEquipoVisitante;
 	private boolean juegoTerminado;
 	private static final long serialVersionUID = 1L;
-	
+
 	public Juego(String id, Equipo equipoLocal, Equipo equipoVisitante, LocalDate fechaPartido) {
 		super();
 		this.id = id;
@@ -71,22 +71,22 @@ public class Juego implements Serializable {
 	public void setCarrerasEquipoVisitante(int carrerasEquipoVisitante) {
 		this.carrerasEquipoVisitante = carrerasEquipoVisitante;
 	}
-	
+
 	public String getGanadorJuego() {
 		if (carrerasEquipoLocal == carrerasEquipoVisitante) {
 			return "Empate";
 		}
-		
+
 		if (carrerasEquipoLocal > carrerasEquipoVisitante) {
 			return equipoLocal.getNombre();
 		}
-		
+
 		if (carrerasEquipoVisitante > carrerasEquipoLocal) {
 			return equipoVisitante.getNombre();
 		}
-		
+
 		return null;
-		
+
 	}
 
 	public boolean isJuegoTerminado() {
@@ -96,9 +96,9 @@ public class Juego implements Serializable {
 	public void setJuegoTerminado(boolean juegoTerminado) {
 		this.juegoTerminado = juegoTerminado;
 	}
-	
+
 	public String toString() {
 		return id;
 	}
-	
+
 }

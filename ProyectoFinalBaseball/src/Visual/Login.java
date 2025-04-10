@@ -65,7 +65,7 @@ public class Login extends JFrame {
 					SerieNacional.setSerieNacional(temp1);
 					serieNacional1.close();
 					serieNacionalRead.close();					
-					SerieNacional.getInstance().cargarGeneradores();
+
 					
 				} catch (FileNotFoundException e) {
 					try {
@@ -74,7 +74,7 @@ public class Login extends JFrame {
 						User aux = new User("Administrador", "Admin", "Admin");
 						
 						try {
-							Control.getInstance().regUser(aux);
+									Control.getInstance().regUser(aux);						
 						} catch (UsuarioYaExisteException exc) {
 							// TODO: handle exception
 							JOptionPane.showConfirmDialog(null, exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -88,7 +88,7 @@ public class Login extends JFrame {
 						serieNacionalWrite.writeObject(SerieNacional.getInstance());
 						serieNacional2.close();
 						serieNacionalWrite.close();
-						SerieNacional.getInstance().guardarGeneradores();
+
 						
 					} catch (FileNotFoundException e1) {
 					} catch (IOException e1) {
@@ -154,12 +154,26 @@ public class Login extends JFrame {
 					PrincipalVisual frame = new PrincipalVisual();
 					dispose();
 					frame.setVisible(true);
+					
 				};
 				
 			}
 		});
 		btnLogin.setBounds(37, 175, 89, 23);
 		panel.add(btnLogin);
+		
+		eliminarAdmin();
+	}
+	
+	private void eliminarAdmin() {
+		
+		User aux = new User("Administrador", "Admin", "Admin");
+		
+		if(Control.getInstance().getMisUsers().size() > 0 ) {
+			if(Control.getInstance().buscarUsuarioDadoNombre(aux.getUserName()) != null) {
+				Control.getInstance().eliminarUsuario(aux);
+			}
+		}
 	}
 	
 }

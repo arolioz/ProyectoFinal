@@ -21,9 +21,9 @@ public class Jugador implements Serializable {
 	protected boolean estaLesionado;
 	protected ArrayList<Lesion> misLesiones;
 	private static final long serialVersionUID = 1L;
-	
+
 	protected String cedula;
-	
+
 	public Jugador(String idJugador, String nombre, String apellido, Date fechaNacimiento, String telefono,
 			String direccion, String nacionalidad, String correoElectronico, int numCamiseta, Equipo equipo, float peso,
 			float altura, String ladoDominante) {
@@ -160,7 +160,7 @@ public class Jugador implements Serializable {
 	public String getIdJugador() {
 		return idJugador;
 	}
-	
+
 	public String toString() {
 		return nombre;
 	}

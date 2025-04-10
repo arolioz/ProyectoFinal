@@ -68,7 +68,7 @@ public class RegistrarUsuario extends JDialog {
 		txtNombre.setColumns(10);
 		
 		CBTipo = new JComboBox();
-		CBTipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Administrador", "Comercial"}));
+		CBTipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Administrador", "Anotador"}));
 		CBTipo.setBounds(20, 113, 127, 20);
 		contentPanel.add(CBTipo);
 		
@@ -98,7 +98,7 @@ public class RegistrarUsuario extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Aceptar");
+				JButton okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -114,7 +114,7 @@ public class RegistrarUsuario extends JDialog {
 								    JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente!!! ");
 								    clear();
 								} catch (UsuarioYaExisteException ex) {
-									JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+									JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
 									txtNombre.setText("");
 								}
 								

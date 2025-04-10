@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import Excepcion.UsuarioYaExisteException;
 
 public class Control implements Serializable{
-    
+
 	/**
 	 * 
 	 */
@@ -15,11 +15,11 @@ public class Control implements Serializable{
 	private static Control control;
 	private static User loginUser;
 
-	
+
 	private Control() {
 		misUsers = new ArrayList<>(); 
 	}
-	
+
 	public static Control getInstance(){
 		if(control == null){
 			control = new Control();
@@ -52,7 +52,7 @@ public class Control implements Serializable{
 	}
 
 	public void regUser(User user) throws UsuarioYaExisteException {
-		
+
 		for(User u : misUsers)
 		{
 			if(u.getUserName().equalsIgnoreCase(user.getUserName())) 
@@ -60,9 +60,9 @@ public class Control implements Serializable{
 				throw new UsuarioYaExisteException("Ya existe un usuario con ese nombre.");
 			}
 		}
-		
+
 		misUsers.add(user);
-		
+
 	}
 
 	public boolean confirmLogin(String text, String text2) {
@@ -75,5 +75,21 @@ public class Control implements Serializable{
 		}
 		return login;
 	}
+
+	public User buscarUsuarioDadoNombre(String id){
+		User user = null;
+		for( User aux : misUsers) {
+			if(aux.getUserName().equalsIgnoreCase(id)) {
+				user = aux;
+			}
+		}
+		return user;
+	}
+
+	public void eliminarUsuario(User user) {
+		misUsers.remove(user);
+	}
+
+
 
 }

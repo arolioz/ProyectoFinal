@@ -4,7 +4,7 @@ package Logico;
 import java.io.Serializable;
 
 public class User implements Serializable{
-    
+
 	/**
 	 * 
 	 */
@@ -12,8 +12,8 @@ public class User implements Serializable{
 	private String tipo;
 	private String userName;
 	private String pass;
-	
-	
+
+
 	public User(String tipo, String userName, String pass) {
 		super();
 		this.tipo = tipo;
@@ -44,7 +44,7 @@ public class User implements Serializable{
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	
-	
+
+
 
 }
