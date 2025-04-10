@@ -38,6 +38,8 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class PrincipalVisual extends JFrame {
 
@@ -288,6 +290,19 @@ public class PrincipalVisual extends JFrame {
 			}
 		});
 		mnmAdmin.add(mnAdmin);
+		
+		JMenu mnNewMenu_3 = new JMenu("Juego");
+		menuBar.add(mnNewMenu_3);
+		
+		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Estadisticas juegos");
+		mntmNewMenuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarEstadisticaJuego est = new ListarEstadisticaJuego();
+				est.setModal(true);
+				est.setVisible(true);
+			}
+		});
+		mnNewMenu_3.add(mntmNewMenuItem_8);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -359,6 +374,7 @@ public class PrincipalVisual extends JFrame {
 		btnNewButton_1.setIcon(new ImageIcon(PrincipalVisual.class.getResource("/Image/BotonCalendario.png")));
 		btnNewButton_1.setBounds(10, 11, 200, 196);
 		panel.add(btnNewButton_1);
+		
 		
 
 

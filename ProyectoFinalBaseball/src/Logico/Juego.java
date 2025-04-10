@@ -20,7 +20,7 @@ public class Juego implements Serializable {
 		this.equipoVisitante = equipoVisitante;
 		this.fechaPartido = fechaPartido;
 		this.carrerasEquipoLocal = 0;
-		this.carrerasEquipoVisitante = 0;
+		this.carrerasEquipoVisitante = 0; 
 		this.juegoTerminado = false;
 	}
 

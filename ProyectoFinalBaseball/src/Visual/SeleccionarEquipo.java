@@ -194,6 +194,7 @@ public class SeleccionarEquipo extends JDialog {
 						SerieNacional.getInstance().crearTorneo(tempCarrito);
 						JOptionPane.showMessageDialog(null, "Se ha creado el torneo", "Exito", JOptionPane.INFORMATION_MESSAGE);
 						clear();
+						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");

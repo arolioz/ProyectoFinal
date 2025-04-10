@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -19,10 +20,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Logico.Equipo;
+import Logico.Juego;
 import Logico.SerieNacional;
 import java.awt.Toolkit;
 
-public class TablaDePosiciones extends JDialog {
+public class ListarEstadisticaJuego extends JDialog {
 	
 	private final JPanel contentPanel = new JPanel();
 	private JPanel panel;
@@ -38,7 +40,7 @@ public class TablaDePosiciones extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			TablaDePosiciones dialog = new TablaDePosiciones();
+			ListarEstadisticaJuego dialog = new ListarEstadisticaJuego();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) { 
@@ -49,12 +51,12 @@ public class TablaDePosiciones extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public TablaDePosiciones() {
+	public ListarEstadisticaJuego() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TablaDePosiciones.class.getResource("/Image/Logo.png")));
 
 		setFont(new Font("Broadway", Font.BOLD, 16));
 		getContentPane().setFont(new Font("Broadway", Font.PLAIN, 16));
-		setTitle("Tabla De Posiciones");
+		setTitle("Estadisticas de juego");
 		setBounds(100, 100, 680, 326);
 		setLocationRelativeTo(null);
 		
@@ -74,7 +76,7 @@ public class TablaDePosiciones extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					model = new DefaultTableModel();
-					String[] headers = {"Posición", "Equipo", "J" , "G", "P", "PCT", "DIF"}; 
+					String[] headers = {"Id", "Equipo L", "Equipo V" , "Carreras L", "Carreras V", "Ganador", "Fecha Partido"}; 
 					model.setColumnIdentifiers(headers);
 					
 					table = new JTable();
@@ -103,29 +105,29 @@ public class TablaDePosiciones extends JDialog {
 		
 		loadEquiposOrdenados();
 	}
+	
 
 	private void loadEquiposOrdenados() {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
-		ArrayList<Equipo> aux = SerieNacional.getInstance().getMisEquipos();
-		SerieNacional.getInstance().ordenarEquipos(aux);
+		ArrayList<Juego> aux = SerieNacional.getInstance().getMisJuegos();
+
 		
-		int posicion = 1; 
+		for (Juego juego : aux) {
+			if(juego.isJuegoTerminado()) {
+
+				fila[0] = juego.getId();
+				fila[1] = juego.getEquipoLocal().getNombre();
+				fila[2] = juego.getEquipoVisitante().getNombre();
+				fila[3] = String.valueOf(juego.getCarrerasEquipoLocal());
+				fila[4] = String.valueOf(juego.getCarrerasEquipoVisitante());;
+				fila[5] = juego.getGanadorJuego();
+				fila[6] = juego.getFechaPartido();
+				
+				model.addRow(fila);
+			}
+	}
 		
-		for (Equipo equipo : aux) {
-			float pct = SerieNacional.getInstance().calcularPorcentajeVictorias(equipo);
-			float dif = SerieNacional.getInstance().calcularDif(equipo);
-			
-			fila[0] = posicion++;
-			fila[1] = equipo.getNombre();
-			fila[2] = equipo.getCantJuegos();
-			fila[3] = equipo.getNumeroVictorias();
-			fila[4] = equipo.getNumeroDerrotas();
-			fila[5] = pct;
-			fila[6] = dif;
-			
-			model.addRow(fila);
-		}
 	}
 
 }
