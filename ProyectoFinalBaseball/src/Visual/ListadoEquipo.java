@@ -81,7 +81,7 @@ public class ListadoEquipo extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					model = new DefaultTableModel();
-					String[] headers = {"Id", "Nombre", "Ciudad", "Estadio", "Año fundado"};
+					String[] headers = {"Id", "Nombre", "Ciudad", "Estadio", "Año fundado", "Torneos ganados"};
 					model.setColumnIdentifiers(headers);
 					
 					table = new JTable();
@@ -135,6 +135,7 @@ public class ListadoEquipo extends JDialog {
 			fila[2] = equipo.getCiudad();
 			fila[3] = equipo.getEstadio();
 			fila[4] = anio;	
+			fila[5] = equipo.getTorneosGanados();
 			
 			model.addRow(fila);
 		}

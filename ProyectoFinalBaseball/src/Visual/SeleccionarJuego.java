@@ -101,6 +101,7 @@ public class SeleccionarJuego extends JDialog {
             btnIniciar.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     JOptionPane.showMessageDialog(null, "Iniciando juego entre "+ juego.getEquipoLocal().getNombre() + " vs "+ juego.getEquipoVisitante().getNombre());
+                    dispose();
                     SimuladorJuego sim = new SimuladorJuego(juego);
                     sim.setModal(true);
                     sim.setVisible(true); 
@@ -121,7 +122,12 @@ public class SeleccionarJuego extends JDialog {
         getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
         cancelButton = new JButton("Cancelar");
-        cancelButton.addActionListener(e -> dispose());
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
         buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         
         JButton btnNewButton = new JButton("Terminar Torneo");

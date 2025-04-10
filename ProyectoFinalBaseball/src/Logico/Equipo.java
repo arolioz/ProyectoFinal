@@ -126,5 +126,13 @@ public class Equipo implements Serializable {
 	public void aumentarTorneosGanados() {
 		torneosGanados += 1;
 	}
+
+	public int getTorneosGanados() {
+		return torneosGanados;
+	}
+
+	public void setTorneosGanados(int torneosGanados) {
+		this.torneosGanados = torneosGanados;
+	}
 	
 }
