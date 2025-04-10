@@ -314,17 +314,22 @@ public class PrincipalVisual extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(SerieNacional.getInstance().getMisEquipos().size() >= 2) {
-					SeleccionarEquipo eq = new SeleccionarEquipo(); 
-					eq.setModal(true);
-					eq.setVisible(true);
-				} else {
-					JOptionPane.showMessageDialog( null, "Debes ingresar al menos dos equipos para poder iniciar un torneo!!!","Advertencia",JOptionPane.WARNING_MESSAGE);
-				}
-				
 				if(SerieNacional.getInstance().getMisJuegos().size() > 0) {
 					JOptionPane.showMessageDialog( null, "No pueden haber dos torneos al mismo tiempo, primero debes terminar el anterior para crear uno nuevo","Advertencia",JOptionPane.WARNING_MESSAGE);
+					
 				}
+				else {
+					if(SerieNacional.getInstance().getMisEquipos().size() >= 2) {
+						SeleccionarEquipo eq = new SeleccionarEquipo(); 
+						eq.setModal(true);
+						eq.setVisible(true);
+					} else {
+						JOptionPane.showMessageDialog( null, "Debes ingresar al menos dos equipos para poder iniciar un torneo!!!","Advertencia",JOptionPane.WARNING_MESSAGE);
+					}
+				}
+				
+
+
 
 
 				
@@ -337,7 +342,8 @@ public class PrincipalVisual extends JFrame {
 		btnNewButton_1 = new JButton("");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(SerieNacional.getInstance().getMisJuegos().size() < 0) {
+				
+				if(SerieNacional.getInstance().getMisJuegos().size() > 0) {
 					SeleccionarJuego juego = new SeleccionarJuego();
 					juego.setModal(true);
 					juego.setVisible(true);

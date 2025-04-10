@@ -48,6 +48,7 @@ public class ListadoJugadores extends JDialog {
 	private JRadioButton rdbTodos;
 	private JRadioButton rdbLanzador;
 	private JRadioButton rdbBateador;
+	private JButton okButton;
 
 	/**
 	 * Launch the application.
@@ -203,6 +204,12 @@ public class ListadoJugadores extends JDialog {
 		}
 		
 		tableEquipo = new JTable();
+		tableEquipo.getSelectionModel().addListSelectionListener(e -> {
+			if (!e.getValueIsAdjusting()) {
+				int selectedRow = tableEquipo.getSelectedRow();
+				okButton.setEnabled(selectedRow != -1);
+			}
+		});
 		tableEquipo.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		tableEquipo.setFillsViewportHeight(true);
 		tableEquipo.setBackground(Color.WHITE);
@@ -229,7 +236,23 @@ public class ListadoJugadores extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Mostrar estadistica");
+				okButton = new JButton("Mostrar estadistica");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						int selectedRow = tableEquipo.getSelectedRow();
+						if (selectedRow != -1) {
+							String idJugador = (String) tableModel.getValueAt(selectedRow, 0);
+							Jugador jugador = SerieNacional.getInstance().buscarJugadorDadoId(idJugador);
+							
+							if (jugador != null) {
+								MostrarEstJugador ventana = new MostrarEstJugador(jugador);
+								ventana.setModal(true);
+								ventana.setVisible(true);
+							}
+						}
+					}
+				});
+
 				okButton.setEnabled(false);
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
