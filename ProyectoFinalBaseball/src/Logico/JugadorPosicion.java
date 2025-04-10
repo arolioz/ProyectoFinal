@@ -57,7 +57,9 @@ public class JugadorPosicion extends Jugador {
 		if (estadisticas.getTurnosAlBate() == 0) {
 			return 0;
 		}
-		return (float) (estadisticas.getHits() / estadisticas.getTurnosAlBate());
+		float promedio = ((float) (estadisticas.getHits()) / estadisticas.getTurnosAlBate());
+		return promedio;
+		
 	}
 	
 	public void actualizarEstadisticas(EstadisticaJugadorPosicion est) {
