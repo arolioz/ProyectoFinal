@@ -55,6 +55,7 @@ public class PrincipalVisual extends JFrame {
 	private JMenuItem mntmNewMenuItem_5;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
+	private JMenuItem Respaldo;
 	
 
 	/**
@@ -290,6 +291,9 @@ public class PrincipalVisual extends JFrame {
 			}
 		});
 		mnmAdmin.add(mnAdmin);
+		
+		Respaldo = new JMenuItem("Respaldo");
+		mnmAdmin.add(Respaldo);
 		
 		JMenu mnNewMenu_3 = new JMenu("Juego");
 		menuBar.add(mnNewMenu_3);

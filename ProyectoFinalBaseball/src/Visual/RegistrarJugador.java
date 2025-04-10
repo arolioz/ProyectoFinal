@@ -393,6 +393,9 @@ public class RegistrarJugador extends JDialog {
 		if (spFecha.getValue() == null) {
 			throw new CamposVaciosException("Seleccione una fecha de nacimiento.");
 		}
+		if(CBBateador.getSelectedIndex() == 0 || CBLanzador.getSelectedIndex() == 0) {
+			throw new CamposVaciosException("Debe seleccionar el rol");
+		}
 		
 	}
 
