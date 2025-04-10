@@ -64,9 +64,9 @@ public class Login extends JFrame {
 					SerieNacional temp1 = (SerieNacional)serieNacionalRead.readObject();
 					SerieNacional.setSerieNacional(temp1);
 					serieNacional1.close();
-					serieNacionalRead.close();
-					
+					serieNacionalRead.close();					
 					SerieNacional.getInstance().cargarGeneradores();
+					
 				} catch (FileNotFoundException e) {
 					try {
 						usuario2 = new  FileOutputStream("Usuarios.dat");
@@ -82,13 +82,14 @@ public class Login extends JFrame {
 						
 						usuarioWrite.writeObject(Control.getInstance());
 						usuario2.close();
-						usuarioWrite.close();
-						
+						usuarioWrite.close();						
 						serieNacional2 = new  FileOutputStream("SerieNacional.dat");
 						serieNacionalWrite = new ObjectOutputStream(serieNacional2);
 						serieNacionalWrite.writeObject(SerieNacional.getInstance());
 						serieNacional2.close();
 						serieNacionalWrite.close();
+						SerieNacional.getInstance().guardarGeneradores();
+						
 					} catch (FileNotFoundException e1) {
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block

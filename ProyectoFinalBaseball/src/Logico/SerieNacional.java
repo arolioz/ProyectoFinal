@@ -411,5 +411,25 @@ public class SerieNacional implements Serializable
     		equipo.setCantJuegos(0);
     	}
     }
+
+
+	public static void setGeneradorEquipos(int generadorEquipos) {
+		SerieNacional.generadorEquipos = generadorEquipos;
+	}
+
+
+	public static void setGeneradorJugadores(int generadorJugadores) {
+		SerieNacional.generadorJugadores = generadorJugadores;
+	}
+
+
+	public static void setGeneradorJuegos(int generadorJuegos) {
+		SerieNacional.generadorJuegos = generadorJuegos;
+	}
+
+
+	public static void setGeneradorLesiones(int generadorLesiones) {
+		SerieNacional.generadorLesiones = generadorLesiones;
+	}
     
 } 
