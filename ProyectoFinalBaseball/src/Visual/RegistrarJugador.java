@@ -381,7 +381,7 @@ public class RegistrarJugador extends JDialog {
 		if (txtCorreo.getText().isEmpty()) {
 			throw new CamposVaciosException("El correo es obligatorio.");
 		}
-		if(CBEquipo.getSelectedIndex() == 0) {
+		if(CBEquipo.getSelectedIndex() == -1) {
 			throw new CamposVaciosException("Debe seleccionar un equipo.");
 		}
 		if (CBRol.getSelectedIndex() == 0) {
