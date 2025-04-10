@@ -16,7 +16,7 @@ public class Servidor extends Thread
     ServerSocket sfd = null;
     try
     {
-      sfd = new ServerSocket(0);
+      sfd = new ServerSocket(7000);
     }
     catch (IOException ioe)
     {
@@ -31,7 +31,7 @@ public class Servidor extends Thread
         Socket nsfd = sfd.accept();
         System.out.println("Conexion aceptada de: "+nsfd.getInetAddress());
         DataInputStream oos = new DataInputStream(nsfd.getInputStream());
-        DataOutputStream escritor = new DataOutputStream(new FileOutputStream(new File("empresa_respaldo.dat")));
+        DataOutputStream escritor = new DataOutputStream(new FileOutputStream(new File("SerieNacionalCompleto_respaldo.dat")));
         int unByte;
         try {
 			while ((unByte = oos.read()) != -1)

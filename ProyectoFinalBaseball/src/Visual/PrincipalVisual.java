@@ -24,10 +24,16 @@ import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import Logico.Control;
 import java.awt.event.ActionEvent;
@@ -56,6 +62,10 @@ public class PrincipalVisual extends JFrame {
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JMenuItem Respaldo;
+	
+	static Socket sfd = null;
+	static DataInputStream EntradaSocket;
+	static DataOutputStream SalidaSocket;
 	
 
 	/**
@@ -279,6 +289,19 @@ public class PrincipalVisual extends JFrame {
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_7);
 		
+		JMenu mnNewMenu_3 = new JMenu("Juego");
+		menuBar.add(mnNewMenu_3);
+		
+		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Estadisticas juegos");
+		mntmNewMenuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarEstadisticaJuego est = new ListarEstadisticaJuego();
+				est.setModal(true);
+				est.setVisible(true);
+			}
+		});
+		mnNewMenu_3.add(mntmNewMenuItem_8);
+		
 		mnmAdmin = new JMenu("Administraccion");
 		menuBar.add(mnmAdmin);
 		
@@ -293,20 +316,55 @@ public class PrincipalVisual extends JFrame {
 		mnmAdmin.add(mnAdmin);
 		
 		Respaldo = new JMenuItem("Respaldo");
-		mnmAdmin.add(Respaldo);
-		
-		JMenu mnNewMenu_3 = new JMenu("Juego");
-		menuBar.add(mnNewMenu_3);
-		
-		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Estadisticas juegos");
-		mntmNewMenuItem_8.addActionListener(new ActionListener() {
+		Respaldo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarEstadisticaJuego est = new ListarEstadisticaJuego();
-				est.setModal(true);
-				est.setVisible(true);
+				try
+			    {
+			      sfd = new Socket("0",7000); //IP
+			      
+			      File[] archivos = {new File("SerieNacional.dat"), new File("Generadores.dat"), new File("Usuarios.dat")};
+
+			      SalidaSocket = new DataOutputStream((sfd.getOutputStream()));
+			      
+			      SalidaSocket.writeInt(archivos.length);
+			      SalidaSocket.flush();
+			      
+			      for(File arch : archivos) {
+			    	  SalidaSocket.writeUTF(arch.getName());
+			    	  SalidaSocket.flush();
+			    	  
+			    	  DataInputStream aux = new DataInputStream(new FileInputStream(arch));
+			    	  
+			    	  int unByte;
+			    	  try {
+                          while ((unByte = aux.read()) != -1) {
+                              SalidaSocket.write(unByte);
+                              SalidaSocket.flush();
+                          }
+                          aux.close();
+                          System.out.println("Archivo " + arch.getName() + " enviado.");
+                      } 
+			    	  catch (IOException ioe) {
+                          System.out.println("Error al enviar archivo " + arch.getName() + ": " + ioe);
+                      }
+				      
+			      }
+				  }catch (UnknownHostException uhe)
+				    {
+				      System.out.println("No se puede acceder al servidor.");
+				      System.exit(1);
+				    } catch (IOException ioe)
+				    {
+				      System.out.println("Comunicación rechazada.");
+				      System.exit(1);
+				    }
+			    
 			}
 		});
-		mnNewMenu_3.add(mntmNewMenuItem_8);
+		mnmAdmin.add(Respaldo);
+		
+		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Cargar respaldo");
+		mnmAdmin.add(mntmNewMenuItem_9);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
