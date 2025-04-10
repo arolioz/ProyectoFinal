@@ -477,18 +477,20 @@ public class SimuladorJuego extends JDialog {
 		
 		if (partido.getEquipoLocal() != null) {
 			for (Jugador jugador : partido.getEquipoLocal().getMisJugadores()) {
-				filaLocal[0] = jugador.getIdJugador();
-				filaLocal[1] = jugador.getNombre();
-				 if (jugador instanceof Lanzador) {
-					 filaLocal[2] = "Lanzador";
-					 filaLocal[3] = ((Lanzador)jugador).getRolLanzador();
-				 }
+				if (!(jugador.isEstaLesionado())) {
+					filaLocal[0] = jugador.getIdJugador();
+					filaLocal[1] = jugador.getNombre();
+					 if (jugador instanceof Lanzador) {
+						 filaLocal[2] = "Lanzador";
+						 filaLocal[3] = ((Lanzador)jugador).getRolLanzador();
+					 }
 
-				if (jugador instanceof JugadorPosicion) {
-					filaLocal[2] = "Bateador";
-					filaLocal[3] = ((JugadorPosicion)jugador).getPosicion();
+					if (jugador instanceof JugadorPosicion) {
+						filaLocal[2] = "Bateador";
+						filaLocal[3] = ((JugadorPosicion)jugador).getPosicion();
+					}
+					modelLocal.addRow(filaLocal);
 				}
-				modelLocal.addRow(filaLocal);
 			}
 		}
 		
@@ -496,18 +498,21 @@ public class SimuladorJuego extends JDialog {
 		filaVisitante = new Object[modelVisitante.getColumnCount()];
 		if (partido.getEquipoVisitante() != null) {
 			for (Jugador jugador : partido.getEquipoVisitante().getMisJugadores()) {
-				filaVisitante[0] = jugador.getIdJugador();
-				filaVisitante[1] = jugador.getNombre();
-				 if (jugador instanceof Lanzador) {
-					 filaVisitante[2] = "Lanzador";
-					 filaVisitante[3] = ((Lanzador)jugador).getRolLanzador();
-				 }
+				
+				if (!(jugador.isEstaLesionado())) {
+					filaVisitante[0] = jugador.getIdJugador();
+					filaVisitante[1] = jugador.getNombre();
+					 if (jugador instanceof Lanzador) {
+						 filaVisitante[2] = "Lanzador";
+						 filaVisitante[3] = ((Lanzador)jugador).getRolLanzador();
+					 }
 
-				if (jugador instanceof JugadorPosicion) {
-					filaVisitante[2] = "Bateador";
-					filaVisitante[3] = ((JugadorPosicion)jugador).getPosicion();
+					if (jugador instanceof JugadorPosicion) {
+						filaVisitante[2] = "Bateador";
+						filaVisitante[3] = ((JugadorPosicion)jugador).getPosicion();
+					}
+					modelVisitante.addRow(filaVisitante);
 				}
-				modelVisitante.addRow(filaVisitante);
 			}
 		}
     }
@@ -516,6 +521,8 @@ public class SimuladorJuego extends JDialog {
     	if (juego == null) {
     		return;
     	}
+    	
+    	
     	
     	if (juego.getEquipoLocal() != null) {
     		for (Jugador jugador : juego.getEquipoLocal().getMisJugadores()) {
