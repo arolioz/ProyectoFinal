@@ -28,6 +28,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
 import javax.swing.JSpinner.DateEditor;
 import java.awt.Toolkit;
+import javax.swing.DefaultComboBoxModel;
 
 public class RegistrarLesion extends JDialog {
 
@@ -39,7 +40,6 @@ public class RegistrarLesion extends JDialog {
 	private JTextField txtId;
 	private JComboBox cbxJugador;
 	private JComboBox cbxJuego;
-	private JTextField txtTipoLesion;
 	private JLabel lblJugador;
 	private JLabel lblJuego;
 	private JLabel lblTipo;
@@ -47,6 +47,7 @@ public class RegistrarLesion extends JDialog {
 	private JLabel lblDescripcion;
 	private JTextField txtDescripcion;
 	private JSpinner spnReincorporacion;
+	private JComboBox cmbLesiones;
 
 	/*
 	public static void main(String[] args) {
@@ -110,11 +111,6 @@ public class RegistrarLesion extends JDialog {
 			lblTipo.setBounds(225, 61, 86, 14);
 			panel.add(lblTipo);
 			
-			txtTipoLesion = new JTextField();
-			txtTipoLesion.setBounds(321, 59, 126, 20);
-			panel.add(txtTipoLesion);
-			txtTipoLesion.setColumns(10);
-			
 			lblReincorporacion = new JLabel("Reincorporaci\u00F3n:");
 			lblReincorporacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			lblReincorporacion.setBounds(225, 103, 102, 14);
@@ -135,6 +131,11 @@ public class RegistrarLesion extends JDialog {
 			spnReincorporacion.setEditor(fecha);
 			spnReincorporacion.setBounds(321, 101, 126, 20);
 			panel.add(spnReincorporacion);
+			
+			cmbLesiones = new JComboBox();
+			cmbLesiones.setModel(new DefaultComboBoxModel(new String[] {"<Seleccionar>", "Codo de lanzador", "Tendinitis del manguito rotador", "Desgarro del labrum", "Esguinces de hombro", "Epicondilitis lateral", "Tendinitis del b\u00EDceps", "Distensiones musculares", "Fracturas por estr\u00E9s", "Lesiones en los dedos", "Conmociones cerebrales"}));
+			cmbLesiones.setBounds(321, 59, 126, 20);
+			panel.add(cmbLesiones);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -147,10 +148,15 @@ public class RegistrarLesion extends JDialog {
 				{
 					public void actionPerformed(ActionEvent e) 
 					{
-						Lesion lesion = new Lesion(txtId.getText(), txtTipoLesion.getText(), (Juego) cbxJuego.getSelectedItem(), (Jugador) cbxJugador.getSelectedItem(), 0, new Date(), (Date) spnReincorporacion.getValue(), txtDescripcion.getText() );
-						SerieNacional.getInstance().ingresarLesion(lesion);
-						JOptionPane.showMessageDialog(null, "La lesión ha sido registrada satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
-						clean(); 
+						if (cmbLesiones.getSelectedIndex() > 0) {
+							Lesion lesion = new Lesion(txtId.getText(), cmbLesiones.getSelectedItem().toString(), (Juego) cbxJuego.getSelectedItem(), (Jugador) cbxJugador.getSelectedItem(), 0, new Date(), (Date) spnReincorporacion.getValue(), txtDescripcion.getText() );
+							SerieNacional.getInstance().ingresarLesion(lesion);
+							JOptionPane.showMessageDialog(null, "La lesión ha sido registrada satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+							clean(); 
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de lesion", null, JOptionPane.WARNING_MESSAGE, null);
+						}
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -176,7 +182,7 @@ public class RegistrarLesion extends JDialog {
 		txtId.setText("L-"+SerieNacional.getInstance().getGeneradorLesiones());
 		cbxJugador.setSelectedIndex(0);
 		cbxJuego.setSelectedIndex(0);
-		txtTipoLesion.setText("");
+		cmbLesiones.setSelectedIndex(0);
 		spnReincorporacion.setValue(new Date());
 		txtDescripcion.setText("");
 		
@@ -202,6 +208,4 @@ public class RegistrarLesion extends JDialog {
 			cbxJuego.addItem(juego);
 		}
 	}
-	
-	
 }

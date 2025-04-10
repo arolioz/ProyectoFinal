@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import Excepcion.UsuarioYaExisteException;
 
@@ -223,26 +225,31 @@ public class SerieNacional implements Serializable
 
 	}
 
-	public void ordenarMejoresBateadores(ArrayList<JugadorPosicion> misBateadores)
-	{
-		int n = misBateadores.size();
-
-		for (int i = 0; i < n - 1; i++) 
-		{
-			for (int j = 0; j < n - i - 1; j++) 
-			{
-				JugadorPosicion actual = misBateadores.get(j);
-				JugadorPosicion siguiente = misBateadores.get(j + 1);
-
-				if (actual.getPromedio() < siguiente.getPromedio()) 
-				{
-					misBateadores.set(j, siguiente);
-					misBateadores.set(j + 1, actual);
-				}
-			}
-		}
+	public void ordenarMejoresBateadores(ArrayList<JugadorPosicion> misBateadores) {
+	    int n = misBateadores.size();
+	    final float min = 0.0001f;
+	    
+	    for (int i = 0; i < n - 1; i++) {
+	        for (int j = 0; j < n - i - 1; j++) {
+	            JugadorPosicion actual = misBateadores.get(j);
+	            JugadorPosicion siguiente = misBateadores.get(j + 1);
+	            
+	            float promActual = actual.calcularPromedio();
+	            float promSiguiente = siguiente.calcularPromedio();
+	            
+	            
+	            if (promActual < promSiguiente - min) {
+	                Collections.swap(misBateadores, j, j + 1);
+	            }
+	            
+	            else if (Math.abs(promActual - promSiguiente) < min) {
+	                if (actual.getNombre().compareToIgnoreCase(siguiente.getNombre()) > 0) {
+	                    Collections.swap(misBateadores, j, j + 1);
+	                }
+	            }
+	        }
+	    }
 	}
-
 
 
 

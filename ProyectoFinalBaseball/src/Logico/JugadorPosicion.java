@@ -54,14 +54,11 @@ public class JugadorPosicion extends Jugador {
 
 
 	public float calcularPromedio() {
-		if (estadisticas.getTurnosAlBate() == 0) {
-			return 0;
-		}
-		float promedio = ((float) (estadisticas.getHits()) / estadisticas.getTurnosAlBate());
-		return promedio;
-
+	    if (estadisticas == null || estadisticas.getTurnosAlBate() <= 0) {
+	        return 0.0f; 
+	    }
+	    return (float) estadisticas.getHits() / estadisticas.getTurnosAlBate();
 	}
-
 	public void actualizarEstadisticas(EstadisticaJugadorPosicion est) {
 		estadisticas.setHits(estadisticas.getHits() + est.getHits());
 		estadisticas.setBasePorBolas(estadisticas.getBasePorBolas() + est.getBasePorBolas());
